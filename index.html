@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sachet | जलरक्षा – Cross-Border Flood Intelligence & Crisis Coordination Platform</title>
+  <meta name="description" content="Sachet / JalRaksha is an India-Nepal transboundary hydrological early-warning network, citizen disaster portal, field responder hub, and government command desk.">
+
+  <!-- Favicon / Shield Icon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8L16 22V48C16 71 30.5 88 50 94C69.5 88 84 71 84 48V22L50 8Z' fill='%232a14b4'/><circle cx='50' cy='58' fill='%2360dd7c' r='8'/></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#2a14b4",
+            "primary-container": "#4338ca",
+            "on-primary": "#ffffff",
+            "on-primary-container": "#c1beff",
+            "primary-fixed": "#e3dfff",
+            "primary-fixed-dim": "#c3c0ff",
+            "on-primary-fixed": "#100069",
+            "on-primary-fixed-variant": "#372abf",
+            "inverse-primary": "#c3c0ff",
+
+            "secondary": "#006398",
+            "secondary-container": "#5bb8fe",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#00476e",
+            "secondary-fixed": "#cce5ff",
+            "secondary-fixed-dim": "#93ccff",
+            "on-secondary-fixed": "#001d31",
+            "on-secondary-fixed-variant": "#004b73",
+
+            "tertiary": "#00451a",
+            "tertiary-container": "#005f26",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#60dd7c",
+            "tertiary-fixed": "#7ffc97",
+            "tertiary-fixed-dim": "#62df7d",
+            "on-tertiary-fixed": "#002109",
+            "on-tertiary-fixed-variant": "#005320",
+
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a",
+
+            "background": "#faf8ff",
+            "on-background": "#131b2e",
+            "surface": "#faf8ff",
+            "on-surface": "#131b2e",
+            "surface-dim": "#d2d9f4",
+            "surface-bright": "#faf8ff",
+            "surface-variant": "#dae2fd",
+            "on-surface-variant": "#464554",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f2f3ff",
+            "surface-container": "#eaedff",
+            "surface-container-high": "#e2e7ff",
+            "surface-container-highest": "#dae2fd",
+            "surface-tint": "#5148d7",
+
+            "inverse-surface": "#283044",
+            "inverse-on-surface": "#eef0ff",
+            "outline": "#777586",
+            "outline-variant": "#c7c4d7"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-2xs": "0.25rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem",
+            "space-md": "1rem",
+            "space-lg": "1.25rem",
+            "space-xl": "1.5rem",
+            "space-2xl": "2rem",
+            "space-3xl": "2.5rem",
+            "space-4xl": "3rem",
+            "margin-mobile": "1rem",
+            "margin-tablet": "1.5rem",
+            "margin-desktop": "2rem",
+            "layout-margin-desktop": "2rem",
+            "gutter-mobile": "1rem",
+            "gutter-tablet": "1.25rem",
+            "gutter-desktop": "1.5rem"
+          },
+          fontFamily: {
+            sans: ["Plus Jakarta Sans", "system-ui", "-apple-system", "sans-serif"],
+            "telemetry-num": ["Plus Jakarta Sans", "monospace"],
+            "headline-lg-mobile": ["Plus Jakarta Sans"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "label-md": ["Plus Jakarta Sans"],
+            "display-lg": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"],
+            "label-xs-mono": ["Plus Jakarta Sans", "monospace"],
+            "body-md": ["Plus Jakarta Sans"],
+            "headline-lg": ["Plus Jakarta Sans"],
+            "headline-md": ["Plus Jakarta Sans"],
+            "title-md": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "headline-sm": ["Plus Jakarta Sans"],
+            "display-lg-mobile": ["Plus Jakarta Sans"]
+          },
+          fontSize: {
+            "telemetry-num": ["24px", { lineHeight: "28px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-lg-mobile": ["24px", { lineHeight: "32px", letterSpacing: "-0.015em", fontWeight: "700" }],
+            "body-sm": ["13px", { lineHeight: "18px", letterSpacing: "0.005em", fontWeight: "400" }],
+            "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "600" }],
+            "display-lg": ["40px", { lineHeight: "48px", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "label-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "600" }],
+            "body-md": ["14px", { lineHeight: "20px", letterSpacing: "0em", fontWeight: "400" }],
+            "headline-lg": ["28px", { lineHeight: "36px", letterSpacing: "-0.015em", fontWeight: "700" }],
+            "headline-md": ["22px", { lineHeight: "28px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "title-md": ["16px", { lineHeight: "22px", letterSpacing: "0em", fontWeight: "600" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-background text-on-surface font-sans antialiased min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
+
+  <!-- Universal Quick Navigator Drawer (Fixed at bottom right) -->
+  <div class="fixed bottom-4 left-4 z-[9990] flex items-center gap-1.5 p-1.5 bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 text-white text-xs">
+    <div class="flex items-center gap-1 px-2 py-1 text-slate-400 font-mono text-[11px]">
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="hidden sm:inline">PAGES:</span>
+    </div>
+    <a href="#/" class="px-2.5 py-1.5 rounded-xl hover:bg-white/10 transition-colors font-semibold" title="Landing Page">
+      🏠 Home
+    </a>
+    <a href="#/login" class="px-2.5 py-1.5 rounded-xl hover:bg-white/10 transition-colors font-semibold" title="Login / Signup Gateway">
+      🔐 Auth
+    </a>
+    <a href="#/citizen" class="px-2.5 py-1.5 rounded-xl hover:bg-white/10 transition-colors font-semibold" title="Citizen Flood Alerts">
+      👤 Citizen
+    </a>
+    <a href="#/responder" class="px-2.5 py-1.5 rounded-xl hover:bg-white/10 transition-colors font-semibold" title="Field Volunteer Operations">
+      🚁 Responder
+    </a>
+    <a href="#/admin" class="px-2.5 py-1.5 rounded-xl hover:bg-white/10 transition-colors font-semibold" title="Government Command Desk">
+      🏛️ Admin
+    </a>
+  </div>
+
+  <!-- Global SOS Emergency Distress Beacon Modal -->
+  <div id="sos-emergency-modal" class="hidden fixed inset-0 z-[9999] bg-slate-950/70 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-red-200 relative overflow-hidden animate-bounce-once">
+      <!-- Glow background -->
+      <div class="absolute -top-20 -right-20 w-48 h-48 bg-red-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-100">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center shadow-inner">
+            <span class="material-symbols-outlined text-[28px] animate-pulse">crisis_alert</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <h3 class="font-extrabold text-xl text-slate-900">EMERGENCY SOS</h3>
+              <span class="px-2 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-mono font-bold uppercase animate-pulse">Live Uplink</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-0.5">Direct Relay to NDRF, SDRF & Nepal APF Rapid Rescue</p>
+          </div>
+        </div>
+        <button onclick="SachetRouter.closeSOS()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Coordinates & Status -->
+      <div class="mt-5 p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex items-center justify-between text-xs">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-indigo-600 text-[18px]">location_searching</span>
+          <span class="font-mono text-slate-600 font-semibold">26.5412° N, 86.8219° E</span>
+        </div>
+        <span class="text-emerald-600 font-bold flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          GPS Acquired
+        </span>
+      </div>
+
+      <!-- Direct Action Helplines Grid -->
+      <div class="mt-4">
+        <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">⚡ 1-Tap Emergency Hotlines</div>
+        <div class="grid grid-cols-2 gap-2.5">
+          <a href="tel:1078" class="flex items-center gap-2.5 p-3 rounded-xl bg-red-50 hover:bg-red-100 border border-red-200 transition-colors text-red-900 group">
+            <span class="material-symbols-outlined text-red-600 text-[22px] group-hover:scale-110 transition-transform">call</span>
+            <div class="text-left">
+              <div class="text-xs font-bold leading-tight">1078 (NDRF)</div>
+              <div class="text-[10px] text-red-600">National Disaster</div>
+            </div>
+          </a>
+          <a href="tel:1070" class="flex items-center gap-2.5 p-3 rounded-xl bg-orange-50 hover:bg-orange-100 border border-orange-200 transition-colors text-orange-900 group">
+            <span class="material-symbols-outlined text-orange-600 text-[22px] group-hover:scale-110 transition-transform">call</span>
+            <div class="text-left">
+              <div class="text-xs font-bold leading-tight">1070 (SDRF)</div>
+              <div class="text-[10px] text-orange-600">Bihar State Relief</div>
+            </div>
+          </a>
+          <a href="tel:1149" class="flex items-center gap-2.5 p-3 rounded-xl bg-sky-50 hover:bg-sky-100 border border-sky-200 transition-colors text-sky-900 group">
+            <span class="material-symbols-outlined text-sky-600 text-[22px] group-hover:scale-110 transition-transform">call</span>
+            <div class="text-left">
+              <div class="text-xs font-bold leading-tight">1149 (Nepal APF)</div>
+              <div class="text-[10px] text-sky-600">Armed Police Force</div>
+            </div>
+          </a>
+          <a href="tel:112" class="flex items-center gap-2.5 p-3 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-colors text-indigo-900 group">
+            <span class="material-symbols-outlined text-indigo-600 text-[22px] group-hover:scale-110 transition-transform">emergency</span>
+            <div class="text-left">
+              <div class="text-xs font-bold leading-tight">112 (Police / EMS)</div>
+              <div class="text-[10px] text-indigo-600">National Emergency</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Distress Pulse Trigger Button -->
+      <div class="mt-6">
+        <button id="send-sos-beacon-btn" onclick="sendDistressPulse()" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold text-sm shadow-lg shadow-red-600/30 flex items-center justify-center gap-2 transition-all active:scale-95 cursor-pointer">
+          <span class="material-symbols-outlined text-[20px] animate-ping">sensors</span>
+          <span id="sos-btn-text">Transmit Satellite Distress Beacon</span>
+        </button>
+      </div>
+
+      <!-- Disclaimer footnote -->
+      <p class="text-center text-[11px] text-slate-400 mt-4 leading-normal">
+        Your verified IP and approximate GPS telemetry will be logged into the Sachet Disaster Command Ledger.
+      </p>
+    </div>
+  </div>
+
+  <!-- SPA Target Container -->
+  <div id="app" class="w-full min-h-screen"></div>
+
+  <!-- Load Page Modules -->
+  <script src="pages/landing.js"></script>
+  <script src="pages/login.js"></script>
+  <script src="pages/citizen.js"></script>
+  <script src="pages/responder.js"></script>
+  <script src="pages/admin.js"></script>
+  <script src="router.js"></script>
+
+  <!-- App Bootstrap -->
+  <script>
+    function sendDistressPulse() {
+      const btn = document.getElementById('send-sos-beacon-btn');
+      const text = document.getElementById('sos-btn-text');
+      if (!btn || !text) return;
+      btn.disabled = true;
+      text.textContent = 'Transmitting Cryptographic Distress Beacon...';
+
+      setTimeout(() => {
+        text.textContent = '✓ SOS Transmitted! Dispatching Nearest Boat Unit.';
+        btn.classList.remove('from-red-600', 'to-red-700');
+        btn.classList.add('from-emerald-600', 'to-emerald-700');
+        SachetRouter.showToast('🚨 SOS Transmitted! NDRF Squad 9 and SDRF boat unit notified.', 'error');
+        setTimeout(() => {
+          SachetRouter.closeSOS();
+          btn.disabled = false;
+          text.textContent = 'Transmit Satellite Distress Beacon';
+          btn.classList.remove('from-emerald-600', 'to-emerald-700');
+          btn.classList.add('from-red-600', 'to-red-700');
+        }, 1800);
+      }, 1200);
+    }
+
+    // Register all routes with SachetRouter
+    SachetRouter.register('/', () => window.LandingPage.render());
+    SachetRouter.register('/login', () => window.LoginPage.render());
+    SachetRouter.register('/citizen', () => window.CitizenPage.render());
+    SachetRouter.register('/responder', () => window.ResponderPage.render());
+    SachetRouter.register('/admin', () => window.AdminPage.render());
+
+    // Initialize application router
+    document.addEventListener('DOMContentLoaded', () => {
+      SachetRouter.init();
+    });
+  </script>
+</body>
+</html>

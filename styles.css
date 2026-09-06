@@ -1,0 +1,122 @@
+/* ================================================
+   Sachet / JalRaksha – Custom Styles & Animations
+   ================================================ */
+
+/* Base resets */
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+}
+
+/* Hide scrollbar but keep functionality */
+::-webkit-scrollbar { display: none; }
+* { scrollbar-width: none; }
+
+/* Page transitions */
+#app {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+#app.fade-out {
+  opacity: 0;
+}
+
+/* Smooth slide-up entrance for page content */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-enter {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+/* Pulse animation for live indicators */
+@keyframes livePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.live-pulse {
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+/* Tactical grid pattern animation */
+@keyframes gridShimmer {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0.3; }
+}
+.grid-shimmer {
+  animation: gridShimmer 4s ease-in-out infinite;
+}
+
+/* Counter animation */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.count-up {
+  animation: countUp 0.6s ease-out forwards;
+}
+
+/* Stagger children animations */
+.stagger-children > * {
+  opacity: 0;
+  animation: slideUp 0.4s ease-out forwards;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.3s; }
+
+/* Active sidebar nav item */
+.sidebar-nav-active {
+  background: var(--primary-container, #4338ca);
+  color: white;
+  font-weight: 600;
+}
+
+/* Hover lift effect for cards */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08);
+}
+
+/* OTP input focus glow */
+.otp-box:focus {
+  box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.15);
+  border-color: #4338ca;
+}
+
+/* Emergency SOS button glow */
+@keyframes sosGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(220, 38, 38, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.6); }
+}
+.sos-glow {
+  animation: sosGlow 2s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .desktop-sidebar { display: none !important; }
+  .mobile-nav { display: flex !important; }
+}
+@media (min-width: 769px) {
+  .mobile-nav { display: none !important; }
+}
