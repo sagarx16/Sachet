@@ -1,859 +1,814 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import Navbar from '../../components/Navbar';
 import { useAuth } from '../../context/AuthContext';
 
-export default function AdminPage() {
-  const { user, openSos, showToast } = useAuth();
-  const [isBroadcastModalOpen, setIsBroadcastModalOpen] = useState(false);
-  const [alertSeverity, setAlertSeverity] = useState('RED ALERT (Immediate Evacuation Order)');
+/* ── MODULE 1: Overview / Command Dashboard ── */
+function OverviewModule({ setActive, openSos, showToast }) {
+  const handleGate = () => showToast('Koshi Barrage: Gates 12-28 opened to 6.2m. Flow: 385,000 cusecs.', 'warning');
 
-  const handleGateSimulation = () => {
-    showToast('Koshi Barrage: Gates 12 to 28 opened to 6.2m. Flow rate increased to 385,000 cusecs.', 'warning');
+  return (
+    <div className="flex flex-col gap-6">
+      {/* Command Banner */}
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-800 via-slate-900 to-purple-950 p-6 text-white shadow-xl">
+        <div className="absolute inset-0 opacity-10">
+          <svg width="100%" height="100%"><defs><pattern id="cmdgrid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#a78bfa" strokeWidth="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#cmdgrid)"/></svg>
+        </div>
+        <div className="absolute -top-8 -right-8 w-48 h-48 rounded-full bg-purple-500/10 blur-2xl" />
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+              <span className="text-xs font-bold uppercase tracking-widest text-purple-200">GOVT COMMAND DESK • CLASSIFIED L4</span>
+            </div>
+            <h1 className="text-2xl font-extrabold tracking-tight mb-1">Bihar–Nepal Disaster Command</h1>
+            <p className="text-slate-300 text-sm">National Disaster Management Authority • Bihar SDMA • Active Incident: IN-2024-F09</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2 shrink-0">
+            <button onClick={() => setActive('broadcast')} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-lg transition-all hover:scale-105 cursor-pointer">
+              <span className="material-symbols-outlined text-[18px] animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>cell_tower</span>
+              CAP Broadcast
+            </button>
+            <button onClick={handleGate} className="flex items-center gap-2 px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all cursor-pointer">
+              <span className="material-symbols-outlined text-[18px]">valve</span>
+              Gate Telemetry
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Threat Level */}
+      <div className="flex items-center gap-4 p-4 rounded-2xl bg-red-50 border border-red-200">
+        <div className="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center text-red-600 shrink-0">
+          <span className="material-symbols-outlined text-[26px] animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>crisis_alert</span>
+        </div>
+        <div className="flex-1">
+          <div className="flex items-center gap-2 flex-wrap mb-0.5">
+            <span className="px-2 py-0.5 rounded-full bg-red-600 text-white text-xs font-bold uppercase tracking-wide">RED ALERT</span>
+            <span className="font-bold text-slate-900 text-sm">Koshi + Gandak simultaneous surge — Bihar districts 14 & 17</span>
+          </div>
+          <p className="text-slate-600 text-xs">Estimated 4.2M civilians in impact zone. NDRF Level-3 deployed. Barrage discharge: 3.85L cusecs.</p>
+        </div>
+        <button onClick={() => setActive('broadcast')} className="shrink-0 px-4 py-2 rounded-xl bg-red-600 text-white font-bold text-xs hover:bg-red-700 transition-colors cursor-pointer">Issue Alert</button>
+      </div>
+
+      {/* KPI Grid */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: 'Population at Risk', value: '4.2M', sub: 'Districts 12, 14, 17, 21', icon: 'groups', color: 'text-red-700', bg: 'bg-red-50', iconColor: 'text-red-500' },
+          { label: 'NDRF Units Active', value: '38', sub: '24 rescue • 14 medical', icon: 'emergency_home', color: 'text-purple-700', bg: 'bg-purple-50', iconColor: 'text-purple-500' },
+          { label: 'Damage Claims Filed', value: '2,841', sub: '1,204 approved • ₹18.4Cr', icon: 'receipt_long', color: 'text-sky-700', bg: 'bg-sky-50', iconColor: 'text-sky-500' },
+          { label: 'Barrage Discharge', value: '3.85L', sub: 'Cusecs • Rising +2.4%/hr', icon: 'valve', color: 'text-amber-700', bg: 'bg-amber-50', iconColor: 'text-amber-500' },
+        ].map((s) => (
+          <div key={s.label} className={`p-4 rounded-2xl ${s.bg} border border-slate-100 flex flex-col gap-2 card-hover`}>
+            <div className={`w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-sm ${s.iconColor}`}>
+              <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>{s.icon}</span>
+            </div>
+            <div>
+              <div className={`text-2xl font-extrabold ${s.color}`}>{s.value}</div>
+              <div className="text-xs text-slate-500 font-medium">{s.label}</div>
+              <div className="text-xs text-slate-400 mt-0.5">{s.sub}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Module Quick Access */}
+      <div>
+        <h2 className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-3">Command Modules</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {[
+            { id: 'heatmap', label: 'Live Heatmap', desc: 'GIS flood intelligence', icon: 'map', color: 'from-sky-500 to-blue-600' },
+            { id: 'broadcast', label: 'CAP Broadcast', desc: 'Emergency alerts — 4.2M citizens', icon: 'cell_tower', color: 'from-red-600 to-rose-700' },
+            { id: 'barrage', label: 'Barrage Control', desc: 'Koshi gate operations', icon: 'valve', color: 'from-amber-500 to-orange-600' },
+            { id: 'ngo', label: 'NGO & Volunteers', desc: 'Coordination & task board', icon: 'volunteer_activism', color: 'from-emerald-500 to-teal-600' },
+            { id: 'damage', label: 'Damage Reports', desc: 'Claims & compensation', icon: 'analytics', color: 'from-purple-500 to-violet-600' },
+          ].map((m) => (
+            <button key={m.id} onClick={() => setActive(m.id)} className="text-left p-4 rounded-2xl bg-white border border-slate-200 hover:border-purple-300 hover:shadow-md transition-all group card-hover">
+              <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${m.color} flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform`}>
+                <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>{m.icon}</span>
+              </div>
+              <div className="font-bold text-slate-900 text-sm">{m.label}</div>
+              <div className="text-xs text-slate-500 mt-0.5">{m.desc}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Recent Alerts Issued */}
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-purple-600 text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>history_edu</span>
+            <h2 className="font-bold text-slate-900">Recent Command Actions</h2>
+          </div>
+          <span className="text-xs text-slate-400">Last 24 hours</span>
+        </div>
+        <div className="divide-y divide-slate-100">
+          {[
+            { time: '06:42', action: 'CAP Broadcast — RED ALERT', detail: 'Districts 12, 14, 17 • 4.2M notified via SMS + App', icon: 'cell_tower', color: 'bg-red-500' },
+            { time: '05:18', action: 'Koshi Barrage — Gate 12–28 opened', detail: 'Gates raised to 6.2m • Flow: 385,000 cusecs', icon: 'valve', color: 'bg-amber-500' },
+            { time: '04:55', action: 'NDRF Squad 9 deployed — Supaul', detail: 'Level-3 response • 38 personnel + 14 boats', icon: 'emergency_home', color: 'bg-sky-600' },
+            { time: '03:20', action: 'Evacuation Order — Ward 12–18 Patna', detail: 'Mandatory evacuation. Bihar Govt Order #2024/F09-B', icon: 'directions_run', color: 'bg-purple-600' },
+          ].map((a, i) => (
+            <div key={i} className="flex items-center gap-4 px-5 py-3.5 hover:bg-slate-50 transition-colors">
+              <div className={`w-8 h-8 rounded-lg ${a.color} flex items-center justify-center text-white shrink-0`}>
+                <span className="material-symbols-outlined text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>{a.icon}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-slate-900">{a.action}</p>
+                <p className="text-xs text-slate-500 truncate">{a.detail}</p>
+              </div>
+              <span className="text-xs text-slate-400 font-mono shrink-0">{a.time}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── MODULE 2: Live Heatmap / GIS ── */
+function HeatmapModule() {
+  const [layer, setLayer] = useState('flood');
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 className="text-xl font-extrabold text-slate-900">Live Flood Intelligence — GIS Command View</h2>
+          <p className="text-sm text-slate-500">Bihar–Nepal cross-border hydrology • Satellite + CWC telemetry fusion</p>
+        </div>
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-sky-50 border border-sky-200">
+          <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
+          <span className="text-xs font-bold text-sky-700 uppercase tracking-wider">Satellite Feed Live</span>
+        </div>
+      </div>
+
+      {/* Layer Toggle */}
+      <div className="flex gap-2 bg-slate-100 p-1 rounded-xl w-fit">
+        {[['flood', 'Flood Depth'], ['risk', 'Risk Score'], ['infra', 'Infrastructure'], ['shelter', 'Shelters']].map(([v, l]) => (
+          <button key={v} onClick={() => setLayer(v)} className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${layer === v ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}>{l}</button>
+        ))}
+      </div>
+
+      {/* Main Map Area */}
+      <div className="relative bg-slate-900 rounded-2xl overflow-hidden h-96 flex flex-col justify-between shadow-xl">
+        {/* Grid overlay */}
+        <div className="absolute inset-0 opacity-10">
+          <svg width="100%" height="100%"><defs><pattern id="gmap" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="#64748b" strokeWidth="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#gmap)"/></svg>
+        </div>
+        {/* Flood blobs */}
+        <div className="absolute top-12 left-16 w-32 h-24 bg-red-500/40 rounded-full blur-2xl" />
+        <div className="absolute top-24 left-40 w-44 h-28 bg-orange-500/30 rounded-full blur-2xl" />
+        <div className="absolute top-8 right-24 w-28 h-20 bg-amber-400/30 rounded-full blur-xl" />
+        <div className="absolute bottom-20 right-12 w-20 h-16 bg-yellow-400/20 rounded-full blur-xl" />
+        <div className="absolute bottom-12 left-1/2 w-24 h-18 bg-red-600/30 rounded-full blur-xl" />
+        {/* Location pins */}
+        {[
+          { x: '20%', y: '25%', label: 'Supaul', color: 'bg-red-500', status: 'CRITICAL' },
+          { x: '45%', y: '40%', label: 'Patna', color: 'bg-orange-400', status: 'HIGH' },
+          { x: '65%', y: '20%', label: 'Madhubani', color: 'bg-amber-400', status: 'MODERATE' },
+          { x: '75%', y: '55%', label: 'Saharsa', color: 'bg-yellow-400', status: 'WATCH' },
+        ].map((p) => (
+          <div key={p.label} className="absolute flex flex-col items-center gap-0.5" style={{ left: p.x, top: p.y }}>
+            <div className={`w-3 h-3 rounded-full ${p.color} border-2 border-white shadow-lg`} />
+            <div className="bg-white/90 text-xs font-bold text-slate-900 px-1.5 py-0.5 rounded shadow-sm whitespace-nowrap" style={{ fontSize: '9px' }}>{p.label}</div>
+          </div>
+        ))}
+        {/* Crosshair center */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-4 h-4 relative">
+            <div className="absolute inset-0 border border-white/30 rounded-full" />
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-white/20" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/20" />
+          </div>
+        </div>
+        {/* Top bar */}
+        <div className="relative z-10 flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-ping" />
+            <span className="text-white text-xs font-bold uppercase tracking-wider">LIVE GIS — Bihar–Nepal Border Corridor</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="bg-white/10 text-white text-xs font-bold px-2 py-1 rounded-lg backdrop-blur-sm uppercase">{layer} layer</span>
+            <span className="text-slate-400 text-xs">Mapbox GL • ISRO NRSC</span>
+          </div>
+        </div>
+        {/* Bottom legend */}
+        <div className="relative z-10 flex items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-3 flex-wrap">
+            {[['bg-red-500', 'Critical'], ['bg-orange-400', 'High'], ['bg-amber-400', 'Moderate'], ['bg-yellow-400', 'Watch'], ['bg-emerald-400', 'Safe']].map(([c, l]) => (
+              <div key={l} className="flex items-center gap-1 text-white text-xs font-semibold"><span className={`w-2.5 h-2.5 rounded-sm ${c}`} />{l}</div>
+            ))}
+          </div>
+          <div className="flex items-center gap-2">
+            <button className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-2.5 py-1.5 rounded-lg backdrop-blur-sm transition-colors cursor-pointer flex items-center gap-1">
+              <span className="material-symbols-outlined text-[14px]">zoom_in</span>Zoom
+            </button>
+            <button className="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-2.5 py-1.5 rounded-lg backdrop-blur-sm transition-colors cursor-pointer flex items-center gap-1">
+              <span className="material-symbols-outlined text-[14px]">download</span>Export KMZ
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* District Stats Table */}
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+          <h3 className="font-bold text-slate-900 text-sm">District-wise Flood Intelligence</h3>
+          <button className="px-3 py-1.5 rounded-lg bg-slate-50 text-slate-700 text-xs font-bold hover:bg-slate-100 transition-colors cursor-pointer flex items-center gap-1">
+            <span className="material-symbols-outlined text-[14px]">download</span>Export CSV
+          </button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="bg-slate-50 border-b border-slate-100">
+              <tr>
+                {['District', 'Flood Depth', 'Pop. Affected', 'Risk Level', 'NDRF Status', 'Action'].map((h) => (
+                  <th key={h} className="px-4 py-3 text-left text-xs font-bold text-slate-500 uppercase tracking-wider">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {[
+                { d: 'Supaul', depth: '4.2m', pop: '3.8L', risk: 'CRITICAL', ndrf: 'Deployed', rc: 'bg-red-600', action: 'Evacuate' },
+                { d: 'Madhubani', depth: '2.8m', pop: '2.1L', risk: 'HIGH', ndrf: 'En-route', rc: 'bg-orange-500', action: 'Alert' },
+                { d: 'Darbhanga', depth: '1.9m', pop: '1.4L', risk: 'MODERATE', ndrf: 'Standby', rc: 'bg-amber-500', action: 'Monitor' },
+                { d: 'Patna', depth: '1.1m', pop: '0.9L', risk: 'WATCH', ndrf: 'Staged', rc: 'bg-yellow-500', action: 'Prepare' },
+                { d: 'Sitamarhi', depth: '0.4m', pop: '0.2L', risk: 'LOW', ndrf: 'Normal', rc: 'bg-emerald-500', action: '—' },
+              ].map((r) => (
+                <tr key={r.d} className="hover:bg-slate-50 transition-colors">
+                  <td className="px-4 py-3 font-semibold text-slate-900">{r.d}</td>
+                  <td className="px-4 py-3 font-mono font-bold text-slate-700">{r.depth}</td>
+                  <td className="px-4 py-3 text-slate-600">{r.pop}</td>
+                  <td className="px-4 py-3"><span className={`px-2 py-0.5 rounded-full ${r.rc} text-white text-xs font-bold`}>{r.risk}</span></td>
+                  <td className="px-4 py-3 text-slate-600 text-xs font-semibold">{r.ndrf}</td>
+                  <td className="px-4 py-3"><button className="text-xs font-bold text-purple-600 hover:underline cursor-pointer">{r.action}</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── MODULE 3: CAP Broadcast ── */
+function BroadcastModule({ showToast }) {
+  const [severity, setSeverity] = useState('RED');
+  const [msg, setMsg] = useState('');
+  const [districts, setDistricts] = useState(['Supaul', 'Madhubani']);
+  const [channel, setChannel] = useState({ sms: true, app: true, ivr: true, tv: false });
+  const [sent, setSent] = useState(false);
+
+  const allDistricts = ['Supaul', 'Madhubani', 'Darbhanga', 'Patna', 'Saharsa', 'Sitamarhi', 'Katihar', 'Purnia'];
+  const toggleDistrict = (d) => setDistricts((prev) => prev.includes(d) ? prev.filter((x) => x !== d) : [...prev, d]);
+
+  const handleSend = () => {
+    setSent(true);
+    showToast(`CAP Broadcast — ${severity} ALERT transmitted to 4.2M citizens!`, 'success');
+    setTimeout(() => setSent(false), 3000);
   };
 
-  const handleSendBroadcast = () => {
-    setIsBroadcastModalOpen(false);
-    showToast('CAP Broadcast transmitted to 4.2M citizens across Bihar & Nepal border corridors!', 'success');
+  const history = [
+    { id: 'CAP-2024-0291', severity: 'RED', districts: 'Supaul, Madhubani', channels: 'SMS+App+IVR', sent: '06:42 today', reach: '4.2M' },
+    { id: 'CAP-2024-0290', severity: 'ORANGE', districts: 'Darbhanga, Patna', channels: 'SMS+App', sent: '03:15 today', reach: '2.3M' },
+    { id: 'CAP-2024-0289', severity: 'YELLOW', districts: 'Sitamarhi', channels: 'App', sent: 'Sep 6, 22:10', reach: '0.8M' },
+  ];
+
+  const sevColor = { RED: 'bg-red-600', ORANGE: 'bg-orange-500', YELLOW: 'bg-yellow-500', GREEN: 'bg-emerald-500' };
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div>
+        <h2 className="text-xl font-extrabold text-slate-900">CAP Emergency Broadcast System</h2>
+        <p className="text-sm text-slate-500">Common Alerting Protocol — transmit to 4.2M+ citizens via SMS (Twilio), App push (FCM), IVR & TV crawl</p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Compose Panel */}
+        <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="px-5 py-4 border-b border-slate-100 flex items-center gap-2 bg-red-50">
+            <span className="material-symbols-outlined text-red-600 text-[20px] animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>campaign</span>
+            <h3 className="font-bold text-slate-900 text-sm">Compose Emergency Alert</h3>
+          </div>
+          <div className="p-5 flex flex-col gap-5">
+            {/* Severity */}
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2">Alert Severity</label>
+              <div className="grid grid-cols-4 gap-2">
+                {['RED', 'ORANGE', 'YELLOW', 'GREEN'].map((s) => (
+                  <button key={s} onClick={() => setSeverity(s)} className={`py-2.5 rounded-xl text-xs font-bold border transition-all cursor-pointer ${severity === s ? `${sevColor[s]} text-white border-transparent shadow-md` : 'border-slate-200 text-slate-600 hover:border-slate-300'}`}>{s}</button>
+                ))}
+              </div>
+              <div className="mt-2 text-xs text-slate-400 font-medium">RED: Immediate Evacuation • ORANGE: High Risk • YELLOW: Watch • GREEN: All Clear</div>
+            </div>
+
+            {/* Districts */}
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2">Target Districts</label>
+              <div className="flex flex-wrap gap-2">
+                {allDistricts.map((d) => (
+                  <button key={d} onClick={() => toggleDistrict(d)} className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all cursor-pointer ${districts.includes(d) ? 'bg-purple-600 text-white border-transparent' : 'border-slate-200 text-slate-600 hover:border-purple-300'}`}>{d}</button>
+                ))}
+              </div>
+            </div>
+
+            {/* Message */}
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-1.5">Alert Message (Hindi/English)</label>
+              <textarea rows={4} value={msg} onChange={(e) => setMsg(e.target.value)} placeholder="EMERGENCY BROADCAST — Government of Bihar / सरकार द्वारा आपातकालीन संदेश&#10;&#10;Flood water rising rapidly. Immediate evacuation mandatory for Ward 12–18 residents. Move to nearest shelter camp NOW.&#10;&#10;बाढ़ का पानी तेजी से बढ़ रहा है। कृपया तुरंत सुरक्षित स्थान पर जाएं।" className="w-full text-sm px-3 py-2.5 rounded-xl border border-slate-200 focus:border-red-400 focus:ring-2 focus:ring-red-100 outline-none transition resize-none" />
+            </div>
+
+            {/* Channels */}
+            <div>
+              <label className="block text-xs font-bold text-slate-600 uppercase tracking-wide mb-2">Transmission Channels</label>
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { key: 'sms', label: 'Twilio SMS', desc: 'Works on 2G — ~4.2M', icon: 'sms' },
+                  { key: 'app', label: 'Firebase Push (FCM)', desc: 'App push notification', icon: 'notifications_active' },
+                  { key: 'ivr', label: 'IVR Voice Call', desc: 'Hindi/regional language', icon: 'record_voice_over' },
+                  { key: 'tv', label: 'TV/Radio Crawl', desc: 'Doordarshan + AIR', icon: 'live_tv' },
+                ].map((ch) => (
+                  <button key={ch.key} onClick={() => setChannel({ ...channel, [ch.key]: !channel[ch.key] })} className={`flex items-start gap-3 p-3 rounded-xl border text-left transition-all cursor-pointer ${channel[ch.key] ? 'border-red-300 bg-red-50' : 'border-slate-200 hover:border-slate-300'}`}>
+                    <span className={`material-symbols-outlined text-[20px] mt-0.5 ${channel[ch.key] ? 'text-red-600' : 'text-slate-400'}`} style={{ fontVariationSettings: channel[ch.key] ? "'FILL' 1" : "'FILL' 0" }}>{ch.icon}</span>
+                    <div>
+                      <div className="font-bold text-slate-900 text-xs">{ch.label}</div>
+                      <div className="text-xs text-slate-500">{ch.desc}</div>
+                    </div>
+                    {channel[ch.key] && <span className="ml-auto material-symbols-outlined text-emerald-500 text-[16px]" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <button onClick={handleSend} className={`w-full py-3.5 rounded-xl font-extrabold text-sm shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2 ${sent ? 'bg-emerald-600 text-white' : 'bg-red-600 hover:bg-red-700 text-white shadow-red-200'}`}>
+              <span className="material-symbols-outlined text-[18px] animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>{sent ? 'check_circle' : 'cell_tower'}</span>
+              {sent ? '✓ Broadcast Transmitted!' : `TRANSMIT ${severity} ALERT → ${districts.length} Districts`}
+            </button>
+          </div>
+        </div>
+
+        {/* Broadcast History */}
+        <div className="lg:col-span-5 flex flex-col gap-4">
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div className="px-5 py-4 border-b border-slate-100">
+              <h3 className="font-bold text-slate-900 text-sm">Broadcast Log</h3>
+            </div>
+            <div className="divide-y divide-slate-100">
+              {history.map((h) => (
+                <div key={h.id} className="px-5 py-4 hover:bg-slate-50 transition-colors">
+                  <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+                    <span className={`px-2 py-0.5 rounded-full ${sevColor[h.severity]} text-white text-xs font-bold`}>{h.severity}</span>
+                    <span className="text-xs font-mono text-slate-400">{h.id}</span>
+                  </div>
+                  <p className="text-xs font-semibold text-slate-900">{h.districts}</p>
+                  <div className="flex justify-between text-xs text-slate-500 mt-1">
+                    <span>{h.channels}</span>
+                    <span className="font-bold text-emerald-600">Reached: {h.reach}</span>
+                  </div>
+                  <p className="text-xs text-slate-400 mt-0.5">Sent: {h.sent}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Reach Stats */}
+          <div className="bg-gradient-to-br from-purple-600 to-violet-700 rounded-2xl p-5 text-white">
+            <h4 className="font-bold text-sm mb-3">Today's Broadcast Reach</h4>
+            <div className="grid grid-cols-2 gap-3">
+              {[['4.2M', 'SMS Delivered'], ['3.8M', 'App Push'], ['1.2M', 'IVR Calls'], ['12.4M', 'TV/Radio']].map(([v, l]) => (
+                <div key={l} className="bg-white/10 rounded-xl p-3 text-center">
+                  <div className="text-xl font-extrabold">{v}</div>
+                  <div className="text-xs text-purple-200 mt-0.5">{l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── MODULE 4: Barrage Control ── */
+function BarrageModule({ showToast }) {
+  const [gates, setGates] = useState([
+    { id: 1, from: 1, to: 6, open: false, level: 0 },
+    { id: 2, from: 7, to: 11, open: true, level: 4.2 },
+    { id: 3, from: 12, to: 18, open: true, level: 6.2 },
+    { id: 4, from: 19, to: 24, open: true, level: 5.8 },
+    { id: 5, from: 25, to: 28, open: false, level: 0 },
+  ]);
+  const [selected, setSelected] = useState(null);
+
+  const toggleGate = (id) => {
+    setGates((prev) => prev.map((g) => g.id === id ? { ...g, open: !g.open, level: g.open ? 0 : 5.0 } : g));
+    const g = gates.find((x) => x.id === id);
+    showToast(`Gate group ${g.from}–${g.to} ${g.open ? 'CLOSED' : 'OPENED'} successfully.`, g.open ? 'info' : 'warning');
+  };
+
+  const totalFlow = gates.filter((g) => g.open).reduce((acc, g) => acc + (g.level * 12400), 0);
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div>
+        <h2 className="text-xl font-extrabold text-slate-900">Koshi Barrage — Gate Operations</h2>
+        <p className="text-sm text-slate-500">Remote gate control simulation • 28 radial gates • India–Nepal border crossing</p>
+      </div>
+
+      {/* Barrage Status Banner */}
+      <div className="p-5 rounded-2xl bg-amber-50 border border-amber-200 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div className="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 shrink-0">
+          <span className="material-symbols-outlined text-[26px]" style={{ fontVariationSettings: "'FILL' 1" }}>valve</span>
+        </div>
+        <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {[
+            { label: 'Total Flow', val: `${(totalFlow / 1000).toFixed(0)}k cusecs`, color: 'text-amber-700' },
+            { label: 'Open Gates', val: `${gates.filter((g) => g.open).reduce((a, g) => a + (g.to - g.from + 1), 0)}/28`, color: 'text-red-600' },
+            { label: 'Reservoir Level', val: '84.2m (HDSL)', color: 'text-slate-900' },
+            { label: 'Downstream Alert', val: 'ORANGE', color: 'text-orange-600' },
+          ].map((s) => (
+            <div key={s.label}>
+              <div className={`text-base font-extrabold ${s.color}`}>{s.val}</div>
+              <div className="text-xs text-slate-500">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Gate Groups */}
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div className="px-5 py-4 border-b border-slate-100">
+          <h3 className="font-bold text-slate-900 text-sm">Gate Control Panel — 28 Radial Gates</h3>
+          <p className="text-xs text-slate-500 mt-0.5">Click a gate group to toggle. Each gate rated at ~12,400 cusecs/m.</p>
+        </div>
+
+        {/* Visual Gate Bar */}
+        <div className="px-5 py-4 border-b border-slate-100">
+          <div className="flex gap-1 h-16 items-end">
+            {Array.from({ length: 28 }, (_, i) => {
+              const gate = gates.find((g) => g.from <= i + 1 && i + 1 <= g.to);
+              return (
+                <div key={i} onClick={() => setSelected(gate?.id)} className={`flex-1 rounded-t-md transition-all cursor-pointer ${gate?.open ? 'bg-blue-500 hover:bg-blue-400' : 'bg-slate-200 hover:bg-slate-300'} ${selected === gate?.id ? 'ring-2 ring-purple-500' : ''}`}
+                  style={{ height: gate?.open ? `${(gate.level / 7) * 100}%` : '20%' }}
+                  title={`Gate ${i + 1}`} />
+              );
+            })}
+          </div>
+          <div className="flex justify-between text-xs text-slate-400 mt-1 font-mono">
+            <span>Gate 1</span><span>Gate 14</span><span>Gate 28</span>
+          </div>
+        </div>
+
+        {/* Gate Group Rows */}
+        <div className="divide-y divide-slate-100">
+          {gates.map((g) => (
+            <div key={g.id} className={`flex items-center justify-between gap-4 px-5 py-4 hover:bg-slate-50 transition-colors ${selected === g.id ? 'bg-purple-50' : ''}`} onClick={() => setSelected(g.id)}>
+              <div className="flex items-center gap-3">
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm ${g.open ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-500'}`}>
+                  {g.from}-{g.to}
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-slate-900">Gates {g.from}–{g.to}</p>
+                  <p className="text-xs text-slate-500">{g.to - g.from + 1} gates • {g.open ? `${g.level}m opening • ~${(g.level * 12400 * (g.to - g.from + 1) / 1000).toFixed(0)}k cusecs` : 'Closed'}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${g.open ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-500'}`}>{g.open ? 'OPEN' : 'CLOSED'}</span>
+                <button onClick={(e) => { e.stopPropagation(); toggleGate(g.id); }} className={`px-4 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${g.open ? 'bg-slate-800 hover:bg-slate-900 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}>
+                  {g.open ? 'Close Gates' : 'Open Gates'}
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Warning */}
+      <div className="p-4 rounded-2xl bg-red-50 border border-red-200 flex items-start gap-3">
+        <span className="material-symbols-outlined text-red-500 text-[20px] mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>security</span>
+        <div>
+          <p className="font-bold text-red-800 text-sm">Downstream Impact Warning</p>
+          <p className="text-xs text-red-700 mt-0.5">Opening gates 12–28 increases downstream flow by ~385,000 cusecs. CAP alert must be issued to affected districts (Supaul, Madhubani, Nepal — Saptari) before any gate operation.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── MODULE 5: NGO & Volunteer Coordination ── */
+function NGOModule({ showToast }) {
+  const [tab, setTab] = useState('tasks');
+  const tasks = [
+    { id: 'TSK-0841', org: 'Red Cross Bihar', task: 'Medical camp setup — Supaul Camp 08', status: 'IN-PROGRESS', due: 'Today 18:00', priority: 'HIGH' },
+    { id: 'TSK-0840', org: 'Goonj Foundation', task: 'Dry ration distribution — 4 villages', status: 'PENDING', due: 'Sep 8, 10:00', priority: 'MEDIUM' },
+    { id: 'TSK-0839', org: 'CRY India', task: 'Child welfare assessment — Madhubani', status: 'COMPLETED', due: 'Sep 6', priority: 'HIGH' },
+    { id: 'TSK-0838', org: 'HelpAge India', task: 'Elderly evacuation assist — Ward 14–16', status: 'IN-PROGRESS', due: 'Today 15:00', priority: 'CRITICAL' },
+    { id: 'TSK-0837', org: 'SEEDS India', task: 'WASH kit distribution — 12 camps', status: 'PENDING', due: 'Sep 9', priority: 'MEDIUM' },
+  ];
+  const ngos = [
+    { name: 'Red Cross Bihar', type: 'Medical', personnel: 42, vehicles: 8, status: 'ACTIVE', location: 'Supaul' },
+    { name: 'Goonj Foundation', type: 'Relief Supply', personnel: 28, vehicles: 12, status: 'ACTIVE', location: 'Madhubani' },
+    { name: 'HelpAge India', type: 'Elderly Care', personnel: 18, vehicles: 4, status: 'ACTIVE', location: 'Patna' },
+    { name: 'CRY India', type: 'Child Welfare', personnel: 14, vehicles: 3, status: 'STANDBY', location: 'Darbhanga' },
+    { name: 'SEEDS India', type: 'WASH & Infra', personnel: 35, vehicles: 6, status: 'ACTIVE', location: 'Saharsa' },
+  ];
+  const statusColor = (s) => ({ 'IN-PROGRESS': 'bg-sky-100 text-sky-700', PENDING: 'bg-amber-100 text-amber-700', COMPLETED: 'bg-emerald-100 text-emerald-700' }[s] || 'bg-slate-100 text-slate-600');
+  const prioColor = (p) => ({ CRITICAL: 'bg-red-600', HIGH: 'bg-orange-500', MEDIUM: 'bg-amber-500', LOW: 'bg-slate-400' }[p]);
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 className="text-xl font-extrabold text-slate-900">NGO & Volunteer Coordination</h2>
+          <p className="text-sm text-slate-500">Task assignment, resource tracking & coordination board for all relief organisations</p>
+        </div>
+        <div className="flex gap-2 bg-slate-100 p-1 rounded-xl">
+          <button onClick={() => setTab('tasks')} className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${tab === 'tasks' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'}`}>Task Board</button>
+          <button onClick={() => setTab('ngos')} className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${tab === 'ngos' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'}`}>Organisations</button>
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div className="grid grid-cols-4 gap-3">
+        {[['5', 'Active NGOs', 'text-emerald-700 bg-emerald-50'], ['137', 'Personnel', 'text-sky-700 bg-sky-50'], ['33', 'Vehicles', 'text-indigo-700 bg-indigo-50'], ['18', 'Open Tasks', 'text-amber-700 bg-amber-50']].map(([v, l, c]) => (
+          <div key={l} className={`p-3 rounded-2xl border border-slate-100 flex flex-col items-center text-center ${c}`}>
+            <div className="text-2xl font-extrabold">{v}</div>
+            <div className="text-xs font-semibold mt-0.5">{l}</div>
+          </div>
+        ))}
+      </div>
+
+      {tab === 'tasks' ? (
+        <div className="flex flex-col gap-3">
+          {tasks.map((t) => (
+            <div key={t.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex items-center gap-4 card-hover">
+              <div className={`w-2 self-stretch rounded-full shrink-0 ${prioColor(t.priority)}`} />
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap mb-1">
+                  <span className="font-bold text-slate-900 text-sm">{t.org}</span>
+                  <span className="text-xs text-slate-400 font-mono">{t.id}</span>
+                  <span className={`px-1.5 py-0.5 rounded text-xs font-bold ${prioColor(t.priority)} text-white`}>{t.priority}</span>
+                </div>
+                <p className="text-xs text-slate-700">{t.task}</p>
+                <p className="text-xs text-slate-400 mt-0.5">Due: {t.due}</p>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${statusColor(t.status)}`}>{t.status}</span>
+                {t.status !== 'COMPLETED' && (
+                  <button onClick={() => showToast(`${t.org} task marked complete.`, 'success')} className="px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs flex items-center gap-1 cursor-pointer transition-colors">
+                    <span className="material-symbols-outlined text-[14px]">check</span>Done
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
+          <button onClick={() => showToast('New task form — coming soon!', 'info')} className="w-full py-3 rounded-2xl border-2 border-dashed border-slate-200 hover:border-purple-300 text-slate-500 hover:text-purple-600 font-bold text-sm transition-all cursor-pointer flex items-center justify-center gap-2">
+            <span className="material-symbols-outlined text-[18px]">add_task</span> Assign New Task
+          </button>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {ngos.map((n) => (
+            <div key={n.name} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-col gap-3 card-hover">
+              <div className="flex items-start justify-between gap-2">
+                <div>
+                  <h3 className="font-bold text-slate-900 text-sm">{n.name}</h3>
+                  <p className="text-xs text-slate-500 mt-0.5">{n.type} • {n.location}</p>
+                </div>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${n.status === 'ACTIVE' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-100 text-slate-500'}`}>{n.status}</span>
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="p-2 rounded-xl bg-slate-50 text-center">
+                  <div className="font-extrabold text-slate-900">{n.personnel}</div>
+                  <div className="text-xs text-slate-500">Personnel</div>
+                </div>
+                <div className="p-2 rounded-xl bg-slate-50 text-center">
+                  <div className="font-extrabold text-slate-900">{n.vehicles}</div>
+                  <div className="text-xs text-slate-500">Vehicles</div>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => showToast(`Contacting ${n.name} coordinator...`, 'info')} className="flex-1 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold text-xs flex items-center justify-center gap-1 transition-colors cursor-pointer">
+                  <span className="material-symbols-outlined text-[14px]">call</span>Contact
+                </button>
+                <button onClick={() => showToast(`Task assigned to ${n.name}.`, 'success')} className="flex-1 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center gap-1 transition-colors cursor-pointer">
+                  <span className="material-symbols-outlined text-[14px]">add_task</span>Assign
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ── MODULE 6: Damage Reports & Analytics ── */
+function DamageModule({ showToast }) {
+  const claims = [
+    { id: 'CLM-2024-1041', name: 'Ramesh Kumar', type: 'House Damage', district: 'Supaul', amount: '₹1,80,000', status: 'PENDING', filed: '2 hrs ago' },
+    { id: 'CLM-2024-1040', name: 'Kavita Devi', type: 'Agricultural Loss', district: 'Madhubani', amount: '₹92,000', status: 'UNDER REVIEW', filed: '4 hrs ago' },
+    { id: 'CLM-2024-1039', name: 'Santosh Yadav', type: 'Vehicle', district: 'Darbhanga', amount: '₹45,000', status: 'APPROVED', filed: 'Sep 6' },
+    { id: 'CLM-2024-1038', name: 'Meena Singh', type: 'House Damage', district: 'Patna', amount: '₹2,20,000', status: 'APPROVED', filed: 'Sep 6' },
+    { id: 'CLM-2024-1037', name: 'Ram Bilas', type: 'Agricultural Loss', district: 'Supaul', amount: '₹68,000', status: 'REJECTED', filed: 'Sep 5' },
+  ];
+  const statusColor = (s) => ({ PENDING: 'bg-amber-100 text-amber-700', 'UNDER REVIEW': 'bg-sky-100 text-sky-700', APPROVED: 'bg-emerald-100 text-emerald-700', REJECTED: 'bg-red-100 text-red-700' }[s]);
+
+  return (
+    <div className="flex flex-col gap-6">
+      <div>
+        <h2 className="text-xl font-extrabold text-slate-900">Damage Reports & Compensation Analytics</h2>
+        <p className="text-sm text-slate-500">Incoming citizen damage claims • Review, approve & generate government compensation records</p>
+      </div>
+
+      {/* Stats Row */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {[
+          { label: 'Total Claims', value: '2,841', sub: '↑ 214 today', icon: 'receipt_long', color: 'text-slate-900 bg-slate-50' },
+          { label: 'Total Liability', value: '₹18.4 Cr', sub: 'Estimated payout', icon: 'currency_rupee', color: 'text-purple-700 bg-purple-50' },
+          { label: 'Approved', value: '1,204', sub: '₹8.2 Cr disbursed', icon: 'check_circle', color: 'text-emerald-700 bg-emerald-50' },
+          { label: 'Pending Review', value: '1,412', sub: 'Requires action', icon: 'pending', color: 'text-amber-700 bg-amber-50' },
+        ].map((s) => (
+          <div key={s.label} className={`p-4 rounded-2xl border border-slate-100 flex items-center gap-3 ${s.color}`}>
+            <span className="material-symbols-outlined text-[24px]" style={{ fontVariationSettings: "'FILL' 1" }}>{s.icon}</span>
+            <div>
+              <div className="text-xl font-extrabold">{s.value}</div>
+              <div className="text-xs font-medium opacity-70">{s.label}</div>
+              <div className="text-xs opacity-50 mt-0.5">{s.sub}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* District Breakdown */}
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+        <h3 className="font-bold text-slate-900 text-sm mb-4">Claims by District & Type</h3>
+        <div className="flex flex-col gap-3">
+          {[
+            { d: 'Supaul', house: 840, agri: 412, vehicle: 88, total: 1340 },
+            { d: 'Madhubani', house: 421, agri: 310, vehicle: 42, total: 773 },
+            { d: 'Darbhanga', house: 198, agri: 240, vehicle: 31, total: 469 },
+            { d: 'Patna', house: 142, agri: 80, vehicle: 24, total: 246 },
+          ].map((r) => (
+            <div key={r.d} className="flex items-center gap-4">
+              <span className="text-sm font-semibold text-slate-900 w-20 shrink-0">{r.d}</span>
+              <div className="flex-1 flex gap-1 h-6 rounded-lg overflow-hidden">
+                <div className="bg-sky-400 flex items-center justify-center text-white text-xs font-bold" style={{ width: `${(r.house / r.total) * 100}%` }}>{r.house > 100 ? r.house : ''}</div>
+                <div className="bg-emerald-400 flex items-center justify-center text-white text-xs font-bold" style={{ width: `${(r.agri / r.total) * 100}%` }}>{r.agri > 100 ? r.agri : ''}</div>
+                <div className="bg-amber-400 flex items-center justify-center text-white text-xs font-bold" style={{ width: `${(r.vehicle / r.total) * 100}%` }}></div>
+              </div>
+              <span className="text-sm font-bold text-slate-700 w-16 text-right shrink-0">{r.total.toLocaleString()}</span>
+            </div>
+          ))}
+          <div className="flex items-center gap-4 mt-1 text-xs font-semibold text-slate-500">
+            <span className="w-20 shrink-0"></span>
+            <div className="flex gap-4">
+              {[['bg-sky-400', 'House'], ['bg-emerald-400', 'Agriculture'], ['bg-amber-400', 'Vehicle']].map(([c, l]) => (
+                <span key={l} className="flex items-center gap-1"><span className={`w-2.5 h-2.5 rounded-sm ${c}`} />{l}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Claims Table */}
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+        <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+          <h3 className="font-bold text-slate-900 text-sm">Incoming Claims — Review Queue</h3>
+          <button className="px-3 py-1.5 rounded-lg bg-slate-50 text-slate-700 text-xs font-bold hover:bg-slate-100 transition-colors cursor-pointer flex items-center gap-1">
+            <span className="material-symbols-outlined text-[14px]">download</span>Export
+          </button>
+        </div>
+        <div className="divide-y divide-slate-100">
+          {claims.map((c) => (
+            <div key={c.id} className="flex items-center gap-4 px-5 py-4 hover:bg-slate-50 transition-colors">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                  <span className="font-bold text-slate-900 text-sm">{c.name}</span>
+                  <span className="text-xs font-mono text-slate-400">{c.id}</span>
+                </div>
+                <p className="text-xs text-slate-500">{c.type} • {c.district} • Filed {c.filed}</p>
+              </div>
+              <div className="flex items-center gap-3 shrink-0">
+                <span className="font-bold text-slate-900 text-sm">{c.amount}</span>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-bold ${statusColor(c.status)}`}>{c.status}</span>
+                {c.status === 'PENDING' && (
+                  <div className="flex gap-1">
+                    <button onClick={() => showToast(`${c.id} APPROVED — ₹ disbursement initiated.`, 'success')} className="px-2 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs cursor-pointer transition-colors">Approve</button>
+                    <button onClick={() => showToast(`${c.id} sent for field verification.`, 'info')} className="px-2 py-1 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-700 font-bold text-xs cursor-pointer transition-colors">Review</button>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── MAIN PAGE ── */
+export default function AdminPage() {
+  const { openSos, showToast } = useAuth();
+  const [active, setActive] = useState('overview');
+
+  const modules = [
+    { id: 'overview', label: 'Overview', icon: 'shield_person' },
+    { id: 'heatmap', label: 'Live Heatmap / GIS', icon: 'map' },
+    { id: 'broadcast', label: 'CAP Broadcast', icon: 'cell_tower', dot: true },
+    { id: 'barrage', label: 'Barrage Control', icon: 'valve' },
+    { id: 'ngo', label: 'NGO Coordination', icon: 'volunteer_activism' },
+    { id: 'damage', label: 'Damage Reports', icon: 'analytics' },
+  ];
+
+  const colors = {
+    overview: 'text-purple-600',
+    heatmap: 'text-sky-600',
+    broadcast: 'text-red-600',
+    barrage: 'text-amber-600',
+    ngo: 'text-emerald-600',
+    damage: 'text-indigo-600',
+  };
+
+  const render = () => {
+    switch (active) {
+      case 'overview': return <OverviewModule setActive={setActive} openSos={openSos} showToast={showToast} />;
+      case 'heatmap': return <HeatmapModule />;
+      case 'broadcast': return <BroadcastModule showToast={showToast} />;
+      case 'barrage': return <BarrageModule showToast={showToast} />;
+      case 'ngo': return <NGOModule showToast={showToast} />;
+      case 'damage': return <DamageModule showToast={showToast} />;
+      default: return null;
+    }
   };
 
   return (
-    <div className="min-h-screen bg-background text-on-surface">
-      <Navbar activePage="admin" />
-
-      {/* Floating Action Ribbon for Admin */}
-      <div className="fixed bottom-20 right-6 z-40 flex items-center gap-2">
-        <button
-          onClick={handleGateSimulation}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs shadow-xl transition-all cursor-pointer"
-        >
-          <span className="material-symbols-outlined text-[18px]">valve</span>
-          <span>Gate Telemetry</span>
-        </button>
-
-        <button
-          onClick={() => setIsBroadcastModalOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-xl shadow-red-600/30 transition-all cursor-pointer"
-        >
-          <span className="material-symbols-outlined text-[18px] animate-pulse">cell_tower</span>
-          <span>CAP Broadcast</span>
-        </button>
-      </div>
-
-      {/* CAP Broadcast Modal */}
-      {isBroadcastModalOpen && (
-        <div className="fixed inset-0 z-[100] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-100">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+    <div className="min-h-screen bg-slate-50 text-on-surface">
+      <Navbar />
+      <div className="flex">
+        {/* Sidebar */}
+        <aside className="fixed left-0 top-16 bottom-0 w-60 bg-white border-r border-slate-200 z-30 flex flex-col justify-between py-3 shadow-sm overflow-y-auto">
+          <div className="flex flex-col gap-0.5 px-2">
+            {/* Portal Header */}
+            <div className="px-3 py-3 mb-1 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-red-600 text-[24px]">campaign</span>
-                <h3 className="font-bold text-lg text-slate-800">Transmit National CAP Emergency Broadcast</h3>
-              </div>
-              <button
-                onClick={() => setIsBroadcastModalOpen(false)}
-                className="text-slate-400 hover:text-slate-600"
-              >
-                <span className="material-symbols-outlined text-[20px]">close</span>
-              </button>
-            </div>
-            <div className="mt-4 space-y-3 text-sm">
-              <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-800 text-xs">
-                <strong>CRITICAL TARGETING:</strong> Cross-Border Koshi & Gandak Corridors (4.2M cell towers, FM transmitters, SMS gateways).
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">Alert Severity</label>
-                <select
-                  value={alertSeverity}
-                  onChange={(e) => setAlertSeverity(e.target.value)}
-                  className="w-full text-sm rounded-xl border-slate-300"
-                >
-                  <option>RED ALERT (Immediate Evacuation Order)</option>
-                  <option>ORANGE ALERT (Standby & Secure Livestock)</option>
-                  <option>YELLOW WATCH (River Swell Approaching Warning)</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase mb-1">CAP Alert Message (Bilingual)</label>
-                <textarea
-                  rows={3}
-                  className="w-full text-sm rounded-xl border-slate-300"
-                  readOnly
-                  value="RED ALERT: Koshi Barrage discharge will exceed 420,000 cusecs at 19:00 hrs. Evacuate low-lying sectors of Supaul, Saharsa, and Sunsari immediately. Move to nearest designated safe camp."
-                />
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-700 to-slate-800 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[18px] text-white" style={{ fontVariationSettings: "'FILL' 1" }}>shield_person</span>
+                </div>
+                <div>
+                  <div className="text-xs font-extrabold text-slate-900">Admin Desk</div>
+                  <div className="text-slate-400 font-semibold uppercase tracking-wider" style={{ fontSize: '9px' }}>NDMA · SDMA COMMAND</div>
+                </div>
               </div>
             </div>
-            <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 mt-4">
-              <button
-                type="button"
-                onClick={() => setIsBroadcastModalOpen(false)}
-                className="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-xl"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={handleSendBroadcast}
-                className="px-5 py-2 text-sm font-bold text-white bg-red-600 hover:bg-red-700 rounded-xl shadow-md flex items-center gap-1.5"
-              >
-                <span className="material-symbols-outlined text-[18px]">cell_tower</span>
-                <span>Broadcast Immediately</span>
-              </button>
+            <div className="text-xs font-bold text-slate-400 uppercase tracking-wider px-3 py-2" style={{ fontSize: '10px' }}>Command Modules</div>
+            {modules.map((m) => {
+              const isActive = active === m.id;
+              return (
+                <button key={m.id} onClick={() => setActive(m.id)} className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-left text-sm font-semibold transition-all cursor-pointer ${isActive ? 'bg-gradient-to-r from-purple-700 to-slate-800 text-white shadow-sm' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}>
+                  <span className={`material-symbols-outlined text-[18px] ${isActive ? 'text-white' : colors[m.id]}`} style={{ fontVariationSettings: isActive ? "'FILL' 1" : "'FILL' 0" }}>{m.icon}</span>
+                  <span className="flex-1">{m.label}</span>
+                  {m.dot && !isActive && <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />}
+                </button>
+              );
+            })}
+
+            {/* Incident Box */}
+            <div className="mx-2 mt-3 p-3 rounded-xl bg-red-50 border border-red-200">
+              <div className="flex items-center gap-1.5 mb-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
+                <span className="text-xs font-bold text-red-700 uppercase tracking-wider" style={{ fontSize: '10px' }}>Active Incident</span>
+              </div>
+              <div className="font-bold text-slate-900 text-xs">IN-2024-F09</div>
+              <div className="text-xs text-slate-500 mt-0.5">Bihar Flood — L3 Response</div>
+              <div className="flex justify-between text-xs mt-2">
+                <span className="text-red-600 font-bold">RED ALERT</span>
+                <span className="text-slate-400">72hr active</span>
+              </div>
             </div>
           </div>
-        </div>
-      )}
 
-      <aside className="fixed left-0 top-20 bottom-0 w-64 bg-white border-r border-slate-200 z-40 flex flex-col justify-between py-4 shadow-sm">
-        <div className="px-3 flex flex-col gap-1">
-          <div className="px-3 py-2 font-mono text-[11px] uppercase tracking-wider text-slate-600 font-bold">
-            Tactical Navigation
-          </div>
-          <nav className="flex flex-col gap-1">
-            <Link
-              href="/"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
-            >
-              <span className="material-symbols-outlined text-lg text-slate-500">dashboard</span>
-              <span>Overview (Home)</span>
-            </Link>
-
-            <Link
-              href="/admin"
-              className="flex items-center gap-3 px-3 py-2 transition-colors bg-indigo-50 text-indigo-700 font-semibold rounded-lg shadow-sm"
-            >
-              <span className="material-symbols-outlined text-lg text-indigo-700">shield_person</span>
-              <span>Govt Command Desk</span>
-            </Link>
-
-            <Link
-              href="/citizen"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
-            >
-              <span className="material-symbols-outlined text-lg text-slate-500">person</span>
-              <span>Citizen Portal</span>
-            </Link>
-
-            <Link
-              href="/responder"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
-            >
-              <span className="material-symbols-outlined text-lg text-slate-500">emergency</span>
-              <span>Responder Hub</span>
-            </Link>
-
-            <Link
-              href="/responder"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
-            >
-              <span className="material-symbols-outlined text-lg text-slate-500">cabin</span>
-              <span>Shelters & Logistics</span>
-            </Link>
-
-            <Link
-              href="/responder"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
-            >
-              <span className="material-symbols-outlined text-lg text-slate-500">person_search</span>
-              <span>Missing Persons</span>
-            </Link>
-
-            <button
-              onClick={openSos}
-              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-red-700 hover:bg-red-50 transition-colors text-left w-full cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-lg text-red-600">emergency</span>
-              <span>SOS Center</span>
+          {/* Bottom CAP Button */}
+          <div className="px-3 pb-3 pt-3 border-t border-slate-100 flex flex-col gap-2">
+            <button onClick={() => setActive('broadcast')} className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-sm shadow-md cursor-pointer transition-all">
+              <span className="material-symbols-outlined text-[16px] animate-pulse" style={{ fontVariationSettings: "'FILL' 1" }}>cell_tower</span>
+              CAP Broadcast
             </button>
-
-            <Link
-              href="/login"
-              className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-700 hover:bg-slate-100 hover:text-slate-900 transition-colors"
-            >
-              <span className="material-symbols-outlined text-lg text-slate-500">login</span>
-              <span>Switch / Login</span>
-            </Link>
-          </nav>
-        </div>
-
-        <div className="px-4 pt-4 border-t border-slate-200 flex flex-col gap-2">
-          <div className="flex items-center justify-between font-mono text-[11px] text-slate-600 font-semibold">
-            <span>STATION STATUS</span>
-            <span className="text-emerald-700 font-bold flex items-center gap-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              SYNCED
-            </span>
+            <button onClick={() => showToast('Koshi Barrage: Gates 12-28 opened to 6.2m.', 'warning')} className="w-full flex items-center justify-center gap-2 py-2 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs cursor-pointer transition-all">
+              <span className="material-symbols-outlined text-[14px]">valve</span>
+              Gate Telemetry
+            </button>
           </div>
-          <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 flex flex-col gap-0.5">
-            <span className="text-xs text-slate-900 font-semibold">Govt Command Desk</span>
-            <span className="text-xs text-slate-600 font-medium">Bihar, UP & Terai Outposts</span>
-          </div>
-        </div>
-      </aside>
-      <div className="pl-64"><main className="relative w-full bg-slate-100/90 min-h-screen"><div className="flex flex-col w-full">
-{/* Cross-Border Mission Control Utility Strip */}
-<div className="w-full px-8 py-3 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 shadow-sm">
-<div className="flex items-center gap-4">
-<div className="flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 border border-red-200">
-<span className="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
-<span className="font-mono text-[11px] text-red-700 tracking-wider font-bold">STATE LEVEL-4 RED PROTOCOL ACTIVATED</span>
-</div>
-<div className="hidden md:flex items-center gap-2 font-mono text-[11px] text-slate-600 font-semibold">
-<span className="">HQ: PATNA APEX DESK</span>
-<span className="text-slate-300">/</span>
-<span className="">KATHMANDU SITCEN LIAISON [ONLINE]</span>
-<span className="text-slate-300">/</span>
-<span className="text-indigo-700 font-bold">RADAR-SYNC: 14 SEC AGO</span>
-</div>
-</div>
-<div className="flex items-center gap-3">
-<button className="px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 font-label-md text-xs font-semibold flex items-center gap-1.5 shadow-sm transition-all">
-<span className="material-symbols-outlined text-base text-indigo-600">satellite_alt</span>
-<span className="">ISRO / RISAT-2B Feed</span>
-</button>
-<button className="px-3.5 py-1.5 rounded-lg bg-indigo-600 text-white font-label-md text-xs font-bold flex items-center gap-1.5 shadow-sm hover:bg-indigo-700 transition-all">
-<span className="material-symbols-outlined text-base">emergency_share</span>
-<span className="">Broadcast CM Directive</span>
-</button>
-</div>
-</div>
-{/* Main Executive Command Body */}
-<div className="px-8 py-6 flex flex-col gap-6">
-{/* Strategic Page Header & Inter-Agency Context */}
-<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
-<div className="flex flex-col gap-1">
-<div className="flex items-center gap-2">
-<span className="font-mono text-xs text-indigo-700 uppercase tracking-wider font-bold">NDMA (India) × NDMA (Nepal) Tri-Basin Taskforce</span>
-<span className="px-2 py-0.5 rounded-full bg-slate-200/80 text-slate-700 font-mono text-[11px] font-semibold">Grid Node #IND-BR-09</span>
-</div>
-<h1 className="font-headline-xl text-3xl font-extrabold text-slate-900 tracking-tight">Executive Crisis Operations &amp; Dispatch Console</h1>
-<p className="text-sm text-slate-600 font-medium">Real-time transboundary hydro-meteorological command, rapid evacuation logistics, and tactical unit management across Kosi, Gandak, and Ganges basins.</p>
-</div>
-{/* Top Action Ribbon */}
-<div className="flex items-center gap-1 self-start lg:self-auto bg-white border border-slate-200 p-1 rounded-xl shadow-sm">
-<button className="px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 font-label-md text-xs font-bold shadow-sm flex items-center gap-1.5">
-<span className="material-symbols-outlined text-base">security</span>
-<span className="">Tactical Live Desk</span>
-</button>
-<button className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-label-md text-xs font-semibold flex items-center gap-1.5 transition-colors">
-<span className="material-symbols-outlined text-base">download</span>
-<span className="">Cabinet Briefing (PDF)</span>
-</button>
-<button className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-50 font-label-md text-xs font-semibold flex items-center gap-1.5 transition-colors">
-<span className="material-symbols-outlined text-base">refresh</span>
-<span className="">Sync All Sensors</span>
-</button>
-</div>
-</div>
-{/* Bilateral Transboundary Sluice Gate Protocol Strip */}
-<div className="w-full relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-5 shadow-sm">
-<div className="absolute inset-0 bg-gradient-to-r from-blue-50/60 via-indigo-50/40 to-transparent pointer-events-none"></div>
-<div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
-<div className="flex items-start md:items-center gap-4">
-<div className="w-12 h-12 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center shrink-0 border border-sky-200">
-<span className="material-symbols-outlined text-2xl">water_damage</span>
-</div>
-<div className="flex flex-col">
-<div className="flex items-center gap-2">
-<span className="font-headline-sm text-base text-slate-900 font-bold">Bilateral Indo-Nepal Sluice Gate Protocol: Active Discharge</span>
-<span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-mono text-[11px] font-bold">SYNCHRONIZED</span>
-</div>
-<p className="text-xs text-slate-600 mt-1 font-medium">
-              Birpur Koshi Barrage: Gates 28 through 36 operated at +2.8m aperture. Telemetric runoff synchronized directly with Kathmandu Singha Durbar Flood Ops and Patna Water Commission.
-            </p>
-</div>
-</div>
-<div className="flex items-center gap-4 shrink-0">
-<div className="flex flex-col text-right hidden sm:flex">
-<span className="font-mono text-[10px] text-slate-600 font-bold uppercase">OUTFLOW RATE</span>
-<span className="font-telemetry-metric text-2xl text-sky-700 font-extrabold tracking-tight">482,190 <span className="text-xs text-slate-500 font-semibold">Cusecs</span></span>
-</div>
-<button className="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-label-md text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
-<span className="material-symbols-outlined text-lg">tune</span>
-<span className="">Barrage Controller Log</span>
-</button>
-</div>
-</div>
-</div>
-{/* Top Row KPI Metric Cards */}
-<div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-{/* Metric 1: Total SOS Broadcasts */}
-<div className="relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-4">
-<div className="flex items-start justify-between">
-<div className="flex flex-col gap-1">
-<span className="font-mono text-[11px] text-slate-600 uppercase tracking-wider font-bold">Total SOS Broadcasts</span>
-<span className="text-3xl font-extrabold text-red-600 tracking-tight">1,482</span>
-</div>
-<div className="px-2 py-1 rounded-full bg-red-100 text-red-700 font-mono text-[11px] font-bold flex items-center gap-1">
-<span className="material-symbols-outlined text-sm">trending_up</span>
-<span className="">+14% vs 24h</span>
-</div>
-</div>
-<div className="flex flex-col gap-2">
-{/* Sparkline */}
-<svg className="w-full h-9 overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 24">
-<path className="text-red-500" d="M 0,20 Q 15,18 28,14 T 50,15 T 70,8 T 88,4 L 100,2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
-<path className="text-red-100" d="M 0,20 Q 15,18 28,14 T 50,15 T 70,8 T 88,4 L 100,2 L 100,24 L 0,24 Z" fill="currentColor"></path>
-<circle className="fill-red-600" cx="100" cy="2" r="3"></circle>
-</svg>
-<div className="flex items-center justify-between font-mono text-[11px] text-slate-500">
-<span className="">Critical alerts pending triage</span>
-<span className="text-red-600 font-bold">157 Unassigned</span>
-</div>
-</div>
-</div>
-{/* Metric 2: Resolution & Rescue Rate */}
-<div className="relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-4">
-<div className="flex items-start justify-between">
-<div className="flex flex-col gap-1">
-<span className="font-mono text-[11px] text-slate-600 uppercase tracking-wider font-bold">Resolution &amp; Rescue Rate</span>
-<span className="text-3xl font-extrabold text-sky-700 tracking-tight">89.4%</span>
-</div>
-<div className="p-2 rounded-xl bg-sky-50 text-sky-700 border border-sky-100">
-<span className="material-symbols-outlined text-xl">verified</span>
-</div>
-</div>
-<div className="flex flex-col gap-2">
-{/* Sparkline */}
-<svg className="w-full h-9 overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 24">
-<path className="text-sky-600" d="M 0,18 Q 20,16 40,10 T 70,8 T 90,4 L 100,3" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
-<path className="text-sky-100" d="M 0,18 Q 20,16 40,10 T 70,8 T 90,4 L 100,3 L 100,24 L 0,24 Z" fill="currentColor"></path>
-<circle className="fill-sky-600" cx="100" cy="3" r="3"></circle>
-</svg>
-<div className="flex items-center justify-between font-mono text-[11px] text-slate-500">
-<span className="">Relocated successfully</span>
-<span className="text-slate-800 font-bold">1,325 Citizens</span>
-</div>
-</div>
-</div>
-{/* Metric 3: Active Shelters Operational */}
-<div className="relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-4">
-<div className="flex items-start justify-between">
-<div className="flex flex-col gap-1">
-<span className="font-mono text-[11px] text-slate-600 uppercase tracking-wider font-bold">Active Shelters Operational</span>
-<span className="text-3xl font-extrabold text-indigo-700 tracking-tight">342</span>
-</div>
-<div className="px-2 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 font-mono text-[11px] font-bold">
-            64.2% Mean Cap
-          </div>
-</div>
-<div className="flex flex-col gap-2">
-{/* Sparkline */}
-<svg className="w-full h-9 overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 24">
-<path className="text-indigo-600" d="M 0,14 Q 25,12 45,15 T 75,10 T 90,9 L 100,8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
-<path className="text-indigo-100" d="M 0,14 Q 25,12 45,15 T 75,10 T 90,9 L 100,8 L 100,24 L 0,24 Z" fill="currentColor"></path>
-<circle className="fill-indigo-600" cx="100" cy="8" r="3"></circle>
-</svg>
-<div className="flex items-center justify-between font-mono text-[11px] text-slate-500">
-<span className="">Critical shelters (&gt;90% full)</span>
-<span className="text-red-600 font-bold">28 Facilities</span>
-</div>
-</div>
-</div>
-{/* Metric 4: Deployed Field Personnel */}
-<div className="relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-4">
-<div className="flex items-start justify-between">
-<div className="flex flex-col gap-1">
-<span className="font-mono text-[11px] text-slate-600 uppercase tracking-wider font-bold">Deployed Field Personnel</span>
-<span className="text-3xl font-extrabold text-slate-900 tracking-tight">2,840</span>
-</div>
-<div className="p-2 rounded-xl bg-slate-100 text-slate-700 border border-slate-200">
-<span className="material-symbols-outlined text-xl">military_tech</span>
-</div>
-</div>
-<div className="flex flex-col gap-2">
-{/* Sparkline */}
-<svg className="w-full h-9 overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 24">
-<path className="text-slate-700" d="M 0,16 Q 30,12 55,8 T 85,5 L 100,4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2.5"></path>
-<path className="text-slate-200" d="M 0,16 Q 30,12 55,8 T 85,5 L 100,4 L 100,24 L 0,24 Z" fill="currentColor"></path>
-<circle className="fill-slate-800" cx="100" cy="4" r="3"></circle>
-</svg>
-<div className="flex items-center justify-between font-mono text-[11px] text-slate-500">
-<span className="">Force allocation</span>
-<span className="text-slate-800 font-bold">NDRF • SDRF • APF • Corps</span>
-</div>
-</div>
-</div>
-</div>
-{/* Central Data Visualization Section */}
-<div className="w-full rounded-2xl bg-white border border-slate-200 p-6 shadow-sm flex flex-col gap-5">
-{/* Graph Header & Control Legend */}
-<div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-<div className="flex flex-col gap-1">
-<div className="flex items-center gap-2">
-<span className="p-1.5 rounded-lg bg-sky-50 text-sky-700 border border-sky-100">
-<span className="material-symbols-outlined text-base">query_stats</span>
-</span>
-<h2 className="font-headline-sm text-lg text-slate-900 font-bold">48-Hour Flood Water Discharge &amp; Inundation Level Trend</h2>
-</div>
-<p className="text-xs text-slate-600 font-medium">Combined gauge height vs danger threshold for River Kosi (Birpur Barrage) and River Ganges (Digha Ghat, Patna).</p>
-</div>
-{/* Legend and Basin Switcher */}
-<div className="flex flex-wrap items-center gap-4">
-<div className="flex items-center gap-4 bg-slate-50 border border-slate-200 px-3.5 py-1.5 rounded-xl">
-<div className="flex items-center gap-1.5">
-<span className="w-3 h-1.5 rounded-full bg-sky-600"></span>
-<span className="font-mono text-xs text-slate-600 font-medium">Actual Flow (Cusecs)</span>
-</div>
-<div className="flex items-center gap-1.5">
-<span className="w-3 h-1 rounded-full bg-indigo-600"></span>
-<span className="font-mono text-xs text-slate-600 font-medium">Projected Peak Surge</span>
-</div>
-<div className="flex items-center gap-1.5">
-<span className="w-3 h-0.5 bg-red-600"></span>
-<span className="font-mono text-xs text-red-600 font-bold">Danger Threshold (52.0m)</span>
-</div>
-</div>
-<div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
-<button className="px-2.5 py-1 rounded-lg font-mono text-xs bg-white text-indigo-700 font-bold shadow-sm">Kosi Basin</button>
-<button className="px-2.5 py-1 rounded-lg font-mono text-xs text-slate-600 hover:text-slate-900 transition-colors">Ganges Digha</button>
-<button className="px-2.5 py-1 rounded-lg font-mono text-xs text-slate-600 hover:text-slate-900 transition-colors">Gandak Barrage</button>
-</div>
-</div>
-</div>
-{/* High-End Responsive SVG Hydro-Trend Area Graph */}
-<div className="w-full relative h-72 sm:h-80 bg-slate-50/70 border border-slate-200 rounded-xl p-3 flex flex-col justify-between overflow-hidden shadow-inner">
-{/* Background Grid Rules */}
-<div className="absolute inset-x-3 top-8 bottom-10 flex flex-col justify-between pointer-events-none opacity-40">
-<div className="w-full border-b border-slate-200"></div>
-<div className="w-full border-b border-red-200"></div>
-<div className="w-full border-b border-slate-200"></div>
-<div className="w-full border-b border-slate-200"></div>
-<div className="w-full border-b border-slate-200"></div>
-</div>
-{/* SVG Visualizing Multi-Stream Area & Danger Overlay */}
-<svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 280">
-<defs>
-{/* Actual Discharge Gradient Fill */}
-<linearGradient id="flowGradientLight" x1="0" x2="0" y1="0" y2="1">
-<stop offset="0%" stop-color="#0284c7" stop-opacity="0.28"></stop>
-<stop offset="85%" stop-color="#0284c7" stop-opacity="0.03"></stop>
-</linearGradient>
-{/* Projected Peak Gradient Fill */}
-<linearGradient id="projectedGradientLight" x1="0" x2="0" y1="0" y2="1">
-<stop offset="0%" stop-color="#4f46e5" stop-opacity="0.22"></stop>
-<stop offset="100%" stop-color="#4f46e5" stop-opacity="0.02"></stop>
-</linearGradient>
-</defs>
-{/* Danger Level Threshold Mark (52.0m line) */}
-<line opacity="0.9" stroke="#dc2626" stroke-dasharray="6,4" stroke-width="1.8" x1="0" x2="1000" y1="84" y2="84"></line>
-<text className="font-mono text-[11px] font-bold" fill="#b91c1c" x="12" y="78">CRITICAL DANGER LEVEL: 52.00 METERS (HFL EXCEEDED)</text>
-{/* Projected Surge Fill & Stroke (T-now through +24h) */}
-<path d="M 520,118 Q 620,95 720,70 T 880,56 L 1000,50 L 1000,240 L 520,240 Z" fill="url(#projectedGradientLight)"></path>
-<path d="M 520,118 Q 620,95 720,70 T 880,56 L 1000,50" fill="none" stroke="#4f46e5" stroke-dasharray="5,4" stroke-width="2.5"></path>
-{/* Actual Discharge Fill & Primary Curve */}
-<path d="M 0,195 Q 120,185 240,165 T 480,125 L 520,118 L 520,240 L 0,240 Z" fill="url(#flowGradientLight)"></path>
-<path d="M 0,195 Q 120,185 240,165 T 480,125 L 520,118" fill="none" stroke="#0284c7" stroke-linecap="round" stroke-width="3.5"></path>
-{/* Current Telemetry Intersect Marker */}
-<line stroke="#0284c7" stroke-dasharray="2,2" stroke-width="1.5" x1="520" x2="520" y1="20" y2="240"></line>
-<circle cx="520" cy="118" fill="#ffffff" r="6" stroke="#0284c7" stroke-width="3"></circle>
-<circle cx="520" cy="118" fill="#0284c7" r="2.5"></circle>
-{/* Callout Marker on Live Gauge */}
-<rect fill="#ffffff" height="38" rx="8" stroke="#0284c7" stroke-width="1.2" width="160" x="440" y="40"></rect>
-<text className="font-mono text-[10px] font-bold" fill="#0369a1" text-anchor="middle" x="520" y="55">T-0 LIVE INUNDATION</text>
-<text className="font-mono text-[12px] font-extrabold" fill="#0f172a" text-anchor="middle" x="520" y="70">50.84m / 482k Cusecs</text>
-{/* Projected Peak Marker Alert */}
-<circle cx="880" cy="56" fill="#dc2626" r="4.5" stroke="#fee2e2" stroke-width="2"></circle>
-<text className="font-mono text-[10px] font-bold" fill="#b91c1c" text-anchor="middle" x="880" y="42">EXPECTED CREST: 53.4m (+18h)</text>
-</svg>
-{/* Time-Axis Markers */}
-<div className="flex items-center justify-between pt-2 border-t border-slate-200 px-2 font-mono text-xs text-slate-500">
-<div className="flex flex-col">
-<span className="font-bold text-slate-800">T-24h (00:00)</span>
-<span className="text-[10px] text-slate-400">Normal Inflow</span>
-</div>
-<div className="flex flex-col">
-<span className="font-bold text-slate-800">T-18h (06:00)</span>
-<span className="text-[10px] text-slate-400">Upstream Nepal Rains</span>
-</div>
-<div className="flex flex-col">
-<span className="font-bold text-slate-800">T-12h (12:00)</span>
-<span className="text-[10px] text-slate-400">Warning Gauge Trigger</span>
-</div>
-<div className="flex flex-col text-sky-700 font-bold">
-<span className="flex items-center gap-1">
-<span className="w-1.5 h-1.5 rounded-full bg-sky-600 animate-ping"></span>
-<span className="">LIVE (18:00)</span>
-</span>
-<span className="text-[10px] text-sky-600">Barrage Spillway Active</span>
-</div>
-<div className="flex flex-col text-slate-700">
-<span className="font-bold">+6h (24:00)</span>
-<span className="text-[10px] text-slate-400">Surge Front</span>
-</div>
-<div className="flex flex-col text-red-600 font-bold">
-<span className="font-bold">+18h (12:00)</span>
-<span className="text-[10px] text-red-500">Projected Apex</span>
-</div>
-</div>
-</div>
-{/* Quick Telemetry Footnote */}
-<div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-<div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3">
-<span className="material-symbols-outlined text-sky-600 text-2xl">speed</span>
-<div className="flex flex-col">
-<span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider font-bold">RIVER FLOW VELOCITY</span>
-<span className="text-sm text-slate-900 font-bold">4.2 m/s <span className="text-red-600 font-normal text-xs">(+0.8 m/s delta)</span></span>
-</div>
-</div>
-<div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3">
-<span className="material-symbols-outlined text-indigo-600 text-2xl">cloud_sync</span>
-<div className="flex flex-col">
-<span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider font-bold">TERAI RUNOFF FORECAST</span>
-<span className="text-sm text-slate-900 font-bold">210 mm / next 12 hrs</span>
-</div>
-</div>
-<div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center gap-3">
-<span className="material-symbols-outlined text-red-600 text-2xl">crisis_alert</span>
-<div className="flex flex-col">
-<span className="font-mono text-[10px] text-slate-500 uppercase tracking-wider font-bold">DOWNSTREAM IMPACT ETA</span>
-<span className="text-sm text-red-700 font-bold">Kursela Junction: 6h 40m</span>
-</div>
-</div>
-</div>
-</div>
-{/* Live Emergency Dispatch Section */}
-<div className="w-full rounded-2xl bg-white border border-slate-200 p-6 shadow-sm flex flex-col gap-5">
-{/* Dispatch Controls & Filtering */}
-<div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
-<div className="flex flex-col gap-1">
-<div className="flex items-center gap-2">
-<span className="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
-<h2 className="font-headline-sm text-lg text-slate-900 font-bold">Live Inter-Agency Dispatch Priority Stream</h2>
-</div>
-<p className="text-xs text-slate-600 font-medium">Real-time coordinated deployment across state lines, district magisterial teams, and bilateral military detachments.</p>
-</div>
-{/* Filter bar */}
-<div className="flex flex-wrap items-center gap-3">
-<div className="relative min-w-[280px]">
-<span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg pointer-events-none">search</span>
-<input className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-xs placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 shadow-sm" placeholder="Filter by District, Priority, or Unit..." type="text" />
-</div>
-<div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200">
-<button className="px-3 py-1.5 rounded-lg bg-white text-slate-900 font-label-md text-xs font-bold shadow-sm">All (48)</button>
-<button className="px-3 py-1.5 rounded-lg font-label-md text-xs font-semibold text-red-600 hover:bg-white transition-colors">Critical (9)</button>
-<button className="px-3 py-1.5 rounded-lg font-label-md text-xs font-semibold text-sky-700 hover:bg-white transition-colors">In-Transit (23)</button>
-</div>
-<button className="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 font-label-md text-xs font-semibold flex items-center gap-1.5 border border-slate-200 transition-all">
-<span className="material-symbols-outlined text-base text-slate-500">filter_list</span>
-<span className="">Refine</span>
-</button>
-</div>
-</div>
-{/* Tactical Dispatch Table */}
-<div className="w-full overflow-x-auto rounded-xl border border-slate-200 shadow-sm">
-<table className="w-full text-left border-collapse">
-<thead>
-<tr className="bg-slate-50/90 font-mono text-[11px] text-slate-600 uppercase tracking-wider border-b border-slate-200">
-<th className="py-3.5 px-4 font-bold">Incident ID</th>
-<th className="py-3.5 px-4 font-bold">Region / Sector</th>
-<th className="py-3.5 px-4 font-bold">Nature of Incident</th>
-<th className="py-3.5 px-4 font-bold">Severity</th>
-<th className="py-3.5 px-4 font-bold">Assigned Unit</th>
-<th className="py-3.5 px-4 font-bold">Status</th>
-<th className="py-3.5 px-4 text-right font-bold">Tactical Action</th>
-</tr>
-</thead>
-<tbody className="divide-y divide-slate-200 bg-white">
-{/* Row 1: Supaul Ward 3 */}
-<tr className="hover:bg-slate-50/70 transition-colors">
-<td className="py-4 px-4 font-mono text-xs font-bold text-indigo-700">
-<div className="flex items-center gap-2">
-<span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping"></span>
-<span className="">#INC-9821</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<div className="flex flex-col">
-<span className="text-xs font-bold text-slate-900">Supaul, Ward 3</span>
-<span className="font-mono text-[11px] text-slate-500">Bihar • Sector B-4</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<div className="flex items-center gap-2.5">
-<span className="material-symbols-outlined text-red-600 text-lg">landslide</span>
-<div className="flex flex-col">
-<span className="text-xs font-semibold text-slate-900">Embankment Breach</span>
-<span className="font-mono text-[11px] text-slate-500">Water ingress 1.8m/hr • 420 trapped</span>
-</div>
-</div>
-</td>
-<td className="py-4 px-4">
-<span className="px-2.5 py-1 rounded-full bg-red-100 text-red-700 font-mono text-[10px] font-extrabold inline-flex items-center gap-1 border border-red-200">
-<span className="material-symbols-outlined text-xs">crisis_alert</span>
-<span className="">CRITICAL</span>
-</span>
-</td>
-<td className="py-4 px-4">
-<div className="flex flex-col">
-<span className="text-xs font-bold text-slate-900">NDRF 9th Bn</span>
-<span className="font-mono text-[11px] text-sky-700 font-medium">3 Zodiac Motorboats • 24 divers</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<span className="px-2.5 py-1 rounded-full bg-sky-50 text-sky-700 font-mono text-[10px] font-bold inline-flex items-center gap-1 border border-sky-200">
-<span className="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
-<span className="">Assigned</span>
-</span>
-</td>
-<td className="py-4 px-4 text-right">
-<button className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-label-md text-xs font-bold transition-all shadow-sm inline-flex items-center gap-1.5">
-<span className="material-symbols-outlined text-sm">videocam</span>
-<span className="">View Drone Stream</span>
-</button>
-</td>
-</tr>
-{/* Row 2: Sunsari, Nepal */}
-<tr className="hover:bg-slate-50/70 transition-colors">
-<td className="py-4 px-4 font-mono text-xs font-bold text-indigo-700">
-                #INC-9820
-              </td>
-<td className="py-4 px-4">
-<div className="flex flex-col">
-<span className="text-xs font-bold text-slate-900">Sunsari District</span>
-<span className="font-mono text-[11px] text-slate-500">Koshi Province, Nepal</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<div className="flex items-center gap-2.5">
-<span className="material-symbols-outlined text-sky-600 text-lg">waves</span>
-<div className="flex flex-col">
-<span className="text-xs font-semibold text-slate-900">Flash Runoff &amp; Debris Flow</span>
-<span className="font-mono text-[11px] text-slate-500">Bridge clearance reduced by 3.1m</span>
-</div>
-</div>
-</td>
-<td className="py-4 px-4">
-<span className="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 font-mono text-[10px] font-extrabold inline-flex items-center gap-1 border border-amber-200">
-<span className="material-symbols-outlined text-xs">warning</span>
-<span className="">HIGH</span>
-</span>
-</td>
-<td className="py-4 px-4">
-<div className="flex flex-col">
-<span className="text-xs font-bold text-slate-900">APF Nepal Unit 4</span>
-<span className="font-mono text-[11px] text-slate-500 font-medium">Border Liaison Biratnagar</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<span className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 font-mono text-[10px] font-bold inline-flex items-center gap-1 border border-blue-200">
-<span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
-<span className="">Dispatched</span>
-</span>
-</td>
-<td className="py-4 px-4 text-right">
-<button className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200/80 text-slate-800 font-label-md text-xs font-bold transition-all border border-slate-200 inline-flex items-center gap-1.5">
-<span className="material-symbols-outlined text-sm text-sky-700">hub</span>
-<span className="">Coordinate APF</span>
-</button>
-</td>
-</tr>
-{/* Row 3: Patna Rural */}
-<tr className="hover:bg-slate-50/70 transition-colors">
-<td className="py-4 px-4 font-mono text-xs font-bold text-slate-500">
-                #INC-9817
-              </td>
-<td className="py-4 px-4">
-<div className="flex flex-col">
-<span className="text-xs font-bold text-slate-900">Patna Rural, Danapur</span>
-<span className="font-mono text-[11px] text-slate-500">Bihar • Ward 12</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<div className="flex items-center gap-2.5">
-<span className="material-symbols-outlined text-indigo-600 text-lg">water</span>
-<div className="flex flex-col">
-<span className="text-xs font-semibold text-slate-900">Lowland Waterlogging</span>
-<span className="font-mono text-[11px] text-slate-500">Hospital access cut-off restored</span>
-</div>
-</div>
-</td>
-<td className="py-4 px-4">
-<span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-mono text-[10px] font-bold inline-flex items-center gap-1 border border-slate-200">
-<span className="">MEDIUM</span>
-</span>
-</td>
-<td className="py-4 px-4">
-<div className="flex flex-col">
-<span className="text-xs font-bold text-slate-900">SDRF Bihar QRT</span>
-<span className="font-mono text-[11px] text-slate-500 font-medium">Pump Ops • 8 high-flow units</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 font-mono text-[10px] font-bold inline-flex items-center gap-1 border border-emerald-200">
-<span className="material-symbols-outlined text-xs">done_all</span>
-<span className="">Resolved</span>
-</span>
-</td>
-<td className="py-4 px-4 text-right">
-<button className="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-label-md text-xs font-medium transition-colors inline-flex items-center gap-1">
-<span className="material-symbols-outlined text-sm">history</span>
-<span className="">Audit Log</span>
-</button>
-</td>
-</tr>
-{/* Row 4: Madhubani East */}
-<tr className="hover:bg-slate-50/70 transition-colors">
-<td className="py-4 px-4 font-mono text-xs font-bold text-indigo-700">
-<div className="flex items-center gap-2">
-<span className="w-1.5 h-1.5 rounded-full bg-red-600"></span>
-<span className="">#INC-9815</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<div className="flex flex-col">
-<span className="text-xs font-bold text-slate-900">Madhubani East</span>
-<span className="font-mono text-[11px] text-slate-500">Jhanjharpur Sub-div</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<div className="flex items-center gap-2.5">
-<span className="material-symbols-outlined text-red-600 text-lg">bolt</span>
-<div className="flex flex-col">
-<span className="text-xs font-semibold text-slate-900">Primary Substation Inundation</span>
-<span className="font-mono text-[11px] text-slate-500">132kV grid offline risk • 90k households</span>
-</div>
-</div>
-</td>
-<td className="py-4 px-4">
-<span className="px-2.5 py-1 rounded-full bg-red-100 text-red-700 font-mono text-[10px] font-extrabold inline-flex items-center gap-1 border border-red-200">
-<span className="material-symbols-outlined text-xs">emergency</span>
-<span className="">CRITICAL</span>
-</span>
-</td>
-<td className="py-4 px-4">
-<div className="flex flex-col">
-<span className="text-xs font-bold text-slate-900">Power Grid Emergency Team</span>
-<span className="font-mono text-[11px] text-slate-500 font-medium">BSPCCL • Heavy barrier pumps</span>
-</div>
-</td>
-<td className="py-4 px-4">
-<span className="px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-700 font-mono text-[10px] font-bold inline-flex items-center gap-1 border border-indigo-200">
-<span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse"></span>
-<span className="">In Progress</span>
-</span>
-</td>
-<td className="py-4 px-4 text-right">
-<button className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200/80 text-slate-800 font-label-md text-xs font-bold transition-all border border-slate-200 inline-flex items-center gap-1.5">
-<span className="material-symbols-outlined text-sm text-indigo-700">my_location</span>
-<span className="">Track Vector</span>
-</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-{/* Table Footer Status Summary */}
-<div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1 font-mono text-xs text-slate-500">
-<div className="flex items-center gap-4">
-<span className="">Showing 4 of 48 active operational incidents</span>
-<span className="text-slate-800 font-semibold">Average unit reaction time: 14.2 min</span>
-</div>
-<div className="flex items-center gap-1">
-<button className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold text-xs shadow-sm">« Prev</button>
-<span className="px-2 text-slate-700 font-medium">Page 1 of 12</span>
-<button className="px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold text-xs shadow-sm">Next »</button>
-</div>
-</div>
-</div>
-{/* Multi-Agency Tactical Deployment & Visual Telemetry Mosaic */}
-<div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-{/* Live Video / Drone Feeds Card */}
-<div className="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col gap-3">
-<div className="flex items-center justify-between">
-<div className="flex items-center gap-2">
-<span className="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
-<span className="font-headline-sm text-sm text-slate-900 font-bold">Drone Recon Vector: Alpha-4</span>
-</div>
-<span className="px-2 py-0.5 rounded bg-slate-100 border border-slate-200 font-mono text-[10px] text-indigo-700 font-bold">LIVE 1080P</span>
-</div>
-<div className="relative w-full h-48 rounded-xl overflow-hidden bg-slate-900">
-<img alt="Drone Reconnaissance" className="w-full h-full object-cover" data-alt="High-resolution aerial night vision drone imagery showing floodwaters submerging riverbanks, flooded highway infrastructure, and tactical search rescue boats with searchlights cutting through water in eastern Bihar Kosi basin." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCu_8lVkc8yaPQdFG6csp84MgOH84B2pHYezNJIcNrDA9BqMuUdZP-1kB8YAcY_oWVGKkY3JV1WL68-Q1I8r-Z8S3FXGXeoRjLRfWRkBAkR3y2X5KjankEymh3eqBwHDn-7r13X2N_90YAyWg9C28DqAjnM3sI05zDzI3wEq9ijDlwm4ga_tKbazH46c3Y0DRgXNpngnjxCP9cNpowQj99LUnZHQo9elKIxB3Qmqw7rnWv66vNhIrUBMg" />
-<div className="absolute top-2 left-2 px-2 py-1 rounded bg-slate-900/80 backdrop-blur font-mono text-[10px] text-white">
-            ALT: 180m • LAT: 26.23° N • LON: 86.88° E
-          </div>
-<div className="absolute bottom-2 right-2 px-2 py-1 rounded bg-slate-900/90 font-mono text-[10px] text-amber-300 font-bold">
-            FLIR THERMAL: 18 HUMAN SIGNATURES DETECTED
-          </div>
-</div>
-<div className="flex items-center justify-between font-mono text-xs text-slate-500">
-<span className="">Target: Ward 3 School Rooftop Refuge</span>
-<a className="text-indigo-700 hover:text-indigo-900 font-bold flex items-center gap-0.5" href="#">Full Telemetry <span className="material-symbols-outlined text-xs">arrow_forward</span></a>
-</div>
-</div>
-{/* Bilateral Command Dispatch Map Preview */}
-<div className="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col gap-3">
-<div className="flex items-center justify-between">
-<div className="flex items-center gap-2">
-<span className="material-symbols-outlined text-sky-600 text-lg">public</span>
-<span className="font-headline-sm text-sm text-slate-900 font-bold">Terai Flood Polygon Mapping</span>
-</div>
-<span className="font-mono text-[10px] text-slate-600 font-semibold">HYDRO-GIS v4.1</span>
-</div>
-<div className="w-full h-48 rounded-xl bg-slate-100 bg-cover bg-center relative overflow-hidden border border-slate-200" data-location="Birpur Barrage, Bihar, India" style={{ backgroundImage: "url('https" }}>
-<div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
-<div className="absolute bottom-3 left-3 flex flex-col gap-0.5">
-<span className="text-xs text-white font-bold">Birpur-Sunsari Corridor</span>
-<span className="font-mono text-[11px] text-sky-300 font-semibold">Inundation zone: 21,400 Hectares</span>
-</div>
-</div>
-<div className="flex items-center justify-between font-mono text-xs text-slate-500">
-<span className="">Status: 14 breach containment dikes reinforced</span>
-<a className="text-sky-700 hover:text-sky-900 font-bold flex items-center gap-0.5" href="#">Launch GIS Desk <span className="material-symbols-outlined text-xs">open_in_new</span></a>
-</div>
-</div>
-{/* Agency Readiness & Stockpile Radar */}
-<div className="rounded-2xl bg-white border border-slate-200 p-5 shadow-sm flex flex-col justify-between gap-3">
-<div className="flex items-center justify-between">
-<div className="flex items-center gap-2">
-<span className="material-symbols-outlined text-indigo-600 text-lg">inventory</span>
-<span className="font-headline-sm text-sm text-slate-900 font-bold">Critical Strategic Stockpiles</span>
-</div>
-<span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-mono text-[10px] font-bold">STABLE</span>
-</div>
-{/* Stockpile Bars */}
-<div className="flex flex-col gap-3 my-auto">
-<div className="flex flex-col gap-1">
-<div className="flex items-center justify-between font-mono text-xs">
-<span className="text-slate-700 font-medium">Potable Water &amp; Chlorine Kits</span>
-<span className="text-sky-700 font-bold">82% (420k Units)</span>
-</div>
-<div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-<div className="h-full bg-sky-600 rounded-full" style={{ width: "82%" }}></div>
-</div>
-</div>
-<div className="flex flex-col gap-1">
-<div className="flex items-center justify-between font-mono text-xs">
-<span className="text-slate-700 font-medium">MRE / Dry Rations (7-Day Packs)</span>
-<span className="text-indigo-700 font-bold">71% (310k Units)</span>
-</div>
-<div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-<div className="h-full bg-indigo-600 rounded-full" style={{ width: "71%" }}></div>
-</div>
-</div>
-<div className="flex flex-col gap-1">
-<div className="flex items-center justify-between font-mono text-xs">
-<span className="text-slate-700 font-medium">Amphibious Evac Craft (Motorized)</span>
-<span className="text-amber-700 font-bold">44% (128 / 290 Active)</span>
-</div>
-<div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-<div className="h-full bg-amber-500 rounded-full" style={{ width: "44%" }}></div>
-</div>
-</div>
-</div>
-<div className="pt-2 border-t border-slate-200 flex items-center justify-between font-mono text-xs text-slate-500">
-<span className="">Supplies depot: Muzaffarpur Airbase</span>
-<span className="text-slate-800 font-semibold">C-130J Sortie #4 ETA 03:40</span>
-</div>
-</div>
-</div>
-</div>
-</div></main></div>
+        </aside>
 
-
-
-
+        {/* Content */}
+        <main className="ml-60 flex-1 min-h-[calc(100vh-64px)] p-6 lg:p-8">
+          <div className="max-w-5xl mx-auto">{render()}</div>
+        </main>
+      </div>
     </div>
   );
 }

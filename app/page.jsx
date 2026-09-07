@@ -10,7 +10,7 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-background text-on-surface">
-      <Navbar activePage="overview" />
+      <Navbar />
       
 <main className="w-full min-h-screen">
 <div className="flex flex-col w-full">

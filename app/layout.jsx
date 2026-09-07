@@ -1,7 +1,6 @@
 import './globals.css';
 import { AuthProvider } from '../context/AuthContext';
 import SosModal from '../components/SosModal';
-import QuickNav from '../components/QuickNav';
 import Toast from '../components/Toast';
 
 export const metadata = {
@@ -32,9 +31,8 @@ export default function RootLayout({ children }) {
       <body className="bg-background text-on-surface font-sans antialiased min-h-screen selection:bg-indigo-100 selection:text-indigo-900">
         <AuthProvider>
           <SosModal />
-          <QuickNav />
           <Toast />
-          <main className="w-full min-h-screen">{children}</main>
+          {children}
         </AuthProvider>
       </body>
     </html>
