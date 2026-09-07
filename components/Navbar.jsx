@@ -36,6 +36,7 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isCitizenPortal = pathname === '/citizen';
 
   const isActive = (link) => {
     if (link.exact) return pathname === link.href;
@@ -47,19 +48,20 @@ export default function Navbar() {
       <header className="sticky top-0 w-full z-50 h-16 bg-white/95 backdrop-blur-xl border-b border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
         <div className="h-full w-full px-4 md:px-8 flex items-center justify-between gap-4 max-w-screen-2xl mx-auto">
 
-          {/* Brand */}
-          <Link href="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity shrink-0">
-            <BrandMark compact />
-            <div className="flex flex-col leading-none">
-              <div className="flex items-center gap-1.5">
-                <span className="text-base font-extrabold tracking-tight text-slate-900">Sachet</span>
-                <span className="text-base font-bold tracking-tight text-primary">| जलरक्षा</span>
+          {!isCitizenPortal && (
+            <Link href="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity shrink-0">
+              <BrandMark compact />
+              <div className="flex flex-col leading-none">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-base font-extrabold tracking-tight text-slate-900">Sachet</span>
+                  <span className="text-base font-bold tracking-tight text-primary">| जलरक्षा</span>
+                </div>
+                <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-secondary mt-0.5">
+                  IN-NP Disaster Grid
+                </span>
               </div>
-              <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-secondary mt-0.5">
-                IN-NP Disaster Grid
-              </span>
-            </div>
-          </Link>
+            </Link>
+          )}
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
@@ -100,25 +102,28 @@ export default function Navbar() {
               <span className="text-[11px] font-bold uppercase tracking-wider">Grid Live</span>
             </div>
 
-            {/* Sign In */}
-            <Link
-              href="/login"
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-white text-sm font-bold shadow-sm hover:bg-indigo-700 transition-colors"
-            >
-              <span className="material-symbols-outlined text-[17px]">account_circle</span>
-              <span className="hidden sm:inline">Sign In</span>
-            </Link>
+            {!isCitizenPortal && (
+              <Link
+                href="/login"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-white text-sm font-bold shadow-sm hover:bg-indigo-700 transition-colors"
+              >
+                <span className="material-symbols-outlined text-[17px]">account_circle</span>
+                <span className="hidden sm:inline">Sign In</span>
+              </Link>
+            )}
 
             {/* Mobile menu toggle */}
-            <button
-              onClick={() => setMobileOpen((v) => !v)}
-              className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors"
-              aria-label="Toggle menu"
-            >
-              <span className="material-symbols-outlined text-[22px]">
-                {mobileOpen ? 'close' : 'menu'}
-              </span>
-            </button>
+            {!isCitizenPortal && (
+              <button
+                onClick={() => setMobileOpen((v) => !v)}
+                className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors"
+                aria-label="Toggle menu"
+              >
+                <span className="material-symbols-outlined text-[22px]">
+                  {mobileOpen ? 'close' : 'menu'}
+                </span>
+              </button>
+            )}
           </div>
         </div>
       </header>
