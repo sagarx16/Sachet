@@ -131,27 +131,27 @@ export default function LoginPage() {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {/* Role: Citizen */}
               <div
                 onClick={() => setRole('citizen')}
-                className={`cursor-pointer relative rounded-xl p-3 transition-all duration-200 shadow-sm flex flex-col justify-between ${
+                className={`cursor-pointer relative rounded-xl p-2.5 sm:p-3 transition-all duration-200 shadow-sm flex flex-col justify-between ${
                   role === 'citizen'
                     ? 'bg-surface-container-low border-2 border-primary'
                     : 'bg-surface-container-lowest border border-slate-200 opacity-75 hover:opacity-100'
                 }`}
               >
                 <div className="flex items-start justify-between mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-surface-container-lowest text-primary flex items-center justify-center shadow-sm">
-                    <span className="material-symbols-outlined text-[20px]">home_pin</span>
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-surface-container-lowest text-primary flex items-center justify-center shadow-sm">
+                    <span className="material-symbols-outlined text-[18px] sm:text-[20px]">home_pin</span>
                   </div>
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center ${role === 'citizen' ? 'bg-primary text-on-primary' : 'bg-surface-container-highest text-transparent'}`}>
                     <span className="material-symbols-outlined text-[14px]">check</span>
                   </div>
                 </div>
                 <div>
-                  <div className="font-bold text-sm text-on-surface">Citizen</div>
-                  <p className="text-[11px] text-on-surface-variant mt-0.5 leading-tight">
+                  <div className="font-bold text-xs sm:text-sm text-on-surface">Citizen</div>
+                  <p className="hidden sm:block text-[11px] text-on-surface-variant mt-0.5 leading-tight">
                     Shelter maps, family SOS beacon, localized flood warnings.
                   </p>
                 </div>
@@ -160,23 +160,23 @@ export default function LoginPage() {
               {/* Role: Responder */}
               <div
                 onClick={() => setRole('responder')}
-                className={`cursor-pointer relative rounded-xl p-3 transition-all duration-200 shadow-sm flex flex-col justify-between ${
+                className={`cursor-pointer relative rounded-xl p-2.5 sm:p-3 transition-all duration-200 shadow-sm flex flex-col justify-between ${
                   role === 'responder'
                     ? 'bg-surface-container-low border-2 border-secondary'
                     : 'bg-surface-container-lowest border border-slate-200 opacity-75 hover:opacity-100'
                 }`}
               >
                 <div className="flex items-start justify-between mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shadow-sm">
-                    <span className="material-symbols-outlined text-[20px]">emergency</span>
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-surface-container-high text-secondary flex items-center justify-center shadow-sm">
+                    <span className="material-symbols-outlined text-[18px] sm:text-[20px]">emergency</span>
                   </div>
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center ${role === 'responder' ? 'bg-secondary text-on-secondary' : 'bg-surface-container-highest text-transparent'}`}>
                     <span className="material-symbols-outlined text-[14px]">check</span>
                   </div>
                 </div>
                 <div>
-                  <div className="font-bold text-sm text-on-surface">Responder</div>
-                  <p className="text-[11px] text-on-surface-variant mt-0.5 leading-tight">
+                  <div className="font-bold text-xs sm:text-sm text-on-surface">Responder</div>
+                  <p className="hidden sm:block text-[11px] text-on-surface-variant mt-0.5 leading-tight">
                     Camps, squads dispatch, relief supplies, kinematics.
                   </p>
                 </div>
@@ -185,23 +185,23 @@ export default function LoginPage() {
               {/* Role: Admin */}
               <div
                 onClick={() => setRole('admin')}
-                className={`cursor-pointer relative rounded-xl p-3 transition-all duration-200 shadow-sm flex flex-col justify-between ${
+                className={`cursor-pointer relative rounded-xl p-2.5 sm:p-3 transition-all duration-200 shadow-sm flex flex-col justify-between ${
                   role === 'admin'
                     ? 'bg-surface-container-low border-2 border-purple-600'
                     : 'bg-surface-container-lowest border border-slate-200 opacity-75 hover:opacity-100'
                 }`}
               >
                 <div className="flex items-start justify-between mb-2">
-                  <div className="w-8 h-8 rounded-lg bg-surface-container-high text-purple-700 flex items-center justify-center shadow-sm">
-                    <span className="material-symbols-outlined text-[20px]">shield_person</span>
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-surface-container-high text-purple-700 flex items-center justify-center shadow-sm">
+                    <span className="material-symbols-outlined text-[18px] sm:text-[20px]">shield_person</span>
                   </div>
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center ${role === 'admin' ? 'bg-purple-700 text-white' : 'bg-surface-container-highest text-transparent'}`}>
                     <span className="material-symbols-outlined text-[14px]">check</span>
                   </div>
                 </div>
                 <div>
-                  <div className="font-bold text-sm text-on-surface">Admin Desk</div>
-                  <p className="text-[11px] text-on-surface-variant mt-0.5 leading-tight">
+                  <div className="font-bold text-xs sm:text-sm text-on-surface">Admin Desk</div>
+                  <p className="hidden sm:block text-[11px] text-on-surface-variant mt-0.5 leading-tight">
                     Gate release, CAP national broadcasts, sensor telemetry.
                   </p>
                 </div>
