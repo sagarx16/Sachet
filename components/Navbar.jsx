@@ -37,14 +37,12 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isCitizenPortal = pathname === '/citizen';
-  const isPortalPage = ['/admin', '/responder'].includes(pathname);
+  const isPortalPage = ['/admin', '/responder', '/citizen'].includes(pathname);
 
   const isActive = (link) => {
     if (link.exact) return pathname === link.href;
     return pathname.startsWith(link.href);
   };
-
-  if (isCitizenPortal) return null;
 
   return (
     <>

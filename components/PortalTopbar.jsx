@@ -80,7 +80,7 @@ export default function PortalTopbar({ portal = 'citizen', onMenuClick, menuOpen
   };
 
   return (
-    <div className={`sticky ${portal === 'citizen' ? 'top-0' : 'top-0 md:top-16'} z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-[0_1px_3px_rgba(0,0,0,0.04)]`}>
+    <div className="sticky top-0 md:top-16 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
       <div className="flex items-center justify-end gap-1.5 sm:gap-3 px-3 sm:px-4 md:px-8 h-14 max-w-screen-2xl mx-auto">
 
         {onMenuClick && (
