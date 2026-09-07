@@ -580,9 +580,9 @@ export default function ResponderPage() {
     <div className="min-h-screen bg-slate-50 text-on-surface">
       <Navbar />
       <PortalTopbar portal="responder" />
-      <div className="flex items-start">
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-start">
         {/* Sidebar */}
-        <aside className="w-64 shrink-0 bg-white border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex flex-col sticky top-[120px] h-[calc(100vh-120px)] pt-4">
+        <aside className="w-full lg:w-64 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex flex-col lg:sticky lg:top-[120px] lg:h-[calc(100vh-120px)] pt-4">
           {/* Header Identity Block */}
           <div id="responder-header-block" className="px-4 pb-4 border-b border-slate-100 shrink-0">
             <div className="flex items-center gap-3">
@@ -601,7 +601,7 @@ export default function ResponderPage() {
             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">
               Operations Desks
             </div>
-            <nav className="flex flex-col gap-1.5">
+            <nav className="grid grid-cols-2 lg:flex lg:flex-col gap-1.5">
               {modules.map((m) => {
                 const isActive = active === m.id;
                 return (
@@ -664,7 +664,7 @@ export default function ResponderPage() {
         </aside>
 
         {/* Content */}
-        <main className="flex-1 min-w-0 min-h-[calc(100vh-120px)] pt-4 px-6 lg:px-8 pb-8">
+        <main className="flex-1 min-w-0 min-h-[calc(100vh-120px)] pt-4 px-4 sm:px-6 lg:px-8 pb-8">
           <div className="max-w-5xl mx-auto">{render()}</div>
         </main>
       </div>

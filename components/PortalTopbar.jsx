@@ -81,11 +81,11 @@ export default function PortalTopbar({ portal = 'citizen' }) {
 
   return (
     <div className="sticky top-16 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
-      <div className="flex items-center justify-end gap-2.5 sm:gap-3 px-4 md:px-8 h-14 max-w-screen-2xl mx-auto">
+      <div className="flex items-center justify-end gap-1.5 sm:gap-3 px-3 sm:px-4 md:px-8 h-14 max-w-screen-2xl mx-auto">
 
         {/* ── Search Bar: compact (260-300px), aligned to right near badges & profile ── */}
         <div
-          className={`flex items-center gap-2 w-64 sm:w-72 h-9.5 px-3.5 rounded-full bg-[#F3F4F6] border border-[#E5E7EB] transition-all duration-200 shrink-0 ${
+            className={`flex items-center gap-2 flex-1 min-w-0 sm:flex-none w-auto sm:w-72 h-9.5 px-3 sm:px-3.5 rounded-full bg-[#F3F4F6] border border-[#E5E7EB] transition-all duration-200 ${
             searchFocused
               ? 'bg-white border-slate-300 ring-2 ring-indigo-100 shadow-sm'
               : 'hover:bg-slate-200/50 hover:border-slate-300'
@@ -177,7 +177,7 @@ export default function PortalTopbar({ portal = 'citizen' }) {
           <button
             id="portal-topbar-logout"
             onClick={handleLogout}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-1.5 rounded-full border border-slate-200 text-slate-700 text-xs font-semibold hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-all cursor-pointer shrink-0"
           >
             <span className="material-symbols-outlined text-[16px]">logout</span>
             <span className="hidden sm:inline">Logout</span>
