@@ -778,6 +778,7 @@ function PWAModule({ showToast }) {
 export default function CitizenPage() {
   const { openSos, showToast } = useAuth();
   const [active, setActive] = useState('overview');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const modules = [
     { id: 'overview', label: 'Overview', icon: 'grid_view' },
@@ -809,10 +810,59 @@ export default function CitizenPage() {
   return (
     <div className="min-h-screen bg-slate-50 text-on-surface">
       <Navbar />
-      <PortalTopbar portal="citizen" />
+      <PortalTopbar
+        portal="citizen"
+        menuOpen={mobileMenuOpen}
+        onMenuClick={() => setMobileMenuOpen((open) => !open)}
+      />
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 top-14 z-50 bg-slate-900/25" onClick={() => setMobileMenuOpen(false)}>
+          <aside className="w-[min(88vw,320px)] h-full bg-white shadow-2xl border-r border-slate-200" onClick={(event) => event.stopPropagation()}>
+            <div className="px-4 py-4 border-b border-slate-100">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-sm">
+                  <span className="material-symbols-outlined text-[20px]">person_pin_circle</span>
+                </div>
+                <div>
+                  <div className="text-sm font-extrabold text-slate-900">Citizen Portal</div>
+                  <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mt-0.5">IN-NP Disaster Grid</div>
+                </div>
+              </div>
+            </div>
+            <div className="px-3.5 py-3">
+              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 mb-2">Modules</div>
+              <nav className="flex flex-col gap-1.5">
+                {modules.map((m) => {
+                  const isActive = active === m.id;
+                  return (
+                    <button
+                      key={m.id}
+                      onClick={() => { setActive(m.id); setMobileMenuOpen(false); }}
+                      className={`group w-full h-10 px-3 rounded-xl flex items-center gap-3 text-left text-[13px] transition-all cursor-pointer ${
+                        isActive ? 'bg-indigo-600 text-white font-semibold shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 font-medium'
+                      }`}
+                    >
+                      <span className={`material-symbols-outlined text-[19px] ${isActive ? 'text-white' : colors[m.id]}`}>{m.icon}</span>
+                      <span className="flex-1 truncate">{m.label}</span>
+                      {m.dot && !isActive && <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />}
+                      {m.badge && !isActive && <span className="text-[10px] font-bold text-red-600 bg-red-50 border border-red-200 px-1.5 py-0.5 rounded-full shrink-0">{m.badge}</span>}
+                    </button>
+                  );
+                })}
+              </nav>
+            </div>
+            <div className="p-3.5 border-t border-slate-100">
+              <button onClick={openSos} className="sos-glow w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-red-600 to-red-500 text-white font-bold text-sm shadow-md cursor-pointer">
+                <span className="material-symbols-outlined text-[18px]">sos</span>
+                <span>Emergency SOS</span>
+              </button>
+            </div>
+          </aside>
+        </div>
+      )}
       <div className="flex flex-col lg:flex-row items-stretch lg:items-start">
         {/* Sidebar */}
-        <aside className="w-full lg:w-64 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex flex-col lg:sticky lg:top-[120px] lg:h-[calc(100vh-120px)] pt-4">
+        <aside className="hidden lg:flex w-full lg:w-64 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex-col lg:sticky lg:top-[120px] lg:h-[calc(100vh-120px)] pt-4">
           {/* Header Identity Block - flush with main content banner */}
           <div id="portal-header-block" className="px-4 pb-4 border-b border-slate-100 shrink-0">
             <div className="flex items-center gap-3">

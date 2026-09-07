@@ -46,7 +46,7 @@ function getInitials(name = '') {
   return name.split(' ').slice(0, 2).map((w) => w[0]).join('').toUpperCase() || 'U';
 }
 
-export default function PortalTopbar({ portal = 'citizen' }) {
+export default function PortalTopbar({ portal = 'citizen', onMenuClick, menuOpen = false }) {
   const { user, logout } = useAuth();
   const router = useRouter();
   const pc = portalConfig[portal] || portalConfig.citizen;
@@ -80,8 +80,18 @@ export default function PortalTopbar({ portal = 'citizen' }) {
   };
 
   return (
-    <div className="sticky top-16 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+    <div className={`sticky ${portal === 'citizen' ? 'top-0' : 'top-16'} z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-[0_1px_3px_rgba(0,0,0,0.04)]`}>
       <div className="flex items-center justify-end gap-1.5 sm:gap-3 px-3 sm:px-4 md:px-8 h-14 max-w-screen-2xl mx-auto">
+
+        {onMenuClick && (
+          <button
+            onClick={onMenuClick}
+            className="order-first mr-auto flex lg:hidden items-center justify-center w-9 h-9 rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition-colors cursor-pointer shrink-0"
+            aria-label="Open portal menu"
+          >
+            <span className="material-symbols-outlined text-[22px]">{menuOpen ? 'close' : 'menu'}</span>
+          </button>
+        )}
 
         {/* ── Search Bar: compact (260-300px), aligned to right near badges & profile ── */}
         <div

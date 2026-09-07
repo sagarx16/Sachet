@@ -43,13 +43,14 @@ export default function Navbar() {
     return pathname.startsWith(link.href);
   };
 
+  if (isCitizenPortal) return null;
+
   return (
     <>
       <header className="sticky top-0 w-full z-50 h-16 bg-white/95 backdrop-blur-xl border-b border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
         <div className="h-full w-full px-4 md:px-8 flex items-center justify-between gap-4 max-w-screen-2xl mx-auto">
 
-          {!isCitizenPortal && (
-            <Link href="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity shrink-0">
+          <Link href="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity shrink-0">
               <BrandMark compact />
               <div className="flex flex-col leading-none">
                 <div className="flex items-center gap-1.5">
@@ -60,8 +61,7 @@ export default function Navbar() {
                   IN-NP Disaster Grid
                 </span>
               </div>
-            </Link>
-          )}
+          </Link>
 
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-1" aria-label="Main navigation">
@@ -102,28 +102,24 @@ export default function Navbar() {
               <span className="text-[11px] font-bold uppercase tracking-wider">Grid Live</span>
             </div>
 
-            {!isCitizenPortal && (
-              <Link
-                href="/login"
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-white text-sm font-bold shadow-sm hover:bg-indigo-700 transition-colors"
-              >
-                <span className="material-symbols-outlined text-[17px]">account_circle</span>
-                <span className="hidden sm:inline">Sign In</span>
-              </Link>
-            )}
+            <Link
+              href="/login"
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-primary text-white text-sm font-bold shadow-sm hover:bg-indigo-700 transition-colors"
+            >
+              <span className="material-symbols-outlined text-[17px]">account_circle</span>
+              <span className="hidden sm:inline">Sign In</span>
+            </Link>
 
             {/* Mobile menu toggle */}
-            {!isCitizenPortal && (
-              <button
-                onClick={() => setMobileOpen((v) => !v)}
-                className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors"
-                aria-label="Toggle menu"
-              >
-                <span className="material-symbols-outlined text-[22px]">
-                  {mobileOpen ? 'close' : 'menu'}
-                </span>
-              </button>
-            )}
+            <button
+              onClick={() => setMobileOpen((v) => !v)}
+              className="md:hidden flex items-center justify-center w-9 h-9 rounded-xl hover:bg-slate-100 text-slate-600 transition-colors"
+              aria-label="Toggle menu"
+            >
+              <span className="material-symbols-outlined text-[22px]">
+                {mobileOpen ? 'close' : 'menu'}
+              </span>
+            </button>
           </div>
         </div>
       </header>
