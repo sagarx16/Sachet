@@ -50,9 +50,9 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="w-full min-h-screen bg-background flex flex-col justify-center items-center px-margin-mobile py-8">
+    <main className="w-full min-h-screen overflow-x-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/60 flex flex-col justify-center items-center px-4 sm:px-6 py-4 sm:py-8">
       {/* Back to Home & Sat Uplink */}
-      <div className="w-full max-w-xl flex items-center justify-between mb-4 px-2">
+      <div className="w-full max-w-xl flex flex-wrap items-center justify-between gap-3 mb-4 px-1 sm:px-2">
         <Link
           href="/"
           className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
@@ -63,7 +63,7 @@ export default function LoginPage() {
         </Link>
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span className="text-xs font-mono text-slate-500 uppercase">SAT-UPLINK ACTIVE</span>
+          <span className="hidden sm:inline text-xs font-mono text-slate-500 uppercase">SAT-UPLINK ACTIVE</span>
         </div>
       </div>
 
@@ -73,14 +73,19 @@ export default function LoginPage() {
         <div className="absolute -bottom-10 -right-10 w-72 h-72 bg-primary-container/15 rounded-full blur-3xl pointer-events-none"></div>
 
         {/* Card */}
-        <div className="relative w-full bg-surface-container-lowest rounded-2xl shadow-xl overflow-hidden p-space-xl md:p-space-2xl border border-slate-200/80">
+        <div className="relative w-full bg-surface-container-lowest rounded-2xl shadow-xl shadow-slate-900/10 overflow-hidden p-4 sm:p-6 md:p-8 border border-slate-200/80">
           {/* Header */}
-          <div className="flex items-center justify-end pb-space-lg mb-space-lg bg-surface-container-low/60 -mx-space-xl md:-mx-space-2xl -mt-space-xl md:-mt-space-2xl px-space-xl md:px-space-2xl pt-space-lg">
+          <div className="flex items-center justify-end pb-4 mb-5 bg-surface-container-low/60 -mx-4 sm:-mx-6 md:-mx-8 -mt-4 sm:-mt-6 md:-mt-8 px-4 sm:px-6 md:px-8 pt-4 sm:pt-5">
             <div className="flex items-center gap-space-xs bg-surface-container px-space-sm py-1.5 rounded-full">
               <span className="material-symbols-outlined text-tertiary-container text-[18px]">satellite_alt</span>
               <span className="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline font-semibold">SAT-SYNC LIVE</span>
               <span className="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
             </div>
+          </div>
+
+          <div className="mb-5">
+            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900">Access your response portal</h1>
+            <p className="text-xs sm:text-sm text-slate-500 mt-1">Secure sign-in for citizens and emergency teams.</p>
           </div>
 
           {/* Mode Switcher: Log In / Register */}
@@ -271,7 +276,7 @@ export default function LoginPage() {
                     Resend Code
                   </button>
                 </div>
-                <div className="grid grid-cols-6 gap-2">
+                <div className="grid grid-cols-6 gap-1.5 sm:gap-2">
                   {[0, 1, 2, 3, 4, 5].map((i) => (
                     <input
                       key={i}
@@ -310,7 +315,7 @@ export default function LoginPage() {
             )}
 
             {/* Remember Checkbox */}
-            <div className="flex items-center justify-between pt-1">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-1">
               <label className="flex items-center gap-2 cursor-pointer text-xs text-slate-600 font-medium">
                 <input
                   type="checkbox"
@@ -390,9 +395,9 @@ export default function LoginPage() {
           </form>
 
           {/* Languages */}
-          <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
-            <span>Transboundary Node: CWC-Patna & DHM-Kathmandu</span>
-            <div className="flex items-center gap-2 font-semibold">
+          <div className="mt-6 pt-4 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-[11px] text-slate-500">
+            <span className="leading-tight">Transboundary Node: CWC-Patna & DHM-Kathmandu</span>
+            <div className="flex items-center gap-2 font-semibold shrink-0">
               <span className="text-primary cursor-pointer">EN</span>
               <span>•</span>
               <span className="hover:text-primary cursor-pointer">हिन्दी</span>
