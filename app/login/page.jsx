@@ -50,7 +50,7 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="w-full min-h-screen overflow-x-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/60 flex flex-col justify-center items-center px-4 sm:px-6 py-4 sm:py-8">
+    <main className="w-full min-h-[100dvh] overflow-x-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/60 flex flex-col justify-start sm:justify-center items-center px-4 sm:px-6 py-4 sm:py-8">
       {/* Back to Home & Sat Uplink */}
       <div className="w-full max-w-xl flex flex-wrap items-center justify-between gap-3 mb-4 px-1 sm:px-2">
         <Link
