@@ -1,0 +1,404 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "inverse-on-surface": "#eef0ff", "on-primary-fixed": "#100069", "surface-container-highest": "#dae2fd", "on-error": "#ffffff", "on-primary-container": "#c1beff", "surface-bright": "#faf8ff", "surface-variant": "#dae2fd", "secondary": "#006398", "tertiary-fixed": "#7ffc97", "on-background": "#131b2e", "secondary-fixed-dim": "#93ccff", "surface-container-lowest": "#ffffff", "secondary-fixed": "#cce5ff", "on-tertiary-fixed": "#002109", "tertiary-container": "#005f26", "tertiary": "#00451a", "on-secondary-container": "#00476e", "error": "#ba1a1a", "on-primary-fixed-variant": "#372abf", "primary": "#2a14b4", "primary-fixed": "#e3dfff", "surface-container": "#eaedff", "on-tertiary": "#ffffff", "tertiary-fixed-dim": "#62df7d", "on-surface-variant": "#464554", "primary-container": "#4338ca", "error-container": "#ffdad6", "outline": "#777586", "on-secondary-fixed": "#001d31", "on-secondary-fixed-variant": "#004b73", "surface-container-high": "#e2e7ff", "primary-fixed-dim": "#c3c0ff", "surface-container-low": "#f2f3ff", "surface-tint": "#5148d7", "surface": "#faf8ff", "on-surface": "#131b2e", "on-tertiary-container": "#60dd7c", "on-secondary": "#ffffff", "inverse-surface": "#283044", "outline-variant": "#c7c4d7", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#005320", "inverse-primary": "#c3c0ff", "surface-dim": "#d2d9f4", "secondary-container": "#5bb8fe", "background": "#faf8ff", "on-primary": "#ffffff" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-tablet": "1.25rem", "margin-mobile": "1rem", "space-sm": "0.75rem", "space-xl": "1.5rem", "space-2xl": "2rem", "space-3xl": "2.5rem", "space-xs": "0.5rem", "gutter-mobile": "1rem", "space-md": "1rem", "gutter-desktop": "1.5rem", "margin-desktop": "2rem", "space-lg": "1.25rem", "margin-tablet": "1.5rem", "space-4xl": "3rem", "space-2xs": "0.25rem" }, "fontFamily": { "title-md": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "label-sm": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"], "headline-lg": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "telemetry-num": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "headline-sm": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"], "display-lg-mobile": ["Plus Jakarta Sans"] }, "fontSize": { "title-md": ["16px", {"lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "600"}], "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "700"}], "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}], "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600"}], "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}], "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700"}], "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}], "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400"}], "telemetry-num": ["24px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "700"}], "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}], "headline-sm": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600"}], "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}], "display-lg-mobile": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "800"}] } } } };</script></head><body class="bg-background font-body-md text-on-surface antialiased"><main class="w-full min-h-screen bg-background flex flex-col justify-center items-center px-margin-mobile"><div class="flex flex-col w-full items-center justify-center py-space-xl px-margin-mobile">
+<!-- Ambient Telemetry Grid Pattern Backdrop (Bounded Container) -->
+<div class="relative w-full max-w-xl">
+<!-- Subtle radial glow behind the main auth card -->
+<div class="absolute -top-12 -left-12 w-64 h-64 bg-secondary-container/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-10 -right-10 w-72 h-72 bg-primary-container/15 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Main Card -->
+<div class="relative w-full bg-surface-container-lowest rounded-2xl shadow-xl overflow-hidden p-space-xl md:p-space-2xl">
+<!-- Top Brand Header with Shield Emblem -->
+<div class="flex items-center justify-between pb-space-lg mb-space-lg bg-surface-container-low/60 -mx-space-xl md:-mx-space-2xl -mt-space-xl md:-mt-space-2xl px-space-xl md:px-space-2xl pt-space-lg">
+<div class="flex items-center gap-space-sm">
+<!-- Inspired Shield Sachet SVG Logo -->
+<div class="w-11 h-11 relative flex items-center justify-center rounded-xl bg-primary shadow-sm flex-shrink-0">
+<svg class="w-7 h-7 text-on-primary" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 8L16 22V48C16 71 30.5 88 50 94C69.5 88 84 71 84 48V22L50 8Z" fill="currentColor" fill-opacity="0.25"></path>
+<path d="M50 14L22 25V47C22 66.5 34 81 50 86.5C66 81 78 66.5 78 47V25L50 14Z" fill="#3B82F6"></path>
+<path d="M50 30C43 40 37 49 37 57C37 64.2 42.8 70 50 70C57.2 70 63 64.2 63 57C63 49 57 40 50 30Z" fill="#67E8F9"></path>
+<circle cx="50" cy="58" fill="#FFFFFF" r="4"></circle>
+</svg>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface tracking-tight">SACHET</span>
+<span class="inline-flex items-center px-space-xs py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-1 animate-ping"></span>
+                v4.2 CAP
+              </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-secondary">verified_user</span>
+              NDMA • DHM Transboundary Portal
+            </p>
+</div>
+</div>
+<!-- Telemetry Uplink Ping -->
+<div class="flex items-center gap-space-xs bg-surface-container px-space-sm py-1.5 rounded-full">
+<span class="material-symbols-outlined text-tertiary-container text-[18px]">satellite_alt</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline">SAT-SYNC LIVE</span>
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+</div>
+</div>
+<!-- Segmented Mode Control: Log In / Register -->
+<div class="w-full bg-surface-container-high p-1 rounded-xl flex items-center mb-space-xl">
+<button class="flex-1 py-2 rounded-lg font-title-md text-title-md text-center transition-all bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-space-xs" id="tab-login" onclick="switchAuthTab('login')" type="button">
+<span class="material-symbols-outlined text-[18px]">login</span>
+<span>Log In</span>
+</button>
+<button class="flex-1 py-2 rounded-lg font-title-md text-title-md text-center transition-all text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-space-xs" id="tab-signup" onclick="switchAuthTab('signup')" type="button">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+<span>Register</span>
+</button>
+</div>
+<!-- ROLE SELECTOR: Citizen vs Field Responder -->
+<div class="mb-space-xl">
+<div class="flex items-center justify-between mb-space-xs">
+<label class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">badge</span>
+            Select Operational Profile
+          </label>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[14px]">touch_app</span> Required
+          </span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Role 1: Citizen (Active by default) -->
+<div class="cursor-pointer relative rounded-xl p-space-md bg-surface-container-low transition-all duration-200 shadow-sm flex flex-col justify-between" id="role-card-citizen" onclick="selectRole('citizen')">
+<div class="flex items-start justify-between mb-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-lowest text-primary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[24px]">home_pin</span>
+</div>
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center text-on-primary" id="radio-citizen">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1">
+<span>Citizen</span>
+<span class="text-secondary material-symbols-outlined text-[18px]">verified</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">
+                Shelter maps, family SOS, and localized river telemetry alerts.
+              </p>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary">water_drop</span>
+<span>Level 1-3 Warnings</span>
+</div>
+</div>
+<!-- Role 2: Field Responder / Official -->
+<div class="cursor-pointer relative rounded-xl p-space-md bg-surface-container-lowest transition-all duration-200 shadow-sm flex flex-col justify-between opacity-80 hover:opacity-100" id="role-card-official" onclick="selectRole('official')">
+<div class="flex items-start justify-between mb-space-sm">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[24px]">emergency</span>
+</div>
+<div class="w-5 h-5 rounded-full bg-surface-container-highest flex items-center justify-center text-transparent" id="radio-official">
+<span class="material-symbols-outlined text-[14px]">check</span>
+</div>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-1">
+<span>Responder</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant">SDRF/NDRF</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-snug">
+                Disaster command wall, sensor control, gate release &amp; broadcasts.
+              </p>
+</div>
+<div class="mt-space-sm pt-space-xs flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-primary-container">shield</span>
+<span>Gov Auth ID Required</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Auth Method Switcher: Mobile OTP vs Official Password -->
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1.5 rounded-full font-label-md text-label-md bg-secondary text-on-secondary transition-all flex items-center gap-1" id="method-otp" onclick="switchMethod('otp')" type="button">
+<span class="material-symbols-outlined text-[16px]">sms</span>
+<span>Mobile OTP</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1" id="method-pwd" onclick="switchMethod('pwd')" type="button">
+<span class="material-symbols-outlined text-[16px]">key</span>
+<span>Password</span>
+</button>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+          Gateway Online
+        </span>
+</div>
+<!-- FORM FIELDS -->
+<form class="space-y-space-md" onsubmit="handleAuthSubmit(event)">
+<!-- Phone & Country Selector -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5" for="phone-input">
+            PHONE NUMBER / EMERGENCY ID
+          </label>
+<div class="relative flex items-center bg-surface-container-low rounded-xl focus-within:bg-surface-container-lowest transition-colors shadow-sm">
+<!-- Indo-Nepal Corridor Picker -->
+<div class="flex items-center gap-1 pl-space-md pr-space-xs py-2.5 bg-surface-container-high/60 rounded-l-xl flex-shrink-0 cursor-pointer">
+<span class="material-symbols-outlined text-secondary text-[20px]">public</span>
+<select class="bg-transparent font-title-md text-title-md text-on-surface outline-none cursor-pointer pr-1" id="country-code">
+<option value="+91">🇮🇳 +91 (IN)</option>
+<option value="+977">🇳🇵 +977 (NP)</option>
+</select>
+</div>
+<input class="w-full bg-transparent px-space-md py-2.5 font-headline-sm text-headline-sm text-on-surface placeholder:text-outline/60 outline-none" id="phone-input" inputmode="numeric" pattern="[0-9]*" placeholder="98765 43210" required="" type="tel">
+<div class="pr-space-md flex items-center">
+<span class="material-symbols-outlined text-outline hover:text-primary cursor-pointer text-[20px]" onclick="document.getElementById('phone-input').value=''" title="Clear input">cancel</span>
+</div>
+</div>
+</div>
+<!-- Dynamic Section: OTP Entry Fields (Default) -->
+<div class="block" id="otp-section">
+<div class="flex items-center justify-between mb-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">pin</span>
+              6-DIGIT VERIFICATION CODE
+            </label>
+<button class="font-label-sm text-label-sm text-secondary hover:underline flex items-center gap-0.5" onclick="resendOtp()" type="button">
+<span class="material-symbols-outlined text-[13px]">refresh</span>
+              Resend SMS
+            </button>
+</div>
+<!-- 6-Pin Discrete Digit Boxes -->
+<div class="grid grid-cols-6 gap-space-xs sm:gap-space-sm" id="otp-inputs">
+<input class="otp-box h-12 w-full text-center font-display-lg-mobile text-display-lg-mobile bg-surface-container-low rounded-xl text-primary font-bold outline-none focus:bg-surface-container-lowest transition-all" inputmode="numeric" maxlength="1" type="text" value="4">
+<input class="otp-box h-12 w-full text-center font-display-lg-mobile text-display-lg-mobile bg-surface-container-low rounded-xl text-primary font-bold outline-none focus:bg-surface-container-lowest transition-all" inputmode="numeric" maxlength="1" type="text" value="8">
+<input class="otp-box h-12 w-full text-center font-display-lg-mobile text-display-lg-mobile bg-surface-container-low rounded-xl text-primary font-bold outline-none focus:bg-surface-container-lowest transition-all" inputmode="numeric" maxlength="1" type="text" value="2">
+<input class="otp-box h-12 w-full text-center font-display-lg-mobile text-display-lg-mobile bg-surface-container-low rounded-xl text-primary font-bold outline-none focus:bg-surface-container-lowest transition-all" inputmode="numeric" maxlength="1" placeholder="•" type="text">
+<input class="otp-box h-12 w-full text-center font-display-lg-mobile text-display-lg-mobile bg-surface-container-low rounded-xl text-primary font-bold outline-none focus:bg-surface-container-lowest transition-all" inputmode="numeric" maxlength="1" placeholder="•" type="text">
+<input class="otp-box h-12 w-full text-center font-display-lg-mobile text-display-lg-mobile bg-surface-container-low rounded-xl text-primary font-bold outline-none focus:bg-surface-container-lowest transition-all" inputmode="numeric" maxlength="1" placeholder="•" type="text">
+</div>
+<div class="flex items-center justify-between mt-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-tertiary-container">mark_chat_read</span>
+              Instant WhatsApp delivery ready
+            </span>
+<span class="text-secondary font-mono">01:42s</span>
+</div>
+</div>
+<!-- Dynamic Section: Password Entry (Hidden initially) -->
+<div class="hidden" id="pwd-section">
+<div class="flex items-center justify-between mb-1.5">
+<label class="font-label-md text-label-md text-on-surface-variant" for="pwd-input">
+              SECURE KEY / PASSPHRASE
+            </label>
+<a class="font-label-sm text-label-sm text-secondary hover:underline" href="#">Forgot?</a>
+</div>
+<div class="relative flex items-center bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-outline pl-space-md text-[20px]">lock</span>
+<input class="w-full bg-transparent px-space-md py-2.5 font-body-lg text-body-lg text-on-surface outline-none" id="pwd-input" placeholder="Enter government agency key" type="password">
+<button class="pr-space-md text-outline hover:text-on-surface" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined text-[20px]" id="eye-icon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Device Trust & Rapid Verify Checkbox -->
+<div class="flex items-center justify-between pt-space-xs">
+<label class="flex items-center gap-space-xs cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded text-primary focus:ring-primary accent-primary" type="checkbox">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Remember terminal for 30 days</span>
+</label>
+<span class="inline-flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm bg-surface-container-high px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">lock_clock</span>
+            256-bit AES
+          </span>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full h-12 bg-primary-container hover:bg-primary text-on-primary rounded-xl font-title-md text-title-md transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-space-sm active:scale-[0.99]" id="submit-btn" type="submit">
+<span class="material-symbols-outlined text-[20px]">how_to_reg</span>
+<span id="submit-text">Verify &amp; Enter Command Desk</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</form>
+<!-- Immediate Emergency SOS Bypass Link -->
+<div class="mt-space-lg p-space-sm rounded-xl bg-error-container/60 flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-8 h-8 rounded-lg bg-error text-on-error flex items-center justify-center flex-shrink-0 animate-pulse">
+<span class="material-symbols-outlined text-[18px]">emergency_share</span>
+</div>
+<div class="text-left">
+<span class="font-title-md text-title-md text-on-error-container block leading-tight">In Immediate Threat?</span>
+<span class="font-label-sm text-label-sm text-on-error-container/80 block">No credentials required for lifeline view</span>
+</div>
+</div>
+<button class="bg-error hover:bg-red-700 text-on-error px-space-sm py-1.5 rounded-lg font-label-md text-label-md flex items-center gap-1 shadow-sm flex-shrink-0" onclick="alert('Routing to public SOS beacon &amp; active evacuation shelter corridor...')" type="button">
+<span>SOS Bypass</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Trust, Security, and Compliance Strip -->
+<div class="mt-space-xl pt-space-lg bg-surface-container-low/50 -mx-space-xl md:-mx-space-2xl -mb-space-xl md:-mb-space-2xl px-space-xl md:px-space-2xl pb-space-lg">
+<div class="grid grid-cols-3 gap-space-xs text-center">
+<div class="flex flex-col items-center p-space-xs">
+<span class="material-symbols-outlined text-secondary text-[22px] mb-1">security</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Govt Verified</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">NDMA • CWC • DHM</span>
+</div>
+<div class="flex flex-col items-center p-space-xs">
+<span class="material-symbols-outlined text-tertiary-container text-[22px] mb-1">cell_tower</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Offline Mesh</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">SMS/Ham Gateway</span>
+</div>
+<div class="flex flex-col items-center p-space-xs">
+<span class="material-symbols-outlined text-primary text-[22px] mb-1">accessibility_new</span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">WCAG AAA</span>
+<span class="font-body-sm text-[10px] text-on-surface-variant">Voice &amp; High-Contrast</span>
+</div>
+</div>
+<!-- Multi-language Quick Strip -->
+<div class="mt-space-md pt-space-xs flex flex-wrap items-center justify-center gap-space-md font-label-sm text-label-sm text-on-surface-variant">
+<span class="hover:text-primary cursor-pointer underline">English</span>
+<span>•</span>
+<span class="hover:text-primary cursor-pointer">हिन्दी (Hindi)</span>
+<span>•</span>
+<span class="hover:text-primary cursor-pointer">नेपाली (Nepali)</span>
+<span>•</span>
+<span class="hover:text-primary cursor-pointer">বাংলা (Bengali)</span>
+<span>•</span>
+<span class="hover:text-primary cursor-pointer">অসমীয়া (Assamese)</span>
+</div>
+</div>
+</div>
+<!-- Live Telemetry Status Ticker Beneath Container -->
+<div class="mt-space-md px-space-sm flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-space-xs">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span>Kosi-Ganga Basin Sensor Cluster #14: Operational</span>
+</div>
+<div class="flex items-center gap-1 font-mono">
+<span class="material-symbols-outlined text-[14px]">cloud_download</span>
+<span>Synced 12s ago</span>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let activeRole = 'citizen';
+  let activeMethod = 'otp';
+  let activeTab = 'login';
+
+  function selectRole(role) {
+    activeRole = role;
+    const citizenCard = document.getElementById('role-card-citizen');
+    const officialCard = document.getElementById('role-card-official');
+    const radioCitizen = document.getElementById('radio-citizen');
+    const radioOfficial = document.getElementById('radio-official');
+
+    if (role === 'citizen') {
+      citizenCard.className = 'cursor-pointer relative rounded-xl p-space-md bg-surface-container-low transition-all duration-200 shadow-sm flex flex-col justify-between';
+      citizenCard.style.outline = '2px solid #2a14b4';
+      citizenCard.style.outlineOffset = '2px';
+      
+      officialCard.className = 'cursor-pointer relative rounded-xl p-space-md bg-surface-container-lowest transition-all duration-200 shadow-sm flex flex-col justify-between opacity-75 hover:opacity-100';
+      officialCard.style.outline = 'none';
+
+      radioCitizen.className = 'w-5 h-5 rounded-full bg-primary flex items-center justify-center text-on-primary';
+      radioOfficial.className = 'w-5 h-5 rounded-full bg-surface-container-highest flex items-center justify-center text-transparent';
+    } else {
+      officialCard.className = 'cursor-pointer relative rounded-xl p-space-md bg-surface-container-low transition-all duration-200 shadow-sm flex flex-col justify-between';
+      officialCard.style.outline = '2px solid #006398';
+      officialCard.style.outlineOffset = '2px';
+
+      citizenCard.className = 'cursor-pointer relative rounded-xl p-space-md bg-surface-container-lowest transition-all duration-200 shadow-sm flex flex-col justify-between opacity-75 hover:opacity-100';
+      citizenCard.style.outline = 'none';
+
+      radioOfficial.className = 'w-5 h-5 rounded-full bg-secondary flex items-center justify-center text-on-secondary';
+      radioCitizen.className = 'w-5 h-5 rounded-full bg-surface-container-highest flex items-center justify-center text-transparent';
+    }
+  }
+
+  function switchMethod(method) {
+    activeMethod = method;
+    const btnOtp = document.getElementById('method-otp');
+    const btnPwd = document.getElementById('method-pwd');
+    const otpSection = document.getElementById('otp-section');
+    const pwdSection = document.getElementById('pwd-section');
+
+    if (method === 'otp') {
+      btnOtp.className = 'px-space-md py-1.5 rounded-full font-label-md text-label-md bg-secondary text-on-secondary transition-all flex items-center gap-1';
+      btnPwd.className = 'px-space-md py-1.5 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1';
+      otpSection.classList.remove('hidden');
+      pwdSection.classList.add('hidden');
+    } else {
+      btnPwd.className = 'px-space-md py-1.5 rounded-full font-label-md text-label-md bg-secondary text-on-secondary transition-all flex items-center gap-1';
+      btnOtp.className = 'px-space-md py-1.5 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-1';
+      pwdSection.classList.remove('hidden');
+      otpSection.classList.add('hidden');
+    }
+  }
+
+  function switchAuthTab(tab) {
+    activeTab = tab;
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup = document.getElementById('tab-signup');
+    const submitText = document.getElementById('submit-text');
+
+    if (tab === 'login') {
+      tabLogin.className = 'flex-1 py-2 rounded-lg font-title-md text-title-md text-center transition-all bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-space-xs';
+      tabSignup.className = 'flex-1 py-2 rounded-lg font-title-md text-title-md text-center transition-all text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-space-xs';
+      submitText.textContent = 'Verify & Enter Command Desk';
+    } else {
+      tabSignup.className = 'flex-1 py-2 rounded-lg font-title-md text-title-md text-center transition-all bg-surface-container-lowest text-primary shadow-sm flex items-center justify-center gap-space-xs';
+      tabLogin.className = 'flex-1 py-2 rounded-lg font-title-md text-title-md text-center transition-all text-on-surface-variant hover:text-on-surface flex items-center justify-center gap-space-xs';
+      submitText.textContent = 'Create Sachet Protected Profile';
+    }
+  }
+
+  function togglePasswordVisibility() {
+    const input = document.getElementById('pwd-input');
+    const icon = document.getElementById('eye-icon');
+    if (input.type === 'password') {
+      input.type = 'text';
+      icon.textContent = 'visibility_off';
+    } else {
+      input.type = 'password';
+      icon.textContent = 'visibility';
+    }
+  }
+
+  function resendOtp() {
+    alert('A new 6-digit cryptographic verification code has been dispatched via Indian NDMA & Nepal DHM SMS gateway.');
+  }
+
+  function handleAuthSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submit-btn');
+    const originalContent = btn.innerHTML;
+    
+    btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">autorenew</span><span>Verifying Cryptographic Beacon...</span>';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">check_circle</span><span>Authenticated! Launching Feed...</span>';
+      setTimeout(() => {
+        btn.innerHTML = originalContent;
+        btn.disabled = false;
+        alert('Welcome to SACHET Hydrological Early-Warning & Coordination Console.');
+      }, 1000);
+    }, 1200);
+  }
+
+  // Auto focus leap for OTP inputs
+  document.addEventListener('DOMContentLoaded', () => {
+    selectRole('citizen');
+    const otpBoxes = document.querySelectorAll('.otp-box');
+    otpBoxes.forEach((box, index) => {
+      box.addEventListener('keyup', (e) => {
+        if (e.key >= '0' && e.key <= '9') {
+          if (index < otpBoxes.length - 1) {
+            otpBoxes[index + 1].focus();
+          }
+        } else if (e.key === 'Backspace') {
+          if (index > 0) {
+            otpBoxes[index - 1].focus();
+          }
+        }
+      });
+    });
+  });
+</script></main></body></html>

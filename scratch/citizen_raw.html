@@ -1,0 +1,586 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "secondary": "#006398",
+          "inverse-surface": "#283044",
+          "on-primary-fixed-variant": "#372abf",
+          "secondary-fixed-dim": "#0284c7",
+          "surface-container-high": "#e2e7ff",
+          "on-error-container": "#93000a",
+          "surface-variant": "#f1f5f9",
+          "primary": "#4338ca",
+          "on-secondary-fixed": "#001d31",
+          "surface-container-highest": "#dae2fd",
+          "on-secondary-fixed-variant": "#004b73",
+          "outline": "#94a3b8",
+          "secondary-container": "#e0f2fe",
+          "tertiary-fixed-dim": "#62df7d",
+          "surface-bright": "#ffffff",
+          "inverse-on-surface": "#eef0ff",
+          "primary-container": "#eef2ff",
+          "secondary-fixed": "#cce5ff",
+          "surface-dim": "#f1f5f9",
+          "surface-container-low": "#f8fafc",
+          "on-secondary": "#ffffff",
+          "error": "#dc2626",
+          "on-tertiary-fixed": "#002109",
+          "primary-fixed-dim": "#c3c0ff",
+          "on-primary-fixed": "#100069",
+          "on-tertiary": "#ffffff",
+          "on-surface": "#0f172a",
+          "background": "#f8fafc",
+          "surface-container-lowest": "#ffffff",
+          "surface": "#ffffff",
+          "on-tertiary-container": "#b91c1c",
+          "on-primary-container": "#4338ca",
+          "inverse-primary": "#c3c0ff",
+          "surface-tint": "#4338ca",
+          "on-tertiary-fixed-variant": "#005320",
+          "on-secondary-container": "#0369a1",
+          "primary-fixed": "#e3dfff",
+          "tertiary-container": "#fee2e2",
+          "on-primary": "#ffffff",
+          "error-container": "#fee2e2",
+          "tertiary": "#dc2626",
+          "outline-variant": "#e2e8f0",
+          "tertiary-fixed": "#7ffc97",
+          "on-background": "#0f172a",
+          "on-error": "#ffffff",
+          "on-surface-variant": "#475569",
+          "surface-container": "#ffffff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-2xs": "0.25rem",
+          "layout-margin-desktop": "2rem",
+          "layout-margin-tablet": "1.5rem",
+          "gutter-expanded": "1.5rem",
+          "space-3xl": "2.5rem",
+          "gutter-default": "1rem",
+          "space-2xl": "2rem",
+          "layout-margin-mobile": "1rem",
+          "space-md": "1rem",
+          "space-lg": "1.25rem",
+          "space-xs": "0.5rem",
+          "space-xl": "1.5rem",
+          "space-sm": "0.75rem",
+          "space-4xl": "3rem"
+        },
+        "fontFamily": {
+          "body-sm": ["Plus Jakarta Sans"],
+          "label-lg": ["Plus Jakarta Sans"],
+          "label-md": ["Plus Jakarta Sans"],
+          "headline-xl-mobile": ["Plus Jakarta Sans"],
+          "headline-xl": ["Plus Jakarta Sans"],
+          "display-hero-mobile": ["Plus Jakarta Sans"],
+          "headline-lg": ["Plus Jakarta Sans"],
+          "headline-md": ["Plus Jakarta Sans"],
+          "body-lg": ["Plus Jakarta Sans"],
+          "label-xs-mono": ["Plus Jakarta Sans"],
+          "display-hero": ["Plus Jakarta Sans"],
+          "headline-sm": ["Plus Jakarta Sans"],
+          "telemetry-metric": ["Plus Jakarta Sans"],
+          "body-md": ["Plus Jakarta Sans"]
+        },
+        "fontSize": {
+          "body-sm": ["13px", {"lineHeight": "18px", "letterSpacing": "0.005em", "fontWeight": "400"}],
+          "label-lg": ["13px", {"lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+          "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+          "headline-xl-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "headline-xl": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.025em", "fontWeight": "700"}],
+          "display-hero-mobile": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+          "headline-lg": ["28px", {"lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "700"}],
+          "headline-md": ["22px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+          "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+          "label-xs-mono": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "600"}],
+          "display-hero": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+          "headline-sm": ["18px", {"lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600"}],
+          "telemetry-metric": ["24px", {"lineHeight": "28px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}]
+        }
+      }
+    }
+  };</script></head><body class="bg-slate-50 font-body-md text-slate-900 antialiased min-h-screen selection:bg-indigo-600 selection:text-white"><header class="fixed top-0 left-0 right-0 z-50 h-20 bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)]"><div class="h-full w-full px-layout-margin-desktop flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-xl"><div class="flex items-center gap-space-sm"><img alt="JalRaksha Emblem" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UTJm79yxpbIABqzRjDtIkwtCnKmRMt58ssFi8rRpUdhMk0SpB2wP1UIPF0XVKi37jzz0mAzOJSBmieQeyVGBg5M6ZFa01i6Wdyan0tR_N_bo5t5raIBxUC7xtrW7heUwGDvCc112BVTFg7DnssB6C2c4SBU3IztEX0XkGut6e-c_9xGCoTCWzZGlZZBnq9Y-aoMaiIAQH34ClPO227JgWSTF27716AdAxemMPRL4dEUsMdZvajnuiaZ9_7"><div class="flex flex-col"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-slate-900 tracking-tight font-bold">JalRaksha</span><span class="font-headline-sm text-headline-sm text-indigo-700 tracking-tight font-bold">| जलरक्षा</span></div><span class="font-label-xs-mono text-label-xs-mono text-sky-700 uppercase tracking-widest font-semibold">IN-NP Disaster Grid</span></div></div></div><nav class="hidden md:flex items-center gap-2 p-1 bg-slate-100 rounded-full border border-slate-200"><a class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-indigo-700 font-label-md text-label-md font-semibold shadow-sm transition-all" data-path="citizen-portal" href="#"><span class="material-symbols-outlined text-lg">dashboard</span><span class="">Dashboard</span></a><a class="flex items-center gap-2 px-4 py-1.5 rounded-full text-slate-600 hover:text-slate-900 font-label-md text-label-md font-medium transition-colors" data-path="live-map-heatmap" href="#"><span class="material-symbols-outlined text-lg text-slate-500">map</span><span class="">Live Map</span></a></nav><div class="flex items-center gap-space-md"><a class="relative inline-flex items-center gap-space-xs px-3.5 py-1.5 rounded-lg bg-red-600 text-white font-label-md text-label-md shadow-[0_4px_14px_rgba(220,38,38,0.35)] hover:bg-red-700 transition-all active:scale-95" data-path="sos-center" href="#"><span class="w-2 h-2 rounded-full bg-white animate-ping"></span><span class="font-bold">SOS</span></a><div class="flex items-center gap-space-xs pl-space-xs border-l border-slate-200"><div class="relative cursor-pointer group"><img alt="Vikram Singh Profile" class="w-9 h-9 rounded-full object-cover ring-2 ring-indigo-500 shadow-sm" src="https://lh3.googleusercontent.com/aida/AEtjO1Vz_b4eAwEmdiLYNOtONVqMlRzM3lhCucsWT60Urz8PH1-SqQp9nsVxgpOTjq9B-RPsuDu7oOncCsPXsobbqCDOfu12Vjx5awhjKgHgDRSFm6-EQthIverQiHpfOK2PKENt90v98smrbY4YAgavLhGXylPePxexveZt5AUQ5kq3lXjn6GkmXB9c62OfHpeoi68YRpdd_24ogSlmpBxoT6A4SDu8ojVo5QFF3jxXQK17Ls7KpkoTW5RhwJqg"><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white"></span></div></div></div></div></header><aside class="fixed left-0 top-20 bottom-0 w-64 bg-white border-r border-slate-200 z-40 flex flex-col justify-between py-space-md shadow-[4px_0_24px_rgba(0,0,0,0.02)]"><div class="px-space-md flex flex-col gap-space-xs"><div class="px-space-xs py-space-xs font-label-xs-mono text-label-xs-mono uppercase tracking-wider text-slate-400 font-semibold">Tactical Navigation</div><nav class="flex flex-col gap-1" data-active-classes="bg-indigo-50 text-indigo-700 font-semibold rounded-lg shadow-sm border border-indigo-100"><a class="flex items-center gap-space-sm px-3 py-2 rounded-lg font-label-md text-label-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors" data-path="overview-landing" href="#"><span class="material-symbols-outlined text-lg">dashboard</span><span class="">Overview</span></a><a class="flex items-center gap-space-sm px-3 py-2 rounded-lg font-label-md text-label-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors" data-path="live-map-heatmap" href="#"><span class="material-symbols-outlined text-lg">map</span><span class="">Live Heatmap</span></a><a aria-current="page" class="flex items-center gap-space-sm px-3 py-2 transition-colors bg-indigo-50 text-indigo-700 font-semibold rounded-lg shadow-sm border border-indigo-100" data-path="citizen-portal" href="#"><span class="material-symbols-outlined text-lg text-indigo-700">person</span><span class="">Citizen Portal</span></a><a class="flex items-center gap-space-sm px-3 py-2 rounded-lg font-label-md text-label-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors" data-path="report-incident" href="#"><span class="material-symbols-outlined text-lg">warning</span><span class="">Report Incident</span></a><a class="flex items-center gap-space-sm px-3 py-2 rounded-lg font-label-md text-label-md text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors" data-path="sos-center" href="#"><span class="material-symbols-outlined text-lg text-red-600">emergency</span><span class="">SOS Center</span></a><a class="flex items-center gap-space-sm px-3 py-2 rounded-lg font-label-md text-label-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors" data-path="shelters-logistics" href="#"><span class="material-symbols-outlined text-lg">cabin</span><span class="">Shelters &amp; Logistics</span></a><a class="flex items-center gap-space-sm px-3 py-2 rounded-lg font-label-md text-label-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors" data-path="missing-persons" href="#"><span class="material-symbols-outlined text-lg">person_search</span><span class="">Missing Persons</span></a><a class="flex items-center gap-space-sm px-3 py-2 rounded-lg font-label-md text-label-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors" data-path="ngo-coordination" href="#"><span class="material-symbols-outlined text-lg">groups</span><span class="">NGO Coordination</span></a><a class="flex items-center gap-space-sm px-3 py-2 rounded-lg font-label-md text-label-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors" data-path="govt-admin-command" href="#"><span class="material-symbols-outlined text-lg">shield_person</span><span class="">Govt Command</span></a><a class="flex items-center gap-space-sm px-3 py-2 rounded-lg font-label-md text-label-md text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-colors" data-path="damage-assessment" href="#"><span class="material-symbols-outlined text-lg">analytics</span><span class="">Damage Assessment</span></a></nav></div><div class="px-space-md pt-space-md border-t border-slate-200 flex flex-col gap-space-xs"><div class="flex items-center justify-between font-label-xs-mono text-label-xs-mono text-slate-400 font-semibold"><span class="">STATION STATUS</span><span class="text-sky-600 font-bold">SYNCED</span></div><div class="p-space-sm rounded-lg bg-slate-50 border border-slate-200 flex flex-col gap-1"><span class="font-label-md text-label-md text-slate-900 font-semibold">National Command Hub</span><span class="font-body-sm text-body-sm text-slate-500">Bihar, UP &amp; Terai Outposts</span></div></div></aside><div class="pl-64"><main class="relative w-full pt-20 bg-slate-50 min-h-screen"><div class="flex flex-col w-full">
+<div class="w-full px-layout-margin-mobile md:px-layout-margin-tablet lg:px-layout-margin-desktop py-space-xl max-w-7xl mx-auto flex flex-col gap-space-2xl">
+<!-- Top Row: Welcome & Ambient Hazard Banner -->
+<div class="relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-space-lg shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] backdrop-blur-md">
+<div class="absolute -top-12 -right-12 w-64 h-64 rounded-full bg-sky-100/60 blur-3xl pointer-events-none"></div>
+<div class="absolute -bottom-16 -left-12 w-72 h-72 rounded-full bg-indigo-50/80 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
+<span class="font-label-xs-mono text-label-xs-mono text-sky-700 uppercase tracking-widest font-semibold">Live Civilian Channel • Grid Sector 4B</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-slate-900 tracking-tight font-bold">Welcome back, Aarav Sharma</h1>
+<div class="flex items-center gap-space-sm text-slate-600 font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-base text-indigo-600">pin_drop</span>
+<span class="">Patna Sadar (Ward 14), Bihar • Hydrology Station #BR-09</span>
+<span class="hidden sm:inline text-slate-300">•</span>
+<span class="hidden sm:inline text-sky-700 font-label-md text-label-md font-semibold">GPS Lock Active (±3m)</span>
+</div>
+</div>
+<!-- Vicinity Flood Threat Pill Badge -->
+<div class="flex items-center gap-space-md bg-amber-50/80 border border-amber-200 px-space-lg py-space-md rounded-xl shadow-sm">
+<div class="relative flex items-center justify-center w-11 h-11 rounded-lg bg-amber-100 text-amber-700">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-xs-mono text-label-xs-mono uppercase tracking-wider text-slate-500 font-semibold">Vicinity Flood Threat</span>
+<span class="px-2 py-0.5 rounded-full bg-amber-200 text-amber-900 font-label-xs-mono text-label-xs-mono uppercase font-bold">Moderate (Yellow)</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-slate-900 font-bold">Rising 1.2 cm/hr</span>
+<span class="font-body-sm text-body-sm text-slate-600">Ganga basin upstream swelling</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Central Tactical Hub: Telemetry Dial + SOS Command Core -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-stretch">
+<!-- Focal Hydrological Dial Panel (7 Cols) -->
+<div class="lg:col-span-7 rounded-2xl bg-white border border-slate-200 p-space-xl flex flex-col justify-between shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] relative overflow-hidden">
+<div class="flex items-center justify-between pb-space-md border-b border-slate-100">
+<div class="flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono uppercase tracking-widest text-slate-400 font-semibold">Hydrological Risk Index</span>
+<h2 class="font-headline-md text-headline-md text-slate-900 font-bold">Ward 14 River Gauge Analysis</h2>
+</div>
+<div class="flex items-center gap-space-xs bg-slate-100 border border-slate-200 px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-base text-sky-600">radar</span>
+<span class="font-label-xs-mono text-label-xs-mono text-slate-600 font-medium">Auto-updating: 4s</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg items-center my-space-md">
+<!-- Circular Progress-Ring Gauge -->
+<div class="md:col-span-6 flex flex-col items-center justify-center relative">
+<div class="relative w-56 h-56 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewBox="0 0 200 200">
+<circle class="text-slate-100" cx="100" cy="100" fill="none" r="82" stroke="currentColor" stroke-width="14"></circle>
+<circle class="text-sky-600" cx="100" cy="100" fill="none" r="82" stroke="currentColor" stroke-dasharray="515.2" stroke-dashoffset="298.8" stroke-linecap="round" stroke-width="14"></circle>
+<circle class="text-slate-200" cx="100" cy="100" fill="none" r="68" stroke="currentColor" stroke-dasharray="4 6" stroke-width="2"></circle>
+</svg>
+<!-- Center Metric Stack -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center p-space-sm">
+<span class="font-label-xs-mono text-label-xs-mono uppercase tracking-wider text-slate-400 font-semibold">Composite Threat</span>
+<span class="font-display-hero-mobile text-display-hero-mobile md:text-display-hero text-slate-900 font-extrabold tracking-tight">42<span class="text-sky-600 font-headline-md text-headline-md">%</span></span>
+<span class="font-label-md text-label-md text-sky-700 font-bold uppercase tracking-wider">Moderate</span>
+</div>
+</div>
+<div class="mt-space-sm flex items-center gap-space-xs text-slate-500 font-label-xs-mono text-label-xs-mono font-medium">
+<span class="w-2 h-2 rounded-full bg-sky-600"></span>
+<span class="">Next Threshold: Red Alert @ 65%</span>
+</div>
+</div>
+<!-- River Gauges Breakdown -->
+<div class="md:col-span-6 flex flex-col gap-space-sm">
+<div class="p-space-md rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="p-2 rounded-lg bg-sky-100 text-sky-700">
+<span class="material-symbols-outlined text-xl">waves</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono uppercase text-slate-500 font-semibold">Current Stage</span>
+<span class="font-telemetry-metric text-telemetry-metric text-slate-900 font-bold">48.90 <span class="font-body-sm text-body-sm text-slate-500 font-normal">m</span></span>
+</div>
+</div>
+<div class="text-right flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono uppercase text-red-600 font-semibold">Danger Mark</span>
+<span class="font-label-lg text-label-lg text-slate-900 font-bold">50.20 m</span>
+<span class="font-body-sm text-body-sm text-sky-700 font-medium">1.30m cushion</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="p-2 rounded-lg bg-indigo-100 text-indigo-700">
+<span class="material-symbols-outlined text-xl">rainy</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono uppercase text-slate-500 font-semibold">Rainfall Inundation</span>
+<span class="font-telemetry-metric text-telemetry-metric text-slate-900 font-bold">38.0 <span class="font-body-sm text-body-sm text-slate-500 font-normal">mm/hr</span></span>
+</div>
+</div>
+<div class="text-right flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono uppercase text-slate-500 font-semibold">Precipitation Type</span>
+<span class="font-label-lg text-label-lg text-indigo-700 font-bold">Heavy Downpour</span>
+<span class="font-body-sm text-body-sm text-slate-500">Cloudburst risk low</span>
+</div>
+</div>
+<div class="p-space-md rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-space-sm">
+<div class="p-2 rounded-lg bg-sky-100 text-sky-700">
+<span class="material-symbols-outlined text-xl">timer</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono uppercase text-slate-500 font-semibold">Apex Projection</span>
+<span class="font-telemetry-metric text-telemetry-metric text-slate-900 font-bold">~6.5 <span class="font-body-sm text-body-sm text-slate-500 font-normal">hrs</span></span>
+</div>
+</div>
+<div class="text-right flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono uppercase text-slate-500 font-semibold">Peak Time</span>
+<span class="font-label-lg text-label-lg text-slate-900 font-bold">21:30 IST</span>
+<span class="font-body-sm text-body-sm text-slate-500">49.45m forecasted</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Basal Progress Indicator -->
+<div class="pt-space-sm flex flex-col gap-space-xs">
+<div class="flex justify-between font-label-xs-mono text-label-xs-mono text-slate-500 font-semibold">
+<span class="">Normal (42.0m)</span>
+<span class="">Warning (48.0m)</span>
+<span class="text-amber-700 font-bold">Danger Mark (50.2m)</span>
+<span class="text-red-600 font-bold">HFL (52.5m)</span>
+</div>
+<div class="w-full h-2.5 rounded-full bg-slate-100 border border-slate-200 overflow-hidden flex">
+<div class="h-full bg-sky-600" style="width: 58%;"></div>
+<div class="h-full bg-amber-500" style="width: 16%;"></div>
+<div class="h-full bg-slate-200" style="width: 26%;"></div>
+</div>
+</div>
+</div>
+<!-- Emergency Trigger Center & Hotline Quick-Action (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- High-Impact SOS Button Card -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-b from-red-50 via-white to-white border border-red-200 p-space-xl flex flex-col items-center text-center justify-center shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)]">
+<div class="absolute inset-0 bg-radial from-red-100/40 via-transparent to-transparent pointer-events-none"></div>
+<div class="flex items-center gap-space-xs mb-space-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-red-600 animate-ping"></span>
+<span class="font-label-xs-mono text-label-xs-mono uppercase tracking-widest text-red-700 font-bold">Direct Command Uplink</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-slate-900 font-bold max-w-xs mb-space-xs">Life-Threatening Emergency?</h3>
+<p class="font-body-sm text-body-sm text-slate-600 max-w-sm mb-space-xl">
+            Transmits GPS coordinates, family headcount, and live telemetry to Bihar SDRF &amp; NDRF 9th Battalion boat assets.
+          </p>
+<!-- Concentric Ring Pulsing Trigger -->
+<div class="relative flex items-center justify-center my-space-sm">
+<div class="absolute w-44 h-44 rounded-full bg-red-200/50 animate-ping pointer-events-none"></div>
+<div class="absolute w-36 h-36 rounded-full bg-red-200/70 pointer-events-none"></div>
+<button class="relative z-10 w-28 h-28 rounded-full bg-gradient-to-br from-red-500 via-red-600 to-red-700 text-white shadow-[0_10px_25px_-5px_rgba(220,38,38,0.5)] flex flex-col items-center justify-center gap-1 hover:scale-105 active:scale-95 transition-transform duration-150 cursor-pointer" id="sosButton" type="button">
+<span class="material-symbols-outlined text-4xl font-bold">e911_emergency</span>
+<span class="font-label-lg text-label-lg tracking-wider font-extrabold">SOS</span>
+</button>
+</div>
+<div class="mt-space-lg flex flex-col items-center gap-space-2xs">
+<span class="font-label-xs-mono text-label-xs-mono uppercase tracking-wider text-slate-500 font-semibold">Press &amp; hold 2 seconds to dispatch</span>
+<div class="flex items-center gap-space-xs text-slate-600 font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm text-sky-600">shield</span>
+<span class="font-medium">Encrypted Geo-Relay • Priority Response Zone</span>
+</div>
+</div>
+</div>
+<!-- Rapid Emergency Helplines Matrix -->
+<div class="p-space-lg rounded-2xl bg-white border border-slate-200 flex flex-col gap-space-sm shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)]">
+<div class="flex items-center justify-between">
+<span class="font-label-xs-mono text-label-xs-mono uppercase tracking-widest text-slate-400 font-semibold">Direct Emergency Hotlines</span>
+<span class="font-label-xs-mono text-label-xs-mono text-sky-700 font-bold">Toll-Free 24x7</span>
+</div>
+<div class="grid grid-cols-2 gap-space-xs">
+<a class="flex items-center justify-between p-space-sm rounded-xl bg-slate-50 border border-slate-200 hover:bg-indigo-50 hover:border-indigo-200 transition-all group" href="tel:1078">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-lg text-indigo-700">support_agent</span>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-slate-900 group-hover:text-indigo-700 font-semibold">NDRF HQ</span>
+<span class="font-label-xs-mono text-label-xs-mono text-slate-500">National Grid</span>
+</div>
+</div>
+<span class="font-label-lg text-label-lg text-indigo-700 font-bold">1078</span>
+</a>
+<a class="flex items-center justify-between p-space-sm rounded-xl bg-slate-50 border border-slate-200 hover:bg-sky-50 hover:border-sky-200 transition-all group" href="tel:1070">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-lg text-sky-600">local_police</span>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-slate-900 group-hover:text-sky-700 font-semibold">SDRF Bihar</span>
+<span class="font-label-xs-mono text-label-xs-mono text-slate-500">State Control</span>
+</div>
+</div>
+<span class="font-label-lg text-label-lg text-sky-700 font-bold">1070</span>
+</a>
+<a class="flex items-center justify-between p-space-sm rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 transition-all group" href="tel:1114">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-lg text-slate-500">security</span>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-slate-900 font-semibold">Nepal APF</span>
+<span class="font-label-xs-mono text-label-xs-mono text-slate-500">Border Coord</span>
+</div>
+</div>
+<span class="font-label-lg text-label-lg text-slate-700 font-bold">1114</span>
+</a>
+<a class="flex items-center justify-between p-space-sm rounded-xl bg-slate-50 border border-slate-200 hover:bg-red-50 hover:border-red-200 transition-all group" href="tel:108">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-lg text-red-600">ambulance</span>
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-slate-900 group-hover:text-red-600 font-semibold">Medical</span>
+<span class="font-label-xs-mono text-label-xs-mono text-slate-500">Ambulance</span>
+</div>
+</div>
+<span class="font-label-lg text-label-lg text-red-600 font-bold">108</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Section: Bento Grid Quick Actions -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono uppercase tracking-widest text-slate-400 font-semibold">Actionable Operations</span>
+<h2 class="font-headline-md text-headline-md text-slate-900 font-bold">Citizen Crisis Assistance</h2>
+</div>
+<span class="font-body-sm text-body-sm text-slate-500 font-medium hidden sm:inline">Offline-ready cached profiles enabled</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-lg">
+<!-- Card 1: Report Flood Incident -->
+<div class="rounded-2xl bg-white border border-slate-200 p-space-lg flex flex-col justify-between shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] hover:border-indigo-300 hover:shadow-md transition-all duration-200 group cursor-pointer">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 text-indigo-700 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">add_a_photo</span>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-slate-100 text-indigo-700 font-label-xs-mono text-label-xs-mono font-bold uppercase">Takes ~30s</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-slate-900 group-hover:text-indigo-700 transition-colors font-bold">Report Incident</h3>
+<p class="font-body-sm text-body-sm text-slate-600 line-clamp-2">
+                Submit geo-tagged photos and estimated water depth to deploy municipal drainage teams.
+              </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md border-t border-slate-100 flex items-center justify-between">
+<span class="font-label-md text-label-md text-indigo-700 font-bold group-hover:underline">Start Report →</span>
+<div class="flex items-center gap-1 text-slate-400 font-label-xs-mono text-label-xs-mono font-medium">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span class="">Auto-GPS</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Find Nearest Shelter -->
+<div class="rounded-2xl bg-white border border-slate-200 p-space-lg flex flex-col justify-between shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] hover:border-sky-300 hover:shadow-md transition-all duration-200 group cursor-pointer">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-sky-50 border border-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">cabin</span>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-sky-50 text-sky-800 font-label-xs-mono text-label-xs-mono font-bold uppercase border border-sky-100">1.4 km Safe Route</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-slate-900 group-hover:text-sky-700 transition-colors font-bold">Find Safe Shelter</h3>
+<p class="font-body-sm text-body-sm text-slate-600 line-clamp-2">
+                Patna Community Hall Camp • 68 dry beds available with infant formula and drinking water.
+              </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md border-t border-slate-100 flex items-center justify-between">
+<span class="font-label-md text-label-md text-sky-700 font-bold group-hover:underline">Navigate Evac Route →</span>
+<div class="flex items-center gap-1 text-sky-700 font-label-xs-mono text-label-xs-mono font-semibold">
+<span class="w-2 h-2 rounded-full bg-sky-500"></span>
+<span class="">Dry roads</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Missing Person Directory -->
+<div class="rounded-2xl bg-white border border-slate-200 p-space-lg flex flex-col justify-between shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] hover:border-indigo-300 hover:shadow-md transition-all duration-200 group cursor-pointer">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 text-indigo-700 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">person_search</span>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-label-xs-mono text-label-xs-mono font-bold uppercase">NGO • Police Sync</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-slate-900 group-hover:text-indigo-700 transition-colors font-bold">Missing Persons</h3>
+<p class="font-body-sm text-body-sm text-slate-600 line-clamp-2">
+                Trace evacuated relatives across shelter registries or file an emergency identification report.
+              </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md border-t border-slate-100 flex items-center justify-between">
+<span class="font-label-md text-label-md text-indigo-700 font-bold group-hover:underline">Search Register →</span>
+<div class="flex items-center gap-1 text-slate-500 font-label-xs-mono text-label-xs-mono font-medium">
+<span class="">3,410 Verified</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Live Doppler & Radar -->
+<div class="rounded-2xl bg-white border border-slate-200 p-space-lg flex flex-col justify-between shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] hover:border-sky-300 hover:shadow-md transition-all duration-200 group cursor-pointer">
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="w-12 h-12 rounded-xl bg-sky-50 border border-sky-100 text-sky-700 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl">satellite_alt</span>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-sky-50 text-sky-800 font-label-xs-mono text-label-xs-mono font-bold uppercase border border-sky-100">IMD Radar Live</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h3 class="font-headline-sm text-headline-sm text-slate-900 group-hover:text-sky-700 transition-colors font-bold">Rain &amp; Flood Radar</h3>
+<p class="font-body-sm text-body-sm text-slate-600 line-clamp-2">
+                Review high-resolution satellite precipitation reflectivity for Patna &amp; Kosi Basin.
+              </p>
+</div>
+</div>
+<div class="pt-space-md mt-space-md border-t border-slate-100 flex items-center justify-between">
+<span class="font-label-md text-label-md text-sky-700 font-bold group-hover:underline">Inspect Radar →</span>
+<div class="flex items-center gap-1 text-slate-400 font-label-xs-mono text-label-xs-mono font-medium">
+<span class="">Sweep: 14m ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Section: Map Insight & Live Feed -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Visual Map & Radar Preview (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md rounded-2xl bg-white border border-slate-200 p-space-lg shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-indigo-700 text-2xl">layers</span>
+<div class="flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-slate-900 font-bold">Local Inundation Heatmap</h3>
+<span class="font-body-sm text-body-sm text-slate-500">Ward 14 perimeter, Patna • High resolution</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 font-label-md text-label-md hover:bg-slate-200 transition-colors font-semibold">Shelters</button>
+<button class="px-3 py-1 rounded-lg bg-indigo-700 text-white font-label-md text-label-md font-semibold shadow-sm">Flood Depth</button>
+</div>
+</div>
+<!-- Map Container -->
+<div class="relative w-full h-80 rounded-xl overflow-hidden shadow-inner border border-slate-200">
+<div class="w-full h-full bg-cover bg-center rounded-xl" data-location="Patna Sadar, Bihar, India" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCtD1NZxhB07DLRfQCUIFcX6WyYadkMqwt30MYIXIXuddaqYKFWbNbVWmBS-YWIW6hQ7q0fJHJNIRHzcWHK9RJuBU8gRxTcU-ycGEfCgMntQ2tU0xlhIFB9Wsmhf6MXlnc4jv2K7p2xcZwvlIJumLCw6SidIeeEtlWD-yD53bGp0H2Y7JMNmNOWH9xvrtdwr6q4VH7wNY7XNTtXtnI5usFq-1R9FaF1gwWfenJQXUs6DBGIG6Gm9zpgmg')"></div>
+<!-- Map Overlay Telemetry Card -->
+<div class="absolute bottom-4 left-4 right-4 p-space-md rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 shadow-md flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="w-3 h-3 rounded-full bg-sky-500 animate-pulse"></span>
+<div class="flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono uppercase text-slate-400 font-semibold">Active Route Safety</span>
+<span class="font-label-lg text-label-lg text-slate-900 font-bold">Bailey Road Elevated • Unobstructed</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex flex-col text-right">
+<span class="font-label-xs-mono text-label-xs-mono text-slate-400 uppercase font-semibold">Active Rescue Rafts</span>
+<span class="font-label-lg text-label-lg text-sky-700 font-bold">14 Vessels Active</span>
+</div>
+<a class="px-3 py-1.5 rounded-lg bg-indigo-700 text-white font-label-md text-label-md font-semibold hover:bg-indigo-800 transition-colors shadow-sm" data-path="live-map-heatmap" href="#">Full GIS View</a>
+</div>
+</div>
+</div>
+<!-- Quick Status Metrics Below Map -->
+<div class="grid grid-cols-3 gap-space-sm pt-space-xs">
+<div class="p-space-sm rounded-xl bg-slate-50 border border-slate-200 flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono text-slate-500 uppercase font-semibold">Pumping Stations</span>
+<span class="font-label-lg text-label-lg text-slate-900 font-bold">12/14 Operational</span>
+</div>
+<div class="p-space-sm rounded-xl bg-slate-50 border border-slate-200 flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono text-slate-500 uppercase font-semibold">Power Substation</span>
+<span class="font-label-lg text-label-lg text-sky-700 font-bold">Grid Stable (220kV)</span>
+</div>
+<div class="p-space-sm rounded-xl bg-slate-50 border border-slate-200 flex flex-col">
+<span class="font-label-xs-mono text-label-xs-mono text-slate-500 uppercase font-semibold">Emergency Radio</span>
+<span class="font-label-lg text-label-lg text-indigo-700 font-bold">FM 100.1 MHz Active</span>
+</div>
+</div>
+</div>
+<!-- Feed & Broadcast Advisories (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md rounded-2xl bg-white border border-slate-200 p-space-lg shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-red-600 text-2xl">campaign</span>
+<h3 class="font-headline-sm text-headline-sm text-slate-900 font-bold">Official Advisories &amp; Relief</h3>
+</div>
+<span class="font-label-xs-mono text-label-xs-mono uppercase text-sky-700 font-bold">Verified Feeds</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Alert 1: Barrage Water Release -->
+<div class="p-space-md rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-space-xs shadow-sm hover:bg-red-50/50 hover:border-red-200 transition-colors">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-red-100 text-red-700 font-label-xs-mono text-label-xs-mono uppercase font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-ping"></span>
+                Emergency Broadcast
+              </span>
+<span class="font-label-xs-mono text-label-xs-mono text-slate-400 font-medium">15 mins ago</span>
+</div>
+<h4 class="font-label-lg text-label-lg text-slate-900 font-bold">High Water Discharge from Valmiki Barrage</h4>
+<p class="font-body-sm text-body-sm text-slate-600">
+              Discharge of 380,000 cusecs anticipated at 16:00 IST. Low-lying riverbank settlements along Ward 12–15 must shift valuable assets above ground floor.
+            </p>
+<div class="pt-1 flex items-center justify-between text-slate-500 font-label-xs-mono text-label-xs-mono font-medium">
+<span class="">Source: Bihar Water Resources Dept</span>
+<span class="text-red-600 font-semibold hover:underline cursor-pointer">Official PDF →</span>
+</div>
+</div>
+<!-- Alert 2: Relief Distribution -->
+<div class="p-space-md rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-space-xs shadow-sm hover:bg-sky-50/50 hover:border-sky-200 transition-colors">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-sky-100 text-sky-800 font-label-xs-mono text-label-xs-mono uppercase font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-sky-600"></span>
+                Relief Distribution
+              </span>
+<span class="font-label-xs-mono text-label-xs-mono text-slate-400 font-medium">42 mins ago</span>
+</div>
+<h4 class="font-label-lg text-label-lg text-slate-900 font-bold">Clean Drinking Water Tankers Arrived</h4>
+<p class="font-body-sm text-body-sm text-slate-600">
+              Two 5,000L clean drinking water tankers stationed at Gandhi Maidan gate 4 relief hub. Free halogen water purification tablets also distributed.
+            </p>
+<div class="pt-1 flex items-center justify-between text-slate-500 font-label-xs-mono text-label-xs-mono font-medium">
+<span class="">Source: Red Cross Society Bihar</span>
+<span class="text-sky-700 font-semibold hover:underline cursor-pointer">View Point →</span>
+</div>
+</div>
+<!-- Alert 3: Medical Mobile Clinic -->
+<div class="p-space-md rounded-xl bg-slate-50 border border-slate-200 flex flex-col gap-space-xs shadow-sm hover:bg-indigo-50/50 hover:border-indigo-200 transition-colors">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 font-label-xs-mono text-label-xs-mono uppercase font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-indigo-700"></span>
+                Medical Alert
+              </span>
+<span class="font-label-xs-mono text-label-xs-mono text-slate-400 font-medium">1 hr ago</span>
+</div>
+<h4 class="font-label-lg text-label-lg text-slate-900 font-bold">Mobile Health Unit Stationed at Rajendra Nagar</h4>
+<p class="font-body-sm text-body-sm text-slate-600">
+              Doctor team equipped with anti-venom, ORS packets, tetanus toxoids, and primary wound dressings available at St. Paul School ground.
+            </p>
+<div class="pt-1 flex items-center justify-between text-slate-500 font-label-xs-mono text-label-xs-mono font-medium">
+<span class="">Source: National Health Mission</span>
+<span class="text-indigo-700 font-semibold hover:underline cursor-pointer">Route Map →</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-xl bg-slate-50 border border-slate-200 hover:bg-slate-100 text-slate-700 font-label-md text-label-md font-semibold transition-colors text-center" type="button">
+          View All 18 Regional Advisories
+        </button>
+</div>
+</div>
+</div>
+<script>
+    (function() {
+      const sosBtn = document.getElementById('sosButton');
+      if (sosBtn) {
+        let pressTimer;
+        sosBtn.addEventListener('mousedown', () => {
+          sosBtn.classList.add('scale-95');
+          pressTimer = setTimeout(() => {
+            alert('🚨 EMERGENCY SOS BROADCASTED: Your live GPS coordinates and household alert have been transmitted to NDRF Patna Station & local SDRF boat command.');
+          }, 1500);
+        });
+        sosBtn.addEventListener('mouseup', () => {
+          clearTimeout(pressTimer);
+          sosBtn.classList.remove('scale-95');
+        });
+        sosBtn.addEventListener('mouseleave', () => {
+          clearTimeout(pressTimer);
+          sosBtn.classList.remove('scale-95');
+        });
+      }
+    })();
+  </script>
+</div></main></div>
+
+</body></html>
