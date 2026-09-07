@@ -55,15 +55,18 @@ export default function LoginPage() {
       <div className="w-full max-w-xl flex flex-wrap items-center justify-between gap-3 mb-4 px-1 sm:px-2">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
+          className="inline-flex min-w-0 items-center gap-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
         >
-          <BrandMark />
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-indigo-100 bg-white shadow-sm shadow-indigo-900/10">
+            <BrandMark compact className="scale-[0.72]" />
+          </span>
           <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-          <span>Back to Overview</span>
+          <span className="hidden sm:inline">Back to Overview</span>
         </Link>
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span className="hidden sm:inline text-xs font-mono text-slate-500 uppercase">SAT-UPLINK ACTIVE</span>
+        <div className="flex items-center gap-2 rounded-full border border-sky-100 bg-white/80 px-2.5 py-1.5 shadow-sm shadow-sky-900/5">
+          <span className="material-symbols-outlined text-[18px] text-sky-600">flight</span>
+          <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-wider text-slate-500">Falcon Relay</span>
+          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
         </div>
       </div>
 
