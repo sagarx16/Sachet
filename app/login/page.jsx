@@ -52,19 +52,17 @@ export default function LoginPage() {
   return (
     <main className="w-full min-h-[100svh] overflow-x-hidden bg-gradient-to-br from-slate-50 via-white to-indigo-50/60 flex flex-col justify-start sm:justify-center items-center px-4 sm:px-6 py-4 sm:py-8">
       {/* Back to Home & Sat Uplink */}
-      <div className="w-full max-w-xl flex flex-wrap items-center justify-between gap-3 mb-4 px-1 sm:px-2">
+      <div className="w-full max-w-xl flex items-center gap-3 mb-4 px-1 sm:px-2">
         <Link
           href="/"
-          className="inline-flex min-w-0 items-center gap-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
+          aria-label="Back to Overview"
+          className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm hover:text-primary transition-colors"
         >
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-indigo-100 bg-white shadow-sm shadow-indigo-900/10">
-            <BrandMark compact className="scale-[0.72]" />
-          </span>
           <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-          <span className="hidden sm:inline">Back to Overview</span>
         </Link>
-        <div className="flex items-center gap-2 rounded-full border border-sky-100 bg-white/80 px-2.5 py-1.5 shadow-sm shadow-sky-900/5">
-          <span className="material-symbols-outlined text-[18px] text-sky-600">flight</span>
+        <BrandMark className="min-w-0 scale-75 origin-left sm:scale-100" />
+        <div className="ml-auto flex shrink-0 items-center gap-2 rounded-full border border-sky-100 bg-white/80 px-2.5 py-1.5 shadow-sm shadow-sky-900/5">
+          <span className="material-symbols-outlined text-[18px] text-sky-600">satellite_alt</span>
           <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-wider text-slate-500">Falcon Relay</span>
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
         </div>
@@ -78,7 +76,7 @@ export default function LoginPage() {
         {/* Card */}
         <div className="relative w-full bg-surface-container-lowest rounded-2xl shadow-xl shadow-slate-900/10 overflow-hidden p-4 sm:p-6 md:p-8 border border-slate-200/80">
           {/* Header */}
-          <div className="flex items-center justify-end pb-4 mb-5 bg-surface-container-low/60 -mx-4 sm:-mx-6 md:-mx-8 -mt-4 sm:-mt-6 md:-mt-8 px-4 sm:px-6 md:px-8 pt-4 sm:pt-5">
+          <div className="hidden sm:flex items-center justify-end pb-4 mb-5 bg-surface-container-low/60 -mx-4 sm:-mx-6 md:-mx-8 -mt-4 sm:-mt-6 md:-mt-8 px-4 sm:px-6 md:px-8 pt-4 sm:pt-5">
             <div className="flex items-center gap-space-xs bg-surface-container px-space-sm py-1.5 rounded-full">
               <span className="material-symbols-outlined text-tertiary-container text-[18px]">satellite_alt</span>
               <span className="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline font-semibold">SAT-SYNC LIVE</span>
