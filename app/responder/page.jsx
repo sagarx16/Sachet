@@ -585,9 +585,15 @@ export default function ResponderPage() {
         menuOpen={mobileMenuOpen}
         onMenuClick={() => setMobileMenuOpen((open) => !open)}
       />
+      {mobileMenuOpen && (
+        <div
+          className="lg:hidden fixed inset-0 top-14 z-20 bg-slate-900/25"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+      )}
       <div className="flex flex-col lg:flex-row items-stretch lg:items-start">
         {/* Sidebar */}
-        <aside className={`${mobileMenuOpen ? 'flex fixed inset-x-0 top-14 bottom-0' : 'hidden'} lg:flex w-full lg:w-64 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex-col lg:sticky lg:top-[120px] lg:h-[calc(100vh-120px)] pt-4`}>
+        <aside className={`${mobileMenuOpen ? 'flex fixed left-0 top-14 bottom-0' : 'hidden'} lg:flex w-[min(88vw,320px)] lg:w-64 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex-col lg:sticky lg:top-[120px] lg:h-[calc(100vh-120px)] pt-4`}>
           {/* Header Identity Block */}
           <div id="responder-header-block" className="px-4 pb-4 border-b border-slate-100 shrink-0">
             <div className="flex items-center gap-3">
