@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../context/AuthContext';
+import BrandMark from '../../components/BrandMark';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -54,8 +55,9 @@ export default function LoginPage() {
       <div className="w-full max-w-xl flex items-center justify-between mb-4 px-2">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
         >
+          <BrandMark />
           <span className="material-symbols-outlined text-[18px]">arrow_back</span>
           <span>Back to Overview</span>
         </Link>
@@ -73,31 +75,7 @@ export default function LoginPage() {
         {/* Card */}
         <div className="relative w-full bg-surface-container-lowest rounded-2xl shadow-xl overflow-hidden p-space-xl md:p-space-2xl border border-slate-200/80">
           {/* Header */}
-          <div className="flex items-center justify-between pb-space-lg mb-space-lg bg-surface-container-low/60 -mx-space-xl md:-mx-space-2xl -mt-space-xl md:-mt-space-2xl px-space-xl md:px-space-2xl pt-space-lg">
-            <div className="flex items-center gap-space-sm">
-              <div className="w-11 h-11 relative flex items-center justify-center rounded-xl bg-primary shadow-sm flex-shrink-0">
-                <svg className="w-7 h-7 text-on-primary" fill="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M50 8L16 22V48C16 71 30.5 88 50 94C69.5 88 84 71 84 48V22L50 8Z" fill="currentColor" fillOpacity="0.25"></path>
-                  <path d="M50 14L22 25V47C22 66.5 34 81 50 86.5C66 81 78 66.5 78 47V25L50 14Z" fill="#3B82F6"></path>
-                  <path d="M50 30C43 40 37 49 37 57C37 64.2 42.8 70 50 70C57.2 70 63 64.2 63 57C63 49 57 40 50 30Z" fill="#67E8F9"></path>
-                  <circle cx="50" cy="58" fill="#FFFFFF" r="4"></circle>
-                </svg>
-              </div>
-              <div>
-                <div className="flex items-center gap-space-xs">
-                  <span className="font-headline-sm text-headline-sm text-on-surface tracking-tight font-extrabold">SACHET</span>
-                  <span className="inline-flex items-center px-space-xs py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-secondary mr-1 animate-ping"></span>
-                    v4.2 CAP
-                  </span>
-                </div>
-                <p className="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
-                  <span className="material-symbols-outlined text-[15px] text-secondary">verified_user</span>
-                  NDMA • DHM Transboundary Portal
-                </p>
-              </div>
-            </div>
-
+          <div className="flex items-center justify-end pb-space-lg mb-space-lg bg-surface-container-low/60 -mx-space-xl md:-mx-space-2xl -mt-space-xl md:-mt-space-2xl px-space-xl md:px-space-2xl pt-space-lg">
             <div className="flex items-center gap-space-xs bg-surface-container px-space-sm py-1.5 rounded-full">
               <span className="material-symbols-outlined text-tertiary-container text-[18px]">satellite_alt</span>
               <span className="font-label-sm text-label-sm text-on-surface-variant hidden sm:inline font-semibold">SAT-SYNC LIVE</span>

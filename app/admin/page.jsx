@@ -191,7 +191,7 @@ export default function AdminPage() {
           </div>
         </div>
       </aside>
-      <div className="pl-64"><main className="relative w-full pt-20 bg-slate-100/90 min-h-screen"><div className="flex flex-col w-full">
+      <div className="pl-64"><main className="relative w-full bg-slate-100/90 min-h-screen"><div className="flex flex-col w-full">
 {/* Cross-Border Mission Control Utility Strip */}
 <div className="w-full px-8 py-3 bg-white border-b border-slate-200 flex flex-wrap items-center justify-between gap-4 shadow-sm">
 <div className="flex items-center gap-4">

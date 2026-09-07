@@ -12,28 +12,8 @@ export default function LandingPage() {
     <div className="min-h-screen bg-background text-on-surface">
       <Navbar activePage="overview" />
       
-<main className="w-full pt-20 min-h-screen">
+<main className="w-full min-h-screen">
 <div className="flex flex-col w-full">
-{/* Top Broadcast Ticker */}
-<aside aria-label="Cross-Border Live Alert Strip" className="w-full bg-[#F8FAFC] border-b border-[#E2E8F0] py-space-xs px-margin-desktop overflow-hidden">
-<div className="max-w-7xl mx-auto flex items-center justify-between gap-space-md text-on-surface-variant font-label-sm text-label-sm">
-<div className="flex items-center gap-space-sm">
-<span className="flex h-2 w-2 relative">
-<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-600 opacity-75"></span>
-<span className="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-</span>
-<span className="font-bold text-red-700 uppercase tracking-wider">CRITICAL RADAR FEED</span>
-<span className="hidden sm:inline text-slate-300">/</span>
-<span className="text-slate-800 font-medium truncate">Birgunj–Raxaul Sluice Gates opened 62% at 04:30 IST</span>
-</div>
-<div className="hidden lg:flex items-center gap-space-lg text-slate-500 font-medium">
-<span className="">Nepal DHM: Narayani River (+0.74m Warning)</span>
-<span className="">•</span>
-<span className="">Bihar SDMA: 14 Relief NDRF Units Staged</span>
-<span className="text-secondary font-bold">Uplink: 99.98% Healthy</span>
-</div>
-</div>
-</aside>
 {/* Hero Section with Tactical Spatial Depth */}
 <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#FFFFFF] via-[#F8FAFC] to-[#EFF6FF] pt-space-3xl pb-space-4xl px-margin-desktop">
 {/* Atmospheric Grid Mesh */}
@@ -75,22 +55,22 @@ export default function LandingPage() {
     {/* Emergency SOS Dispatch */}
     <button
       onClick={openSos}
-      className="relative group flex items-center justify-center gap-space-xs px-space-xl py-3.5 rounded-xl bg-gradient-to-r from-[#dc2626] to-[#ea580c] text-white font-label-md text-label-md font-bold shadow-lg shadow-red-600/20 hover:shadow-red-600/35 transition-all duration-300 transform active:scale-95 cursor-pointer"
+      className="sos-glow relative group flex items-center justify-center gap-space-xs px-space-xl py-3.5 rounded-xl bg-gradient-to-r from-[#dc2626] to-[#ea580c] text-white font-label-md text-label-md font-bold shadow-lg shadow-red-600/20 hover:-translate-y-0.5 hover:shadow-red-600/45 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-red-300/60 transition-all duration-300 transform active:translate-y-0 active:scale-[0.97] cursor-pointer"
     >
       <span className="relative flex h-3 w-3">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-80"></span>
         <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
       </span>
-      <span className="material-symbols-outlined text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>sos</span>
+      <span className="material-symbols-outlined text-[20px] transition-transform duration-300 group-hover:rotate-12" style={{ fontVariationSettings: "'FILL' 1" }}>sos</span>
       <span>Emergency SOS Dispatch</span>
     </button>
 
     {/* Sign In Gateway Link */}
     <Link
       href="/login"
-      className="flex items-center justify-center gap-space-xs px-space-xl py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary-container text-white font-label-md text-label-md font-bold shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/35 transition-all duration-300 transform active:scale-95"
+      className="group flex items-center justify-center gap-space-xs px-space-xl py-3.5 rounded-xl bg-gradient-to-r from-primary to-primary-container text-white font-label-md text-label-md font-bold shadow-lg shadow-indigo-600/20 hover:-translate-y-0.5 hover:shadow-indigo-600/40 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-indigo-300/60 transition-all duration-300 transform active:translate-y-0 active:scale-[0.97]"
     >
-      <span className="material-symbols-outlined text-[20px]">account_circle</span>
+      <span className="material-symbols-outlined text-[20px] transition-transform duration-300 group-hover:scale-110">account_circle</span>
       <span>Log In / Register Gateway</span>
     </Link>
   </div>

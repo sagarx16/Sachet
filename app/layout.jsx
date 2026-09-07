@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
         <link
           rel="icon"
           type="image/svg+xml"
-          href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 8L16 22V48C16 71 30.5 88 50 94C69.5 88 84 71 84 48V22L50 8Z' fill='%232a14b4'/><circle cx='50' cy='58' fill='%2360dd7c' r='8'/></svg>"
+          href="/logo.svg"
         />
       </head>
       <body className="bg-background text-on-surface font-sans antialiased min-h-screen selection:bg-indigo-100 selection:text-indigo-900">

@@ -208,7 +208,7 @@ export default function CitizenPage() {
           </div>
         </div>
       </aside>
-      <div className="pl-64"><main className="relative w-full pt-20 bg-slate-50 min-h-screen"><div className="flex flex-col w-full">
+      <div className="pl-64"><main className="relative w-full bg-slate-50 min-h-screen"><div className="flex flex-col w-full">
 <div className="w-full px-layout-margin-mobile md:px-layout-margin-tablet lg:px-layout-margin-desktop py-space-xl max-w-7xl mx-auto flex flex-col gap-space-2xl">
 {/* Top Row: Welcome & Ambient Hazard Banner */}
 <div className="relative overflow-hidden rounded-2xl bg-white border border-slate-200 p-space-lg shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] backdrop-blur-md">

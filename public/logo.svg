@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 554" role="img" aria-labelledby="title desc">
+  <title id="title">Sachet shield logo</title>
+  <desc id="desc">Blue and violet shield containing a water droplet and waves</desc>
+  <defs>
+    <linearGradient id="shield" x1="92" y1="28" x2="424" y2="526" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4037b8"/>
+      <stop offset="0.55" stop-color="#3730a8"/>
+      <stop offset="1" stop-color="#241b80"/>
+    </linearGradient>
+    <linearGradient id="water" x1="126" y1="174" x2="397" y2="431" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#36d2f1"/>
+      <stop offset="1" stop-color="#2a92d5"/>
+    </linearGradient>
+    <linearGradient id="lowerWave" x1="174" y1="333" x2="327" y2="493" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5b5ce5"/>
+      <stop offset="1" stop-color="#4d45d1"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-15%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" values="0 0 0 0 0.29 0 0 0 0 0.27 0 0 0 0 0.75 0 0 0 .22 0"/>
+      <feBlend in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g filter="url(#glow)">
+    <path d="M48 35Q256 -16 464 35v157c0 149-73 281-208 362C121 473 48 341 48 192V35Z" fill="url(#shield)"/>
+    <path d="M80 61Q256 18 432 61v130c0 133-63 250-176 323C143 441 80 324 80 191V61Z" fill="none" stroke="#8b8ce8" stroke-opacity=".5" stroke-width="5"/>
+    <path d="M99 278c48-27 82-5 119 8 46 16 74 12 111 0 43-14 77-10 109 2v49c-44 51-99 70-160 48-53-19-101-31-179 15Z" fill="url(#water)"/>
+    <path d="M99 350c51-25 91-29 137-50 25-12 42-19 65-6 38 22 54 37 103 48 15 3 24 11 34 20-25 73-68 131-127 171-73-39-128-99-168-183Z" fill="url(#lowerWave)"/>
+    <path d="M192 260c0-44 34-91 64-137 30 46 64 93 64 137 0 41-27 69-64 69s-64-28-64-69Z" fill="#41c9ee"/>
+    <path d="M242 201c-14 34-25 62-18 82 4 12 12 21 22 26" fill="none" stroke="#d8f7ff" stroke-linecap="round" stroke-width="7"/>
+    <circle cx="258" cy="268" r="12" fill="#fff"/>
+    <path d="M209 178q48-29 96 0" fill="none" stroke="#39b9ed" stroke-dasharray="7 9" stroke-linecap="round" stroke-width="5"/>
+  </g>
+</svg>

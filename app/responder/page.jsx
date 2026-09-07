@@ -115,7 +115,7 @@ export default function ResponderPage() {
       </aside>
 
       {/* Main Content Area */}
-      <div className="pl-64 pt-20">
+      <div className="pl-64">
         {activeTab === 'overview' && (
           <main className="relative w-full bg-background min-h-screen px-gutter-desktop py-space-xl">
             <div className="flex flex-col w-full gap-space-xl">
