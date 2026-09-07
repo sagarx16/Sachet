@@ -86,7 +86,7 @@ export default function PortalTopbar({ portal = 'citizen', onMenuClick, menuOpen
         {onMenuClick && (
           <button
             onClick={onMenuClick}
-            className="order-first mr-auto flex lg:hidden items-center justify-center w-9 h-9 rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition-colors cursor-pointer shrink-0"
+            className="order-first flex lg:hidden items-center justify-center w-9 h-9 rounded-xl bg-indigo-50 text-indigo-700 hover:bg-indigo-100 transition-colors cursor-pointer shrink-0"
             aria-label="Open portal menu"
           >
             <span className="material-symbols-outlined text-[22px]">{menuOpen ? 'close' : 'menu'}</span>
@@ -95,7 +95,7 @@ export default function PortalTopbar({ portal = 'citizen', onMenuClick, menuOpen
 
         {/* ── Search Bar: compact (260-300px), aligned to right near badges & profile ── */}
         <div
-            className={`flex items-center gap-2 flex-1 min-w-0 sm:flex-none w-auto sm:w-72 h-9.5 px-3 sm:px-3.5 rounded-full bg-[#F3F4F6] border border-[#E5E7EB] transition-all duration-200 ${
+          className={`flex items-center gap-2 flex-1 min-w-0 sm:flex-none w-auto sm:w-72 h-9.5 px-3 sm:px-3.5 mr-auto rounded-full bg-[#F3F4F6] border border-[#E5E7EB] transition-all duration-200 ${
             searchFocused
               ? 'bg-white border-slate-300 ring-2 ring-indigo-100 shadow-sm'
               : 'hover:bg-slate-200/50 hover:border-slate-300'

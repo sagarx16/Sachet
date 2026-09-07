@@ -862,7 +862,7 @@ export default function CitizenPage() {
       )}
       <div className="flex flex-col lg:flex-row items-stretch lg:items-start">
         {/* Sidebar */}
-        <aside className="hidden lg:flex w-full lg:w-64 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex-col lg:sticky lg:top-[120px] lg:h-[calc(100vh-120px)] pt-4">
+        <aside className="hidden lg:flex w-full lg:w-64 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex-col lg:sticky lg:top-14 lg:h-[calc(100vh-56px)] pt-4">
           {/* Header Identity Block - flush with main content banner */}
           <div id="portal-header-block" className="px-4 pb-4 border-b border-slate-100 shrink-0">
             <div className="flex items-center gap-3">
@@ -930,7 +930,7 @@ export default function CitizenPage() {
         </aside>
 
         {/* Content */}
-        <main className="flex-1 min-w-0 min-h-[calc(100vh-120px)] pt-4 px-4 sm:px-6 lg:px-8 pb-8">
+        <main className="flex-1 min-w-0 min-h-[calc(100vh-56px)] pt-4 px-4 sm:px-6 lg:px-8 pb-8">
           <div className="max-w-5xl mx-auto">{render()}</div>
         </main>
       </div>
