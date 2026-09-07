@@ -551,6 +551,7 @@ function ReuniteModule({ showToast }) {
 export default function ResponderPage() {
   const { openSos, showToast } = useAuth();
   const [active, setActive] = useState('overview');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const modules = [
     { id: 'overview', label: 'Overview', icon: 'grid_view' },
@@ -579,10 +580,14 @@ export default function ResponderPage() {
   return (
     <div className="min-h-screen bg-slate-50 text-on-surface">
       <Navbar />
-      <PortalTopbar portal="responder" />
+      <PortalTopbar
+        portal="responder"
+        menuOpen={mobileMenuOpen}
+        onMenuClick={() => setMobileMenuOpen((open) => !open)}
+      />
       <div className="flex flex-col lg:flex-row items-stretch lg:items-start">
         {/* Sidebar */}
-        <aside className="w-full lg:w-64 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex flex-col lg:sticky lg:top-[120px] lg:h-[calc(100vh-120px)] pt-4">
+        <aside className={`${mobileMenuOpen ? 'flex fixed inset-x-0 top-14 bottom-0' : 'hidden'} lg:flex w-full lg:w-64 shrink-0 bg-white border-b lg:border-b-0 lg:border-r border-slate-200/80 shadow-[1px_0_6px_rgba(0,0,0,0.03)] z-30 flex-col lg:sticky lg:top-[120px] lg:h-[calc(100vh-120px)] pt-4`}>
           {/* Header Identity Block */}
           <div id="responder-header-block" className="px-4 pb-4 border-b border-slate-100 shrink-0">
             <div className="flex items-center gap-3">
@@ -607,7 +612,7 @@ export default function ResponderPage() {
                 return (
                   <button
                     key={m.id}
-                    onClick={() => setActive(m.id)}
+                    onClick={() => { setActive(m.id); setMobileMenuOpen(false); }}
                     className={`group w-full h-10 px-3 rounded-xl flex items-center gap-3 text-left text-[13px] transition-all cursor-pointer ${
                       isActive
                         ? 'bg-sky-700 text-white font-semibold shadow-sm'

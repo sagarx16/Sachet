@@ -37,6 +37,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isCitizenPortal = pathname === '/citizen';
+  const isPortalPage = ['/admin', '/responder'].includes(pathname);
 
   const isActive = (link) => {
     if (link.exact) return pathname === link.href;
@@ -47,7 +48,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 w-full z-50 h-16 bg-white/95 backdrop-blur-xl border-b border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.05)]">
+      <header className={`sticky top-0 w-full z-50 h-16 bg-white/95 backdrop-blur-xl border-b border-[#E2E8F0] shadow-[0_2px_12px_rgba(0,0,0,0.05)] ${isPortalPage ? 'hidden md:block' : ''}`}>
         <div className="h-full w-full px-4 md:px-8 flex items-center justify-between gap-4 max-w-screen-2xl mx-auto">
 
           <Link href="/" className="flex items-center gap-2.5 hover:opacity-90 transition-opacity shrink-0">
