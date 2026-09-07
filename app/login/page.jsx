@@ -62,7 +62,7 @@ export default function LoginPage() {
         </Link>
         <BrandMark className="min-w-0 scale-75 origin-left sm:scale-100" />
         <div className="ml-auto flex shrink-0 items-center gap-2 rounded-full border border-sky-100 bg-white/80 px-2.5 py-1.5 shadow-sm shadow-sky-900/5">
-          <span className="material-symbols-outlined text-[18px] text-sky-600">satellite_alt</span>
+          <img src="/logo.svg" alt="Sachet relay logo" className="h-5 w-5 object-contain" />
           <span className="hidden sm:inline text-[10px] font-bold uppercase tracking-wider text-slate-500">Falcon Relay</span>
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
         </div>
